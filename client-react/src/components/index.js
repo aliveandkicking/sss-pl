@@ -1,5 +1,6 @@
-export { NavigationHeader } from './navigation-header/NavigationHeader'
+export { WeekNavigationHeader } from './navigation-header/WeekNavigationHeader'
 export { Day } from './day/Day'
 export { Task } from './task/Task'
-export { EditTask } from './edittask/EditTask'
 export { Week } from './week/Week'
+export { EditTask } from './edit-task/EditTask'
+export { Calendar } from './calendar/Calendar'

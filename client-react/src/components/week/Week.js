@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { weekStyles } from './WeekStyle';
 // import { PropTypes } from 'prop-types';
 import { Day } from '..';
-import { WeekNavigationHeader } from '../../containers';
+import { WeekNavigationHeader } from '..';
 
 export class Week extends Component {
   randerDays () {

@@ -1,7 +1,7 @@
 import { navigationHeaderStyles as styles } from './NavigationHeaderStyle';
 import React from 'react';
 
-export const NavigationHeader = ({onAdd, onNext, onPrev, onToday, dateCaption}) => {
+export const NavigationHeaderView = ({onAdd, onNext, onPrev, onToday, dateCaption}) => {
   return (
     <div style={styles.root}>
       <span

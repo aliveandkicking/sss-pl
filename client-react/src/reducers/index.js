@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { editTaskReducer } from './edit-task';
 
 const date = (state = new Date(), action) => {
   if (action.type === 'SET_DATE') {
@@ -14,17 +15,10 @@ const tasks = (state = [], action) => {
   return state;
 }
 
-const editTaskDialogVisibility = (state = false, action) => {
-  if (action.type === 'SET_EDIT_TASK_DIALOG_VISIBILITY') {
-    return action.visible
-  }
-  return state;
-}
-
 const rootReducer = combineReducers({
   date,
   tasks,
-  editTaskDialogVisibility
+  editTaskDialog: editTaskReducer
 })
 
 export default rootReducer

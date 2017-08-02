@@ -1,1 +1,0 @@
-export { WeekNavigationHeader } from './WeekNavigationHeader'

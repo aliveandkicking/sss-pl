@@ -1,6 +1,6 @@
 class DateUtils {
   constructor () {
-    this.DATE_SEPARATOR = '/'
+    this.DATE_SEPARATOR = '-'
     this.MILISECONDS_IN_DAY = 24 * 60 * 60 * 1000 // consider timezones change e.g. last sun of oct
     this.DAYS_IN_WEEK = 7;
 
@@ -11,6 +11,7 @@ class DateUtils {
     this.DAY_NAMES = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
     [this.JAN, this.DEC] = [0, 11]
+    this.MONTH_IN_YEAR = 12
     this.MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     this.MONTH_NAMES_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   }
@@ -36,6 +37,10 @@ class DateUtils {
     return (this.sameDay(date, dateToCompare) || (date < dateToCompare))
   }
 
+  daysInMonth(year, month) {
+    return new Date(year, month + 1, 0).getDate()
+  }
+
   incDay (date, numberOfDays = 1) {
     let result = new Date(date.getTime())
     result.setDate(result.getDate() + numberOfDays)
@@ -44,6 +49,42 @@ class DateUtils {
 
   decDay (date, numberOfDays = 1) {
     return this.incDay(date, 0 - numberOfDays)
+  }
+
+  incMonth (date) {
+    let [year, month, day] = this.decodeDate(date)
+    if (month === this.DEC) {
+      month = this.JAN
+      if (year) {
+        year++
+      }
+    } else {
+      month++
+    }
+    let daysInMonth = this.daysInMonth(year, month, 1)
+    return new Date(year, month, day > daysInMonth ? daysInMonth : day)
+  }
+
+  decMonth (date) {
+    let [year, month, day] = this.decodeDate(date)
+    if (month === this.JAN) {
+      month = this.DEC
+      if (year) {
+        year--
+      }
+    } else {
+      month--
+    }
+    let daysInMonth = this.daysInMonth(year, month, 1)
+    return new Date(year, month, day > daysInMonth ? daysInMonth : day)
+  }
+
+  incYear (date) {
+    return new Date([date.getFullYear() + 1, date.getMonth(), date.getDate()])
+  }
+
+  decYear (date, numberOfDays = 1) {
+    return new Date([date.getFullYear() - 1, date.getMonth(), date.getDate()])
   }
 
   getStartOfMonth (date) {
@@ -70,7 +111,7 @@ class DateUtils {
     return date.getTime() + date.getTimezoneOffset()
   }
 
-  getDaysBetween (startDate, endDate) {
+  getDaysBetween (startDate, endDate) { //biktop time zone
     return Math.abs(Math.floor(
       (Date.UTC(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()) -
       Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate())) /
@@ -90,19 +131,19 @@ class DateUtils {
   }
 
   toCustomString (date, separator) {
-    return [this.getElementAsString(date.getMonth() + 1), this.getElementAsString(date.getDate()), date.getFullYear()].join(separator)
+    return [date.getFullYear(), this.getElementAsString(date.getMonth() + 1), this.getElementAsString(date.getDate())].join(separator)
   }
 
-  toString (date) {
+  toISOString (date) {
     return this.toCustomString(date, this.DATE_SEPARATOR)
   }
 
   fromCustomString (dateString, separator) {
     let dateData = dateString.split(separator)
-    return new Date(dateData[2], parseInt(dateData[0]) - 1, dateData[1])
+    return new Date(dateData[0], parseInt(dateData[1], 10) - 1, dateData[2])
   }
 
-  fromString (dateString) {
+  fromISOString (dateString) {
     return this.fromCustomString(dateString, this.DATE_SEPARATOR)
   }
 }

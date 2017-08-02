@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Week } from './components'
 import { EditTask } from './components';
+import { store, state } from './store';
 
 class App extends Component {
   constructor(props) {
     super(props)
-    const store = props.store
     this.unsubscribe = store.subscribe(() =>
-      console.log(store.getState())
+      console.log(state())
     )
   }
 
