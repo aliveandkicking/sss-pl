@@ -2,10 +2,7 @@ const dateUtils = require('../utils/dateutils').dateUtils
 const { repeatMode } = require('../immutable/repeat-modes');
 
 class TaskModel {
-  constructor (sources) {
-    if (this.assign(sources))  {
-      return
-    }
+  constructor () {
     this.id = null
     this.name = 'do stuff'
     this.repeatModeId = repeatMode.once.id
@@ -15,31 +12,64 @@ class TaskModel {
     this.startDate = dateUtils.clearTime(new Date())
     this.endDate = dateUtils.clearTime(new Date())
     this.skipDates = []
+    this.markedDates = []
     this.neverEnd = true
+    this.assign(Object.values(arguments))
   }
 
   assign(sources) {
-    if ((sources) && (Array.isArray(sources)))  {
-      Object.assign(this, ...sources)
+    if (sources && (Array.isArray(sources))) {
+      sources.forEach(source => {
+        if (source.constructor === TaskModel) {
+          this.id = source.id
+          this.name = source.name
+          this.repeatModeId = source.repeatModeId
+          this.every = source.every
+          this.weeklyDays = source.weeklyDays.map(el => el)
+          this.monthlyDayOfTheLastWeek = source.monthlyDayOfTheLastWeek
+          this.startDate = new Date(source.startDate.getTime())
+          this.endDate = new Date(source.endDate.getTime())
+          this.skipDates = source.skipDates.map(el => new Date(el.getTime()))
+          this.markedDates = source.markedDates.map(el => new Date(el.getTime()))
+          this.neverEnd = source.neverEnd;
+        } else {
+          Object.assign(this, source)
+        }
+      })
       this.normalize()
-      return true
+      return this
     }
+  }
+
+  addMarkedDate(date) {
+    this.markedDates.push(dateUtils.clearTime(date))
+  }
+
+  removeMarkedDate(date) {
+    const index = this.markedDates.findIndex(
+      (markedDate) => date.getTime() === markedDate.getDate())
+    if (index >= 0) {
+      this.markedDates.splice(index, 1)
+    }
+  }
+
+  isMarkedOnDate(date) {
+    return (this.markedDates.findIndex(
+      (markedDate) => date.getTime() === markedDate.getDate()) >= 0
+    )
   }
 
   normalize() {
     if (this.endDate.getTime() < this.startDate.getTime()) {
-      this.setEndDate(this.startDate)
+      this.endDate = new Date(this.startDate.getTime())
     }
-    if (!repeatMode.ids.includes(this.modeId)) {
+    if (!repeatMode.ids.includes(this.repeatModeId)) {
       this.repeatModeId = repeatMode.once.id
     }
   }
 
   checkDailyRules (date) {
-    if (this.dailyRules) {
-      return (dateUtils.getDaysBetween(date, this.startDate) % this.dailyRules.every === 0)
-    }
-    return false
+    return (dateUtils.getDaysBetween(date, this.startDate) % this.every === 0)
   }
 
   checkWeeklyRules (date) {
@@ -94,11 +124,11 @@ class TaskModel {
       return true
     } else if (!this.checkPeriod(date)) {
       return false
-    } else if (this.repeatModeId === repeatMode.daily) {
+    } else if (this.repeatModeId === repeatMode.daily.id) {
       return this.checkDailyRules(date)
-    } else if (this.repeatModeId === repeatMode.weekly) {
+    } else if (this.repeatModeId === repeatMode.weekly.id) {
       return this.checkWeeklyRules(date)
-    } else if (this.repeatModeId === repeatMode.monthly) {
+    } else if (this.repeatModeId === repeatMode.monthly.id) {
       return this.checkMonthlyRules(date)
     } else {
       return false

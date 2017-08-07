@@ -1,21 +1,17 @@
-import React, { Component } from 'react';
-import { dayStyles } from './DayStyle';
-import { Task } from '../task/Task';
+import { connect } from 'react-redux'
+import { DayView } from './DayView'
 
-export class Day extends Component {
-  randerTasks () {
-    let result = []
-    for (let i = 0; i < 5; i++) {
-       result.push(<Task key={i}/>)
-    }
-    return result
-  }
-
-  render() {
-    return (
-      <div style={dayStyles.root}>
-        {this.randerTasks()}
-      </div>
-    );
+const mapStateToProps = (state, ownProps) => {
+  return {
+    date: ownProps.date
   }
 }
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return { }
+}
+
+export const Day = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DayView)

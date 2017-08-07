@@ -1,24 +1,23 @@
 import { connect } from 'react-redux'
 import { EditTaskView } from './EditTaskView'
-import {
-  setEditTaskDialogActiveMode,
-  setEditTaskVisibility,
-  modifyEditingTask
-} from '../../actions'
+import { changeTask, setEditingTaskId } from '../../actions'
+import { TaskModel } from '../../shared/models/task-model'
+import { state } from '../../store'
+
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    activeMode: state.editTaskDialog.activeMode,
-    visible: state.editTaskDialog.visible,
-    taskModel: state.editTaskDialog.taskModel
+    taskModel: state.editTask.taskId ? state.tasks[state.editTask.taskId] : null
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onModelChanges: (modifications) => dispatch(modifyEditingTask(modifications)),
-    onChangeTab: id => dispatch(setEditTaskDialogActiveMode(id)),
-    onClose: () => {dispatch(setEditTaskVisibility(false))}
+    onModelChanges: (changes) => {
+      const task = state().tasks[state().editTask.taskId]
+      dispatch(changeTask({task: new TaskModel(task, changes)}))
+    },
+    onClose: () => dispatch(setEditingTaskId({id: null}))
   }
 }
 

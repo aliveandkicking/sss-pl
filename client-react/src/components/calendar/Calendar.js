@@ -3,8 +3,8 @@ import { CalendarView } from './CalendarView'
 import { dateUtils } from '../../shared/utils/dateutils';
 import { state } from '../../store';
 import {
-  setEditTaskDialogCalendarInitialDate,
-  setEditTaskDialogCalendarMonthMode
+  setEditTaskCalendarInitialDate,
+  setEditTaskCalendarMonthMode
 } from '../../actions';
 
 const numberOfWeeks = 7;
@@ -39,17 +39,17 @@ const getMonths = () => {
 }
 
 const getTitle = (date) => {
-  return state().editTaskDialog.calendarMonthMode
+  return state().editTask.calendarMonthMode
      ? date.getFullYear()
      : `${dateUtils.MONTH_NAMES[date.getMonth()]} ${date.getFullYear()}`
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    rows: state.editTaskDialog.calendarMonthMode
+    rows: state.editTask.calendarMonthMode
       ? getMonths()
-      : getWeeks(state.editTaskDialog.calendarInitialDate),
-    title: getTitle(state.editTaskDialog.calendarInitialDate),
+      : getWeeks(state.editTask.calendarInitialDate),
+    title: getTitle(state.editTask.calendarInitialDate),
     onClick: ownProps.onClick
   }
 }
@@ -57,21 +57,21 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onNext: () => {
-      dispatch(setEditTaskDialogCalendarInitialDate(
-        state().editTaskDialog.calendarMonthMode
-          ? dateUtils.incYear(state().editTaskDialog.calendarInitialDate)
-          : dateUtils.incMonth(state().editTaskDialog.calendarInitialDate))
+      dispatch(setEditTaskCalendarInitialDate(
+        state().editTask.calendarMonthMode
+          ? dateUtils.incYear(state().editTask.calendarInitialDate)
+          : dateUtils.incMonth(state().editTask.calendarInitialDate))
     )},
     onPrev: () => {
-      dispatch(setEditTaskDialogCalendarInitialDate(
-        state().editTaskDialog.calendarMonthMode
-          ? dateUtils.decYear(state().editTaskDialog.calendarInitialDate)
-          : dateUtils.decMonth(state().editTaskDialog.calendarInitialDate))
+      dispatch(setEditTaskCalendarInitialDate(
+        state().editTask.calendarMonthMode
+          ? dateUtils.decYear(state().editTask.calendarInitialDate)
+          : dateUtils.decMonth(state().editTask.calendarInitialDate))
     )},
     onTitleClick: () => {
-      dispatch(setEditTaskDialogCalendarMonthMode(!state().editTaskDialog.calendarMonthMode))
+      dispatch(setEditTaskCalendarMonthMode(!state().editTask.calendarMonthMode))
     },
-    onTodayClick: () => dispatch(setEditTaskDialogCalendarInitialDate(new Date()))
+    onTodayClick: () => dispatch(setEditTaskCalendarInitialDate(new Date()))
   }
 }
 

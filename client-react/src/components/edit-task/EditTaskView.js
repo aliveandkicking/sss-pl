@@ -5,14 +5,11 @@ import { repeatMode } from '../../shared/immutable/repeat-modes';
 import { dateUtils } from '../../shared/utils/dateutils';
 
 export const EditTaskView = ({
-  activeMode,
-  visible,
   taskModel,
-  onChangeTab,
   onClose,
   onModelChanges
 }) => {
-  if (!visible) {
+  if (!taskModel) {
     return null
   }
 
@@ -23,7 +20,7 @@ export const EditTaskView = ({
         <span
           key={info.id}
           style={editTaskStyles.tab}
-          onClick={e => {onChangeTab(info.id)}}>
+          onClick={e => {onModelChanges({repeatModeId: info.id})}}>
           {info.title}
         </span>
     )})
@@ -39,7 +36,7 @@ export const EditTaskView = ({
         <input
           id="date-input"
           type="date"
-          defaultValue={dateUtils.toISOString(taskModel.startDate)}
+          value={dateUtils.toISOString(taskModel.startDate)}
           onChange={(e) => {
             onModelChanges({startDate: dateUtils.fromISOString(e.target.value)})
           }}
@@ -139,7 +136,7 @@ export const EditTaskView = ({
             onChange={(e) => {
               onModelChanges({ every: e.target.value})
             }}
-            defaultValue="1"/>
+            value={taskModel.every}/>
         </div>
 
         <div>
@@ -149,7 +146,7 @@ export const EditTaskView = ({
           <input
             id="start-date-control"
             type="date"
-            defaultValue={dateUtils.toISOString(taskModel.startDate)}
+            value={dateUtils.toISOString(taskModel.startDate)}
             onChange={(e) => {
               onModelChanges({startDate: dateUtils.fromISOString(e.target.value)})
             }}
@@ -163,7 +160,7 @@ export const EditTaskView = ({
           <input
             id="end-date-control"
             type="date"
-            defaultValue={dateUtils.toISOString(taskModel.endDate)}
+            value={dateUtils.toISOString(taskModel.endDate)}
             onChange={(e) => {
               onModelChanges({endDate: dateUtils.fromISOString(e.target.value)})
             }}
@@ -173,7 +170,6 @@ export const EditTaskView = ({
             type="checkbox"
             checked={taskModel.neverEnd}
             onChange={(e) => {
-              console.dir(e.target)
               onModelChanges({neverEnd: e.target.checked})
             }}
           />
@@ -188,14 +184,14 @@ export const EditTaskView = ({
 
   const getRules = () => {
     // once
-    if (activeMode === repeatMode.once.id) {
+    if (taskModel.repeatModeId === repeatMode.once.id) {
       return getNoRepeatRules()
     }
     //repeat
     const rules = []
-    if (activeMode === repeatMode.weekly.id) {
+    if (taskModel.repeatModeId === repeatMode.weekly.id) {
       rules.push(getWeeklyCustomRules())
-    } else if (activeMode === repeatMode.monthly.id) {
+    } else if (taskModel.repeatModeId === repeatMode.monthly.id) {
       rules.push(getMonthlyCustomRules())
     }
     rules.push(getCommonRepeatRules())

@@ -1,24 +1,32 @@
-import { combineReducers } from 'redux';
-import { editTaskReducer } from './edit-task';
+import { combineReducers } from 'redux'
+import { editTaskReducer } from './edit-task'
+import { dateUtils } from '../shared/utils/dateutils';
 
-const date = (state = new Date(), action) => {
-  if (action.type === 'SET_DATE') {
-    return action.date
+const initialDate = (state = new Date(), action) => {
+  if (action.type === 'SET_INITIAL_DATE') {
+    return dateUtils.clearTime(action.payload.date)
   }
-  return state
+  return state;
 }
 
-const tasks = (state = [], action) => {
-  if (action.type === 'SET_TASKS') {
-    return action.tasks
+const tasks = (state = {}, action) => {
+  if (action.type === 'ADD_TASK') {
+    return {
+      ...state,
+      [action.payload.task.id]: action.payload.task
+    }
+  } else if (action.type === 'CHANGE_TASK') {
+    const newState = {...state}
+    newState[action.payload.task.id] = action.payload.task
+    return newState
   }
   return state;
 }
 
 const rootReducer = combineReducers({
-  date,
+  initialDate,
   tasks,
-  editTaskDialog: editTaskReducer
+  editTask: editTaskReducer
 })
 
 export default rootReducer
