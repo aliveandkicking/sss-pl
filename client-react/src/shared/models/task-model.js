@@ -1,5 +1,5 @@
 const dateUtils = require('../utils/dateutils').dateUtils
-const { repeatMode } = require('../immutable/repeat-modes');
+const { repeatMode } = require('../immutable/repeat-modes')
 
 class TaskModel {
   constructor () {
@@ -17,7 +17,7 @@ class TaskModel {
     this.assign(Object.values(arguments))
   }
 
-  assign(sources) {
+  assign (sources) {
     if (sources && (Array.isArray(sources))) {
       sources.forEach(source => {
         if (source.constructor === TaskModel) {
@@ -30,8 +30,7 @@ class TaskModel {
           this.startDate = new Date(source.startDate.getTime())
           this.endDate = new Date(source.endDate.getTime())
           this.skipDates = source.skipDates.map(el => new Date(el.getTime()))
-          this.markedDates = source.markedDates.map(el => new Date(el.getTime()))
-          this.neverEnd = source.neverEnd;
+          this.neverEnd = source.neverEnd
         } else {
           Object.assign(this, source)
         }
@@ -41,25 +40,7 @@ class TaskModel {
     }
   }
 
-  addMarkedDate(date) {
-    this.markedDates.push(dateUtils.clearTime(date))
-  }
-
-  removeMarkedDate(date) {
-    const index = this.markedDates.findIndex(
-      (markedDate) => date.getTime() === markedDate.getDate())
-    if (index >= 0) {
-      this.markedDates.splice(index, 1)
-    }
-  }
-
-  isMarkedOnDate(date) {
-    return (this.markedDates.findIndex(
-      (markedDate) => date.getTime() === markedDate.getDate()) >= 0
-    )
-  }
-
-  normalize() {
+  normalize () {
     if (this.endDate.getTime() < this.startDate.getTime()) {
       this.endDate = new Date(this.startDate.getTime())
     }
