@@ -16,6 +16,12 @@ export const TaskView = ({
       }}
     >
       {task.name}
+      <span onClick={(e) => {
+        e.stopPropagation()
+        onEdit()
+      }}>
+        {' edit'}
+      </span>
     </div>
   )
 }

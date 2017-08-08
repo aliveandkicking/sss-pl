@@ -5,12 +5,26 @@ import { repeatMode } from '../../shared/immutable/repeat-modes';
 import { dateUtils } from '../../shared/utils/dateutils';
 
 export const EditTaskView = ({
-  taskModel,
+  task,
   onClose,
-  onModelChanges
+  onModelChanges,
+  onCalendarCellClick
 }) => {
-  if (!taskModel) {
+  if (!task) {
     return null
+  }
+
+  const getHeader = () => {
+    return (
+      <div>
+        <span onClick={e => onClose(true)}>
+          {'Save'}
+        </span>
+        <span onClick={e => onClose()}>
+          {'Cancel'}
+        </span>
+      </div>
+    )
   }
 
   const getTabs = () => {
@@ -36,7 +50,7 @@ export const EditTaskView = ({
         <input
           id="date-input"
           type="date"
-          value={dateUtils.toISOString(taskModel.startDate)}
+          value={dateUtils.toISOString(task.startDate)}
           onChange={(e) => {
             onModelChanges({startDate: dateUtils.fromISOString(e.target.value)})
           }}
@@ -46,7 +60,7 @@ export const EditTaskView = ({
   }
 
   const processWeekDay = (day) => {
-    const result = Array.from(taskModel.weeklyDays)
+    const result = Array.from(task.weeklyDays)
     const index = result.indexOf(day)
     if (index >= 0) {
       result.splice(index, 1)
@@ -63,7 +77,7 @@ export const EditTaskView = ({
         <span
           key={day}
           style={
-            taskModel.weeklyDays.includes(day)
+            task.weeklyDays.includes(day)
             ? editTaskStyles.selectedDayOfWeek
             : editTaskStyles.dayOfWeek
           }
@@ -91,12 +105,12 @@ export const EditTaskView = ({
       <div key='monthly-custom-rules'>
         <span
           style={
-            !taskModel.monthlyDayOfTheLastWeek
+            !task.monthlyDayOfTheLastWeek
             ? editTaskStyles.monthlyDayOfTheLastWeekSelected
             : null
           }
           onClick={(e) => {
-            if (taskModel.monthlyDayOfTheLastWeek) {
+            if (task.monthlyDayOfTheLastWeek) {
               onModelChanges({monthlyDayOfTheLastWeek: false})}
             }
           }
@@ -105,15 +119,14 @@ export const EditTaskView = ({
         </span>
         <span
           style={
-            taskModel.monthlyDayOfTheLastWeek
+            task.monthlyDayOfTheLastWeek
             ? editTaskStyles.monthlyDayOfTheLastWeekSelected
             : null
           }
-          onClick={(e) => {
-            if (!taskModel.monthlyDayOfTheLastWeek) {
+          onClick={e => {
+            if (!task.monthlyDayOfTheLastWeek) {
               onModelChanges({monthlyDayOfTheLastWeek: true})}
-            }
-          }
+          }}
         >
           {'Day of the last week'}
         </span>
@@ -133,10 +146,8 @@ export const EditTaskView = ({
             type="number"
             min="1"
             max="30"
-            onChange={(e) => {
-              onModelChanges({ every: e.target.value})
-            }}
-            value={taskModel.every}/>
+            onChange={e => onModelChanges({ every: e.target.value})}
+            value={task.every}/>
         </div>
 
         <div>
@@ -146,8 +157,8 @@ export const EditTaskView = ({
           <input
             id="start-date-control"
             type="date"
-            value={dateUtils.toISOString(taskModel.startDate)}
-            onChange={(e) => {
+            value={dateUtils.toISOString(task.startDate)}
+            onChange={e => {
               onModelChanges({startDate: dateUtils.fromISOString(e.target.value)})
             }}
           />
@@ -160,16 +171,16 @@ export const EditTaskView = ({
           <input
             id="end-date-control"
             type="date"
-            value={dateUtils.toISOString(taskModel.endDate)}
-            onChange={(e) => {
+            value={dateUtils.toISOString(task.endDate)}
+            onChange={e => {
               onModelChanges({endDate: dateUtils.fromISOString(e.target.value)})
             }}
           />
           <input
             id="never-end-checkbox"
             type="checkbox"
-            checked={taskModel.neverEnd}
-            onChange={(e) => {
+            checked={task.neverEnd}
+            onChange={e => {
               onModelChanges({neverEnd: e.target.checked})
             }}
           />
@@ -184,14 +195,14 @@ export const EditTaskView = ({
 
   const getRules = () => {
     // once
-    if (taskModel.repeatModeId === repeatMode.once.id) {
+    if (task.repeatModeId === repeatMode.once.id) {
       return getNoRepeatRules()
     }
     //repeat
     const rules = []
-    if (taskModel.repeatModeId === repeatMode.weekly.id) {
+    if (task.repeatModeId === repeatMode.weekly.id) {
       rules.push(getWeeklyCustomRules())
-    } else if (taskModel.repeatModeId === repeatMode.monthly.id) {
+    } else if (task.repeatModeId === repeatMode.monthly.id) {
       rules.push(getMonthlyCustomRules())
     }
     rules.push(getCommonRepeatRules())
@@ -201,25 +212,16 @@ export const EditTaskView = ({
   return (
     <div
       style={editTaskStyles.root}
-      onClick={e => {
-        e.preventDefault()
-        onClose()
-      }}>
+      onClick={e => onClose()}>
       <div style={editTaskStyles.dialog}
         onClick={e => {e.stopPropagation()}}>
         <div>
-
-          <div>
-            header
-          </div>
-
+          {getHeader()}
           <div>
             <input
               type="text"
-              defaultValue={taskModel.name}
-              onChange={(e) => {
-                onModelChanges({ name: e.target.value})
-              }}
+              defaultValue={task.name}
+              onChange={e => onModelChanges({ name: e.target.value})}
             />
             <div style={editTaskStyles.tabs}>
               {getTabs()}
@@ -228,7 +230,7 @@ export const EditTaskView = ({
               {getRules()}
             </div>
             <div>
-              <Calendar />
+              <Calendar onCalendarCellClick={onCalendarCellClick}/>
             </div>
           </div>
         </div>

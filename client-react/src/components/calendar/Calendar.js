@@ -11,7 +11,14 @@ const numberOfWeeks = 7;
 const monthsInRow = 4;
 
 const getWeeks = (date) => {
-  const weeks = [];
+  const weeks = [dateUtils.DAYS_OF_WEEK_MONDAY_BASED.map(day => {
+    return {
+      data: day,
+      text: dateUtils.DAY_NAMES[day],
+      isDayName: true
+    }
+  })]
+
   let startOfWeek = dateUtils.getStartOfWeek(dateUtils.getStartOfMonth(date))
   for (let j = 0; j < numberOfWeeks; j++) {
     let week = [];
@@ -31,7 +38,11 @@ const getMonths = () => {
     let row = [];
     for (let i = 0; i < monthsInRow; i++) {
       let monthIndex = j * monthsInRow + i
-      row.push({data: monthIndex, text: dateUtils.MONTH_NAMES_SHORT[monthIndex]})
+      row.push({
+        data: monthIndex,
+        text: dateUtils.MONTH_NAMES_SHORT[monthIndex],
+        isMonth: true
+      })
     }
     months.push(row)
   }
@@ -68,10 +79,22 @@ const mapDispatchToProps = (dispatch, ownProps) => {
           ? dateUtils.decYear(state().editTask.calendarInitialDate)
           : dateUtils.decMonth(state().editTask.calendarInitialDate))
     )},
-    onTitleClick: () => {
-      dispatch(setEditTaskCalendarMonthMode(!state().editTask.calendarMonthMode))
+    onTitleClick: () =>
+      dispatch(setEditTaskCalendarMonthMode(!state().editTask.calendarMonthMode)),
+    onTodayClick: () => {
+      dispatch(setEditTaskCalendarMonthMode(false))
+      dispatch(setEditTaskCalendarInitialDate(new Date()))
     },
-    onTodayClick: () => dispatch(setEditTaskCalendarInitialDate(new Date()))
+    onCellClick: cell => {
+      if (cell.isMonth) {
+        dispatch(setEditTaskCalendarInitialDate(
+          new Date(state().editTask.calendarInitialDate.getFullYear(), cell.data, 1)))
+        dispatch(setEditTaskCalendarMonthMode(false))
+      } else
+        if (ownProps.onCalendarCellClick) {
+          ownProps.onCalendarCellClick(cell)
+      }
+    }
   }
 }
 

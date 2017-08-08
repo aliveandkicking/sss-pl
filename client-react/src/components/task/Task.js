@@ -1,10 +1,15 @@
 import { connect } from 'react-redux'
 import { TaskView } from './TaskView'
-import { addDoneTask, removeDoneTask } from '../../actions'
+import {
+  addDoneTask,
+  removeDoneTask,
+  setEditingTask
+} from '../../actions'
 import { doneTasks } from '../../store'
-import { dateUtils } from '../../shared/utils/dateutils';
+import { dateUtils } from '../../shared/utils/dateutils'
+import { TaskModel } from '../../shared/models/task-model'
 
-const isDone = (taskId, date) => {
+const isDone = (date, taskId) => {
   const dateStr = dateUtils.toISOString(date)
   return doneTasks()[dateStr] ? doneTasks()[dateStr].includes(taskId) : false
 }
@@ -12,23 +17,20 @@ const isDone = (taskId, date) => {
 const mapStateToProps = (state, ownProps) => {
   return {
     task: ownProps.task,
-    isMarked: isDone(ownProps.task.id, ownProps.date)
+    isMarked: isDone(ownProps.date, ownProps.task.id)
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onClick: () => {
-      const payload = {taskId: ownProps.task.id, date: ownProps.date}
-      if (isDone(ownProps.task.id, ownProps.date)) {
-        dispatch(removeDoneTask(payload))
+      if (isDone(ownProps.date, ownProps.task.id)) {
+        dispatch(removeDoneTask(ownProps.date, ownProps.task.id))
       } else {
-        dispatch(addDoneTask(payload))
+        dispatch(addDoneTask(ownProps.date, ownProps.task.id))
       }
     },
-    onEdit: () => {
-
-    }
+    onEdit: () => dispatch(setEditingTask(new TaskModel(ownProps.task)))
   }
 }
 

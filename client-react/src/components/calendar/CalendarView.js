@@ -2,7 +2,7 @@ import React from 'react';
 import { calendarStyles } from './CalendarStyle';
 
 export const CalendarView = ({
-  rows, title, onPrev, onNext, onTitleClick, onTodayClick
+  rows, title, onPrev, onNext, onTitleClick, onTodayClick, onCellClick
 }) => {
 
   const getCell = (cell) => {
@@ -10,9 +10,7 @@ export const CalendarView = ({
       <span
         style={calendarStyles.cell}
         key={cell.data}
-        onClick={(e) => {
-          console.log(cell.data)
-        }}>
+        onClick={e => onCellClick(cell)}>
         {cell.text}
       </span>
     )

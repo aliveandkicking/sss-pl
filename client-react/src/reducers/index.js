@@ -10,12 +10,7 @@ const initialDate = (state = new Date(), action) => {
 }
 
 const tasks = (state = {}, action) => {
-  if (action.type === 'ADD_TASK') {
-    return {
-      ...state,
-      [action.payload.task.id]: action.payload.task
-    }
-  } else if (action.type === 'CHANGE_TASK') {
+  if (action.type === 'CHANGE_TASK') {
     const newState = {...state}
     newState[action.payload.task.id] = action.payload.task
     return newState

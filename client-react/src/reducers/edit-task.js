@@ -14,23 +14,15 @@ const calendarMonthMode = (state = false, action) => {
   return state
 }
 
-const taskId = (state = null, action) => {
-  if (action.type === 'SET_EDITING_TASK_ID') {
-    return action.payload.id
-  }
-  return state
-}
-
-const isNew = (state = null, action) => {
-  if (action.type === 'SET_EDITING_TASK_ID') {
-    return Boolean(action.payload.isNew)
+const task = (state = null, action) => {
+  if (action.type === 'SET_EDITING_TASK') {
+    return action.payload.task
   }
   return state
 }
 
 export const editTaskReducer = combineReducers({
-  taskId,
-  isNew,
+  task,
   calendarInitialDate,
   calendarMonthMode
 })
