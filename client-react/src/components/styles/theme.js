@@ -3,5 +3,8 @@ export const theme = {
   colorB: '#00468D',
   colorC: '#3067A0',
   colorD: '#418DD9',
-  colorE: '#002D5A'
+  colorE: '#002D5A',
+
+  colorHeaderText: '#fff',
+  fontFamily: 'Lucida Console'
 }
