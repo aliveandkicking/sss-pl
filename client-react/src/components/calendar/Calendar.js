@@ -1,21 +1,21 @@
 import { connect } from 'react-redux'
 import { CalendarView } from './CalendarView'
-import { dateUtils } from '../../shared/utils/dateutils';
-import { state } from '../../store';
+import { dateUtils } from '../../shared/utils/dateutils'
 import {
   setEditTaskCalendarInitialDate,
   setEditTaskCalendarMonthMode
-} from '../../actions';
+} from '../../actions'
 
 const numberOfWeeks = 7;
 const monthsInRow = 4;
 
-const getWeeks = (date) => {
+const getWeeks = (date, onCheckCellSelection) => {
   const weeks = [dateUtils.DAYS_OF_WEEK_MONDAY_BASED.map(day => {
     return {
       data: day,
       text: dateUtils.DAY_NAMES[day],
-      isDayName: true
+      isWeekDay: true,
+      selected: onCheckCellSelection(day, true)
     }
   })]
 
@@ -24,7 +24,11 @@ const getWeeks = (date) => {
     let week = [];
     for (let i = 0; i < dateUtils.DAYS_IN_WEEK; i++) {
       let day = dateUtils.incDay(startOfWeek, i)
-      week.push({data: day, text: day.getDate()})
+      week.push({
+        data: day,
+        text: day.getDate(),
+        selected: onCheckCellSelection(day)
+      })
     }
     weeks.push(week)
     startOfWeek = dateUtils.incDay(startOfWeek, dateUtils.DAYS_IN_WEEK)
@@ -49,38 +53,41 @@ const getMonths = () => {
   return months;
 }
 
-const getTitle = (date) => {
-  return state().editTask.calendarMonthMode
+const getTitle = (monthMode, date) => {
+  return monthMode
      ? date.getFullYear()
      : `${dateUtils.MONTH_NAMES[date.getMonth()]} ${date.getFullYear()}`
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    rows: state.editTask.calendarMonthMode
-      ? getMonths()
-      : getWeeks(state.editTask.calendarInitialDate),
-    title: getTitle(state.editTask.calendarInitialDate),
-    onClick: ownProps.onClick
+    monthMode: state.editTask.calendarMonthMode,
+    initialDate: state.editTask.calendarInitialDate,
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const { dispatch } = dispatchProps
+  const { monthMode, initialDate } = stateProps
+
   return {
+    rows: monthMode ? getMonths() : getWeeks(initialDate, ownProps.onCheckCellSelection),
+    title: getTitle(monthMode, initialDate),
+    onClick: ownProps.onClick,
     onNext: () => {
       dispatch(setEditTaskCalendarInitialDate(
-        state().editTask.calendarMonthMode
-          ? dateUtils.incYear(state().editTask.calendarInitialDate)
-          : dateUtils.incMonth(state().editTask.calendarInitialDate))
+        monthMode
+          ? dateUtils.incYear(initialDate)
+          : dateUtils.incMonth(initialDate))
     )},
     onPrev: () => {
       dispatch(setEditTaskCalendarInitialDate(
-        state().editTask.calendarMonthMode
-          ? dateUtils.decYear(state().editTask.calendarInitialDate)
-          : dateUtils.decMonth(state().editTask.calendarInitialDate))
+        monthMode
+          ? dateUtils.decYear(initialDate)
+          : dateUtils.decMonth(initialDate))
     )},
     onTitleClick: () =>
-      dispatch(setEditTaskCalendarMonthMode(!state().editTask.calendarMonthMode)),
+      dispatch(setEditTaskCalendarMonthMode(!monthMode)),
     onTodayClick: () => {
       dispatch(setEditTaskCalendarMonthMode(false))
       dispatch(setEditTaskCalendarInitialDate(new Date()))
@@ -88,11 +95,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     onCellClick: cell => {
       if (cell.isMonth) {
         dispatch(setEditTaskCalendarInitialDate(
-          new Date(state().editTask.calendarInitialDate.getFullYear(), cell.data, 1)))
+          new Date(initialDate.getFullYear(), cell.data, 1)))
         dispatch(setEditTaskCalendarMonthMode(false))
       } else
-        if (ownProps.onCalendarCellClick) {
-          ownProps.onCalendarCellClick(cell)
+        if (ownProps.onCellClick) {
+          ownProps.onCellClick(cell)
       }
     }
   }
@@ -100,5 +107,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 export const Calendar = connect(
   mapStateToProps,
-  mapDispatchToProps
+  null,
+  mergeProps
 )(CalendarView)

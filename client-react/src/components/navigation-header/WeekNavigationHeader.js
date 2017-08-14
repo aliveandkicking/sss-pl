@@ -5,25 +5,43 @@ import {
   setInitialDate
 } from '../../actions'
 import { TaskModel } from '../../shared/models/task-model';
-import { state } from '../../store';
 import { dateUtils } from '../../shared/utils/dateutils';
+
+const buildDateCaption = date => {
+  const startDateData = dateUtils.decodeDate(date)
+  const endDateData = dateUtils.decodeDate(dateUtils.incDay(date, dateUtils.DAYS_IN_WEEK))
+  let result = ''
+
+  if (startDateData[1] === endDateData[1]) {
+    result = ` ${dateUtils.MONTH_NAMES[startDateData[1]]} ${startDateData[2]} - ${endDateData[2]}, `
+  } else {
+    result = ` ${dateUtils.MONTH_NAMES[startDateData[1]]} ${startDateData[2]} -  ${dateUtils.MONTH_NAMES[endDateData[1]]} ${endDateData[2]}, `
+  }
+  result += startDateData[0] !== endDateData[0] ? startDateData[0] + ' - ' + endDateData[0] : startDateData[0]
+  return result
+}
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    dateCaption: state.initialDate.toString()
+    initialDate: dateUtils.getStartOfWeek(state.initialDate)
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const { dispatch } = dispatchProps
+  const { initialDate } = stateProps
+
   return {
+    dateCaption: buildDateCaption(initialDate),
     onAdd: () => dispatch(setEditingTask(new TaskModel())),
-    onNext: () => dispatch(setInitialDate(dateUtils.incDay(state().initialDate, dateUtils.DAYS_IN_WEEK))),
-    onPrev: () => dispatch(setInitialDate(dateUtils.decDay(state().initialDate, dateUtils.DAYS_IN_WEEK))),
+    onNext: () => dispatch(setInitialDate(dateUtils.incDay(initialDate, dateUtils.DAYS_IN_WEEK))),
+    onPrev: () => dispatch(setInitialDate(dateUtils.decDay(initialDate, dateUtils.DAYS_IN_WEEK))),
     onToday: () => dispatch(setInitialDate(dateUtils.getStartOfWeek(new Date()))),
   }
 }
 
 export const WeekNavigationHeader = connect(
   mapStateToProps,
-  mapDispatchToProps
+  null,
+  mergeProps
 )(NavigationHeaderView)

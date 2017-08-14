@@ -7,8 +7,10 @@ import { dateUtils } from '../../shared/utils/dateutils';
 export const EditTaskView = ({
   task,
   onClose,
-  onModelChanges,
-  onCalendarCellClick
+  onChanges,
+  onCalendarCellClick,
+  onProcessWeekDay,
+  onCheckCalendarCellSelection
 }) => {
   if (!task) {
     return null
@@ -34,7 +36,7 @@ export const EditTaskView = ({
         <span
           key={info.id}
           style={editTaskStyles.tab}
-          onClick={e => {onModelChanges({repeatModeId: info.id})}}>
+          onClick={e => {onChanges({repeatModeId: info.id})}}>
           {info.title}
         </span>
     )})
@@ -52,22 +54,11 @@ export const EditTaskView = ({
           type="date"
           value={dateUtils.toISOString(task.startDate)}
           onChange={(e) => {
-            onModelChanges({startDate: dateUtils.fromISOString(e.target.value)})
+            onChanges({startDate: dateUtils.fromISOString(e.target.value)})
           }}
           />
       </div>
     )
-  }
-
-  const processWeekDay = (day) => {
-    const result = Array.from(task.weeklyDays)
-    const index = result.indexOf(day)
-    if (index >= 0) {
-      result.splice(index, 1)
-    } else {
-      result.push(day)
-    }
-    return result
   }
 
   const getWeeklyCustomRules = () => {
@@ -82,7 +73,7 @@ export const EditTaskView = ({
             : editTaskStyles.dayOfWeek
           }
           onClick={(e) => {
-            onModelChanges({weeklyDays: processWeekDay(day)})}
+            onChanges({weeklyDays: onProcessWeekDay(task.weeklyDays, day)})}
           }>
           {dateUtils.DAY_NAMES[day]}
         </span>
@@ -111,7 +102,7 @@ export const EditTaskView = ({
           }
           onClick={(e) => {
             if (task.monthlyDayOfTheLastWeek) {
-              onModelChanges({monthlyDayOfTheLastWeek: false})}
+              onChanges({monthlyDayOfTheLastWeek: false})}
             }
           }
         >
@@ -125,7 +116,7 @@ export const EditTaskView = ({
           }
           onClick={e => {
             if (!task.monthlyDayOfTheLastWeek) {
-              onModelChanges({monthlyDayOfTheLastWeek: true})}
+              onChanges({monthlyDayOfTheLastWeek: true})}
           }}
         >
           {'Day of the last week'}
@@ -146,7 +137,7 @@ export const EditTaskView = ({
             type="number"
             min="1"
             max="30"
-            onChange={e => onModelChanges({ every: e.target.value})}
+            onChange={e => onChanges({ every: e.target.value})}
             value={task.every}/>
         </div>
 
@@ -159,7 +150,7 @@ export const EditTaskView = ({
             type="date"
             value={dateUtils.toISOString(task.startDate)}
             onChange={e => {
-              onModelChanges({startDate: dateUtils.fromISOString(e.target.value)})
+              onChanges({startDate: dateUtils.fromISOString(e.target.value)})
             }}
           />
         </div>
@@ -173,7 +164,7 @@ export const EditTaskView = ({
             type="date"
             value={dateUtils.toISOString(task.endDate)}
             onChange={e => {
-              onModelChanges({endDate: dateUtils.fromISOString(e.target.value)})
+              onChanges({endDate: dateUtils.fromISOString(e.target.value)})
             }}
           />
           <input
@@ -181,7 +172,7 @@ export const EditTaskView = ({
             type="checkbox"
             checked={task.neverEnd}
             onChange={e => {
-              onModelChanges({neverEnd: e.target.checked})
+              onChanges({neverEnd: e.target.checked})
             }}
           />
           <label htmlFor="never-end-checkbox">
@@ -221,7 +212,7 @@ export const EditTaskView = ({
             <input
               type="text"
               defaultValue={task.name}
-              onChange={e => onModelChanges({ name: e.target.value})}
+              onChange={e => onChanges({ name: e.target.value})}
             />
             <div style={editTaskStyles.tabs}>
               {getTabs()}
@@ -230,7 +221,10 @@ export const EditTaskView = ({
               {getRules()}
             </div>
             <div>
-              <Calendar onCalendarCellClick={onCalendarCellClick}/>
+              <Calendar
+                onCellClick={onCalendarCellClick}
+                onCheckCellSelection={onCheckCalendarCellSelection}
+              />
             </div>
           </div>
         </div>

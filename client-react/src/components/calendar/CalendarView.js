@@ -8,7 +8,9 @@ export const CalendarView = ({
   const getCell = (cell) => {
     return (
       <span
-        style={calendarStyles.cell}
+        style={cell.selected
+          ? calendarStyles.cellSelected
+          : calendarStyles.cell}
         key={cell.data}
         onClick={e => onCellClick(cell)}>
         {cell.text}

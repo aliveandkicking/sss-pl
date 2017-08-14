@@ -1,15 +1,17 @@
+import { theme } from '../styles';
+
+const buttonEdge = '30px'
+
 const buttonDef = {
-  height: '30px',
-  cursor: 'pointer',
-  backgroundColor: '#cfc',
-  margin: '0px 5px'
+  height: buttonEdge,
+  cursor: 'pointer'
 }
 
 export const navigationHeaderStyles = {
   root:{
-    border: '1px solid brown',
+    backgroundColor: theme.colorB,
     flex: 1,
-    height: '40px',
+    height: '42px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between'
@@ -17,13 +19,18 @@ export const navigationHeaderStyles = {
   rightButtonGroupContainer: {
 
   },
-  button: {
+  buttonAdd: {
     ...buttonDef,
-    width: '30px'
+    width: '30px',
+    fontSize: '500px'
   },
   todayButton: {
     ...buttonDef,
-    width: '100px'
+    width: '100px',
+  },
+  todayButtonHover: {
+    ...buttonDef,
+    width: '100px',
+    backgroundColor: theme.colorA
   }
-
 }

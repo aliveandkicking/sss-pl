@@ -27,5 +27,11 @@ export const calendarStyles = {
     flex: '1',
     border: '1px solid grey',
     cursor: 'pointer'
+  },
+  cellSelected: {
+    flex: '1',
+    border: '1px solid grey',
+    cursor: 'pointer',
+    backgroundColor: 'yellow'
   }
 }

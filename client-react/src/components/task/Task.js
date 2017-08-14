@@ -5,26 +5,27 @@ import {
   removeDoneTask,
   setEditingTask
 } from '../../actions'
-import { doneTasks } from '../../store'
 import { dateUtils } from '../../shared/utils/dateutils'
 import { TaskModel } from '../../shared/models/task-model'
 
-const isDone = (date, taskId) => {
-  const dateStr = dateUtils.toISOString(date)
-  return doneTasks()[dateStr] ? doneTasks()[dateStr].includes(taskId) : false
-}
-
 const mapStateToProps = (state, ownProps) => {
+  const dateStr = dateUtils.toISOString(ownProps.date)
   return {
-    task: ownProps.task,
-    isMarked: isDone(ownProps.date, ownProps.task.id)
+    isDone: state.doneTasks[dateStr]
+      ? state.doneTasks[dateStr].includes(ownProps.task.id)
+      : false
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const { dispatch } = dispatchProps
+  const { isDone } = stateProps
+
   return {
+    task: ownProps.task,
+    isMarked: isDone,
     onClick: () => {
-      if (isDone(ownProps.date, ownProps.task.id)) {
+      if (isDone) {
         dispatch(removeDoneTask(ownProps.date, ownProps.task.id))
       } else {
         dispatch(addDoneTask(ownProps.date, ownProps.task.id))
@@ -36,5 +37,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 export const Task = connect(
   mapStateToProps,
-  mapDispatchToProps
+  null,
+  mergeProps
 )(TaskView)

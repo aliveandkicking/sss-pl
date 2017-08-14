@@ -34,7 +34,8 @@ const doneTasks = (state = {}, action) => {
     const dateStr = dateUtils.toISOString(action.payload.date)
     const newState = Object.assign({}, state)
     if (Array.isArray(newState[dateStr])) {
-      newState[dateStr] = newState[dateStr].filter(taskId => action.payload.taskId !== taskId)
+      newState[dateStr] = newState[dateStr]
+        .filter(taskId => action.payload.taskId !== taskId)
     }
     return newState
   }

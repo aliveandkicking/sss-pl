@@ -1,3 +1,4 @@
+export { CustomSpan } from './custom-span/CustomSpan'
 export { WeekNavigationHeader } from './navigation-header/WeekNavigationHeader'
 export { Day } from './day/Day'
 export { Task } from './task/Task'

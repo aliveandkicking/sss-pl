@@ -1,17 +1,15 @@
 import { connect } from 'react-redux'
 import { DayView } from './DayView'
+import { dateUtils } from '../../shared/utils/dateutils'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    date: ownProps.date
+    title: dateUtils.toISOString(ownProps.date),
+    date: ownProps.date,
+    tasks: Object.values(state.tasks).filter(task => task.containsDate(ownProps.date))
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return { }
-}
-
 export const Day = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(DayView)

@@ -81,12 +81,10 @@ class TaskModel {
   }
 
   checkPeriod (date) {
-    if (this.startDate) {
-      if (date < this.startDate) {
-        return false
-      }
+    if (date < this.startDate) {
+      return false
     }
-    if ((this.endDate) && (!this.neverEnd)) {
+    if (!this.neverEnd) {
       if (date > this.endDate) {
         return false
       }

@@ -1,5 +1,6 @@
-import { navigationHeaderStyles as styles } from './NavigationHeaderStyle';
+import { navigationHeaderStyles as styles } from './NavigationHeaderStyle'
 import React from 'react';
+import { CustomSpan } from '..';
 
 export const NavigationHeaderView = ({onAdd, onNext, onPrev, onToday, dateCaption}) => {
   return (
@@ -18,14 +19,15 @@ export const NavigationHeaderView = ({onAdd, onNext, onPrev, onToday, dateCaptio
       </span>
 
       <span style={styles.rightButtonGroupContainer}>
-        <span
+        <CustomSpan
           style={styles.todayButton}
+          styleHover={styles.todayButtonHover}
           onClick={e => {
             e.preventDefault()
             onToday()
           }}>
           Today
-        </span>
+        </CustomSpan>
 
         <span
           style={styles.button}
@@ -33,7 +35,7 @@ export const NavigationHeaderView = ({onAdd, onNext, onPrev, onToday, dateCaptio
             e.preventDefault()
             onPrev()
           }}>
-          prev
+          {'<'}
         </span>
 
         <span
@@ -42,7 +44,7 @@ export const NavigationHeaderView = ({onAdd, onNext, onPrev, onToday, dateCaptio
             e.preventDefault()
             onNext()
           }}>
-          next
+          {'>'}
         </span>
       </span>
 
