@@ -25,8 +25,13 @@ export const taskStyles = {
     transition: '300ms',
     userSelect: 'none'
   },
-  selectedRoot: {
-    opacity: 0.6
+  content: {
+    position: 'relative',
+    height: '100%',
+    width: '100%'
+  },
+  contentSelected: {
+    opacity: 0.3
   },
   taskName: {
     ...taskInfoItem,
