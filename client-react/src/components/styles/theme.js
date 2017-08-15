@@ -5,6 +5,8 @@ export const theme = {
   colorD: '#418DD9',
   colorE: '#002D5A',
 
-  colorHeaderText: '#fff',
-  fontFamily: 'Lucida Console'
+  colorText: '#eee',
+  colorHeaderTextHover: '#8C9DD9',
+
+  fontFamily: 'Verdana, sans-serif'
 }

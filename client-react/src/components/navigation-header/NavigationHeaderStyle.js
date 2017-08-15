@@ -2,35 +2,31 @@ import { theme } from '../styles'
 
 const button = {
   cursor: 'pointer',
-  // border: '1px solid red',
   transition: '200ms',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center'
+  justifyContent: 'center',
 }
 
 export const navigationHeaderStyles = {
   root: {
-    backgroundColor: theme.colorB,
-    flex: 1,
     height: '42px',
     display: 'flex',
     alignItems: 'stretch',
     justifyContent: 'space-between',
-    color: theme.colorHeaderText,
-    userSelect: 'none',
-    fontFamily: theme.fontFamily
+    userSelect: 'none'
   },
   dateCaption: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     cursor: 'default',
+    marginLeft: '50px',
   },
   rightButtonGroupContainer: {
     display: 'flex',
     alignItems: 'stretch',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   },
   button: {
     ...button,
@@ -41,7 +37,7 @@ export const navigationHeaderStyles = {
     width: '75px'
   },
   buttonHover: {
-    backgroundColor: theme.colorA
+    color: theme.colorHeaderTextHover,
   },
   addButtonSymbol: {
     transform: 'scale(2, 2)'

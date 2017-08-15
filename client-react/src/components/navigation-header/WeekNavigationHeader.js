@@ -9,7 +9,7 @@ import { dateUtils } from '../../shared/utils/dateutils';
 
 const buildDateCaption = date => {
   const startDateData = dateUtils.decodeDate(date)
-  const endDateData = dateUtils.decodeDate(dateUtils.incDay(date, dateUtils.DAYS_IN_WEEK))
+  const endDateData = dateUtils.decodeDate(dateUtils.incDay(date, dateUtils.DAYS_IN_WEEK - 1))
   let result = ''
 
   if (startDateData[1] === endDateData[1]) {

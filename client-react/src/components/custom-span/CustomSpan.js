@@ -1,11 +1,18 @@
 import React from 'react'
 
-const reservedProps = ['style', 'styleHover']
+const reservedProps = ['style', 'styleHover', 'onHoverChange']
 
 export class CustomSpan extends React.Component {
   constructor (props) {
     super(props)
     this.state = {hover: false}
+  }
+
+  setHover(hover) {
+    if (this.props.onHoverChange) {
+      this.props.onHoverChange(hover)
+    }
+    this.setState({hover})
   }
 
   render () {
@@ -19,8 +26,8 @@ export class CustomSpan extends React.Component {
     const hoverStyle = Object.assign({}, this.props.style, this.props.styleHover)
 
     return React.createElement('span', {
-      onMouseOver: () => this.setState({hover: true}),
-      onMouseOut: () => this.setState({hover: false}),
+      onMouseOver: () => this.setHover(true),
+      onMouseOut: () => this.setHover(false),
       style: this.state.hover ? hoverStyle : this.props.style,
       ...innerProps
     }, this.props.children)

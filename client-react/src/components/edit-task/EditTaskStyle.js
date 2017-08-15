@@ -7,7 +7,8 @@ export const editTaskStyles = {
     height: '100%',
     width: '100%',
     backgroundColor: 'rgba(0,0,0,0.1)',
-    userSelect: 'none'
+    userSelect: 'none',
+    zIndex: '2'
   },
   dialog: {
     height: '500px',

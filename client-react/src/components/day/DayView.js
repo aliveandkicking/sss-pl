@@ -1,5 +1,5 @@
 import React from 'react';
-import { dayStyles } from './DayStyle';
+import { dayStyles as styles } from './DayStyle';
 import { Task } from '../task/Task';
 
 
@@ -15,9 +15,13 @@ export const DayView = ({title, tasks, date}) => {
   }
 
   return (
-    <div style={dayStyles.root}>
-      {title}
-      {randerTasks()}
+    <div style={styles.root}>
+      <div style={styles.caption}>
+          {title}
+      </div>
+      <div style={styles.content}>
+        {randerTasks()}
+      </div>
     </div>
   )
 }
