@@ -49,7 +49,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return {
     task: ownProps.task,
     taskNameAbbreviation: getTaskNameAbbreviation(ownProps.task.name),
-    isMarked: isDone,
+    isDone,
     onClick: () => {
       if (isDone) {
         dispatch(removeDoneTask(ownProps.date, ownProps.task.id))

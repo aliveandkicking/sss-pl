@@ -1,8 +1,8 @@
 class StringToColor {
   constructor () {
     this.cache = {}
-    this.minChannelValue = 0
-    this.maxChannelValue = 255
+    this.minChannelValue = 60
+    this.maxChannelValue = 200
   }
 
   _getChannelValue (number) {
@@ -43,7 +43,7 @@ class StringToColor {
       }
     }
 
-    const result = this._formatColorString(r,g,b)
+    const result = this._formatColorString(r, g, b)
     this.cache[string] = result
     return result
   }

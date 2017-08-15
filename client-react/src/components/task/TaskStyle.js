@@ -15,14 +15,14 @@ const height = '80px'
 
 export const taskStyles = {
   root: {
-    border: '1px solid orange',
+    margin: '1px',
     cursor: 'pointer',
     position: 'relative',
     flex: 1,
     height: height,
     minWidth: height,
     overflow: 'hidden',
-    transition: '300ms',
+    transition: '400ms',
     userSelect: 'none'
   },
   content: {
@@ -31,7 +31,7 @@ export const taskStyles = {
     width: '100%'
   },
   contentSelected: {
-    opacity: 0.3
+    opacity: 0.2
   },
   taskName: {
     ...taskInfoItem,
@@ -45,7 +45,7 @@ export const taskStyles = {
     ...taskInfoItem
   },
   taskAbbrHover: {
-    opacity: 0.0,
+    opacity: 0,
   },
   footer: {
     position: 'absolute',
@@ -53,7 +53,7 @@ export const taskStyles = {
     left: '0px',
     height: '18px',
     opacity: 0.1,
-    transition: '200ms',
+    transition: '400ms',
     margin: '0px 3px 3px',
     overflow: 'hidden'
   },
@@ -72,6 +72,6 @@ export const taskStyles = {
     transform: 'rotate(-60deg) skewX(-10deg) '
   },
   checkMarkCheked: {
-    opacity: 1
+    opacity: 0.5
   }
 }
