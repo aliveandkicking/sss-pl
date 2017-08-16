@@ -36,6 +36,9 @@ const initialState = {
   },
   doneTasks: {
     [dateUtils.toISOString(new Date())]: [1, 2]
+  },
+  editTask: {
+    task: new TaskModel()
   }
 }
 //temp

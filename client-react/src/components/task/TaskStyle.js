@@ -11,7 +11,7 @@ const taskInfoItem = {
   transition: '500ms',
 }
 
-const height = '80px'
+const height = '75px'
 
 export const taskStyles = {
   root: {
@@ -72,6 +72,6 @@ export const taskStyles = {
     transform: 'rotate(-60deg) skewX(-10deg) '
   },
   checkMarkCheked: {
-    opacity: 0.5
+    opacity: 0.7
   }
 }

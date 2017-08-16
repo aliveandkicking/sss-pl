@@ -4,7 +4,7 @@ export const weekStyles = {
     display: 'flex',
     flexDirection: 'column'
   },
-  content: {
+  body: {
     flex: 1,
     display: 'flex',
     alignItems: 'stretch'

@@ -1,10 +1,10 @@
 export const dayStyles = {
   root:{
-    // border: '1px solid black',
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'stretch'
+    alignItems: 'stretch',
+    margin: '0px 2px'
   },
   caption: {
     display: 'flex',

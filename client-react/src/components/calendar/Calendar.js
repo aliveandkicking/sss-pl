@@ -27,7 +27,8 @@ const getWeeks = (date, onCheckCellSelection) => {
       week.push({
         data: day,
         text: day.getDate(),
-        selected: onCheckCellSelection(day)
+        selected: onCheckCellSelection(day),
+        siblingLeftover: date.getMonth() !== day.getMonth()
       })
     }
     weeks.push(week)

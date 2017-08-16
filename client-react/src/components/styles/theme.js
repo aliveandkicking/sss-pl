@@ -5,8 +5,8 @@ export const theme = {
   colorD: '#418DD9',
   colorE: '#002D5A',
 
-  colorText: '#eee',
-  colorHeaderTextHover: '#8C9DD9',
+  colorText: '#dedede',
+  colorTextHover: '#8C9DD9',
 
   fontFamily: 'Verdana, sans-serif'
 }

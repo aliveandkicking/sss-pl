@@ -1,37 +1,81 @@
+import { theme } from '../styles/theme';
+
+const transition = '200ms'
+const gridColor = 'rgba(255, 255, 255, 0.07)'
+
 export const calendarStyles = {
   root:{
     display: 'flex',
     justifyContent: 'center',
-    flexDirection: 'column',
+    alignItems: 'center',
     userSelect: 'none',
+  },
+  content: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    height: '300px',
+    width: '300px'
   },
   header: {
     display: 'flex',
     justifyContent: 'space-between',
     userSelect: 'none',
-    cursor: 'pointer'
+    alignSelf: 'stretch',
+    margin: '10px 5px'
+  },
+  caption: {
+    transition,
+    cursor: 'pointer',
+  },
+  navigationButton: {
+    transform: 'scale(0.8, 1.3)',
+    cursor: 'pointer',
+    transition
+  },
+  hover: {
+    color: theme.colorTextHover,
+    transition
   },
   body:{
+    flex: 1,
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column',
-    alignItems: 'stretch'
+    alignItems: 'stretch',
+    borderBottom: `1px solid ${gridColor}`,
+    borderRight: `1px solid ${gridColor}`,
   },
   row: {
+    flex: 1,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'stretch',
-    height: '20px'
   },
   cell: {
     flex: '1',
-    border: '1px solid grey',
-    cursor: 'pointer'
-  },
-  cellSelected: {
-    flex: '1',
-    border: '1px solid grey',
+    borderLeft: `1px solid ${gridColor}`,
+    borderTop: `1px solid ${gridColor}`,
     cursor: 'pointer',
-    backgroundColor: 'yellow'
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  cellGrayed: {
+    color: '#999'
+  },
+  cellSelection: {
+    backgroundColor: theme.colorD,
+    color: theme.colorText
+  },
+  cellHover: {
+    color: theme.colorE,
+    fontWeight: 'bold',
+  },
+  todayButton: {
+    transition,
+    cursor: 'pointer',
+    alignSelf: 'center',
+    marginTop: '3px'
   }
 }

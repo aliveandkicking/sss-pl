@@ -1,5 +1,6 @@
 import React from 'react';
-import { calendarStyles } from './CalendarStyle';
+import { calendarStyles as styles  } from './CalendarStyle';
+import { CustomSpan } from '..';
 
 export const CalendarView = ({
   rows, title, onPrev, onNext, onTitleClick, onTodayClick, onCellClick
@@ -7,20 +8,25 @@ export const CalendarView = ({
 
   const getCell = (cell) => {
     return (
-      <span
-        style={cell.selected
-          ? calendarStyles.cellSelected
-          : calendarStyles.cell}
+      <CustomSpan
+        style={Object.assign({}, styles.cell,
+          cell.siblingLeftover
+            ? styles.cellGrayed
+            : null,
+          cell.selected
+            ? styles.cellSelection
+            : null)}
+        styleHover={styles.cellHover}
         key={cell.data}
         onClick={e => onCellClick(cell)}>
         {cell.text}
-      </span>
+      </CustomSpan>
     )
   }
 
   const getRow = (row, id) => {
     return (
-      <div key={id} style={calendarStyles.row}>
+      <div key={id} style={styles.row}>
         {row}
       </div>
     )
@@ -39,26 +45,39 @@ export const CalendarView = ({
   }
 
   return (
-    <div style={calendarStyles.root}>
+    <div style={styles.root}>
+      <div style={styles.content}>
+        <div style={styles.header}>
+          <CustomSpan
+            style={styles.navigationButton}
+            styleHover={styles.hover}
+            onClick={onPrev}>
+            {'<'}
+          </CustomSpan>
+          <CustomSpan
+            style={styles.caption}
+            styleHover={styles.hover}
+            onClick={onTitleClick}>
+            {title}
+          </CustomSpan>
+          <CustomSpan
+            style={styles.navigationButton}
+            styleHover={styles.hover}
+            onClick={onNext}>
+            {'>'}
+          </CustomSpan>
+        </div>
 
-      <div style={calendarStyles.header}>
-        <span onClick={onPrev}>
-          {'<'}
-        </span>
-        <span onClick={onTitleClick}>
-          {title}
-        </span>
-        <span onClick={onNext}>
-          {'>'}
-        </span>
-      </div>
+        <div style={styles.body}>
+          {getCells()}
+        </div>
 
-      <div style={calendarStyles.body}>
-        {getCells()}
-      </div>
-
-      <div onClick={onTodayClick}>
-        Today
+        <CustomSpan
+          style={styles.todayButton}
+          styleHover={styles.hover}
+          onClick={onTodayClick}>
+          Today
+        </CustomSpan>
       </div>
     </div>
   )

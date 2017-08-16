@@ -16,7 +16,7 @@ export const WeekView = ({initialDate}) => {
   return (
     <div style={weekStyles.root} >
       <WeekNavigationHeader />
-      <div style={weekStyles.content}>
+      <div style={weekStyles.body}>
         {randerDays()}
       </div>
     </div>

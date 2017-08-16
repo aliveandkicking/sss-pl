@@ -37,7 +37,7 @@ export const navigationHeaderStyles = {
     width: '75px'
   },
   buttonHover: {
-    color: theme.colorHeaderTextHover,
+    color: theme.colorTextHover,
   },
   addButtonSymbol: {
     transform: 'scale(2, 2)'

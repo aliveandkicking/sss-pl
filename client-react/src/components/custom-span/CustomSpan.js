@@ -1,6 +1,6 @@
 import React from 'react'
 
-const reservedProps = ['style', 'styleHover', 'onHoverChange']
+const reservedProps = ['style', 'styleHover']
 
 export class CustomSpan extends React.Component {
   constructor (props) {
@@ -9,9 +9,6 @@ export class CustomSpan extends React.Component {
   }
 
   setHover(hover) {
-    if (this.props.onHoverChange) {
-      this.props.onHoverChange(hover)
-    }
     this.setState({hover})
   }
 

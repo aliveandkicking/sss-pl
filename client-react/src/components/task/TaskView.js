@@ -16,12 +16,10 @@ export class TaskView extends React.Component {
   }
 
   getContentStyle () {
-    // let color = stringToColor.getColor(this.props.task.name)
     return Object.assign({},
       styles.content,
       this.props.isDone ? styles.contentSelected : null,
       {backgroundColor: stringToColor.getColor(this.props.task.name)}
-      //{background: `linear-gradient(${color} 50%, yellow 200%)`}
     )
   }
 
