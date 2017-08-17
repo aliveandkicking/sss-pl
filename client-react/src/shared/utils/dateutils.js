@@ -8,6 +8,7 @@ class DateUtils {
     this.DAYS_OF_WEEK = [this.SU, this.MO, this.TU, this.WE, this.TH, this.FR, this.SA]
     this.DAYS_OF_WEEK_MONDAY_BASED = [this.MO, this.TU, this.WE, this.TH, this.FR, this.SA, this.SU]
     this.MO_FR = [this.MO, this.TU, this.WE, this.TH, this.FR]
+    this.SA_SU = [this.SA, this.SU]
     this.DAY_NAMES = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
     [this.JAN, this.DEC] = [0, 11]

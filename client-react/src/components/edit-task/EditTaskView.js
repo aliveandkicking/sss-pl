@@ -52,11 +52,12 @@ export const EditTaskView = ({
 
   const getNoRepeatRules = () => {
     return (
-      <div style={styles.ruleRow}>
+      <div
+        style={styles.ruleRow}
+        key={task.repeatModeId}>
         <label
           style={styles.ruleLabel}
-          htmlFor='date-input'
-          key={task.repeatModeId}>
+          htmlFor='date-input'>
           {'Date:'}
         </label>
         <input
@@ -73,22 +74,22 @@ export const EditTaskView = ({
 
   const getWeeklyCustomRules = () => {
     const days = []
-    dateUtils.DAYS_OF_WEEK_MONDAY_BASED.forEach((day) => {
+    const getDay = (day) => {
       days.push(
         <span
           key={day}
-          style={
+          style={Object.assign({}, styles.dayOfWeek,
             task.weeklyDays.includes(day)
-            ? styles.selectedDayOfWeek
-            : styles.dayOfWeek
+            ? styles.dayOfWeekSelected
+            : null)
           }
-          onClick={(e) => {
-            onChanges({weeklyDays: onProcessWeekDay(task.weeklyDays, day)})}
-          }>
+          onClick={e => onChanges({weeklyDays: onProcessWeekDay(task.weeklyDays, day)})}>
           {dateUtils.DAY_NAMES[day]}
         </span>
       )
-    })
+      return days
+    }
+    dateUtils.DAYS_OF_WEEK_MONDAY_BASED.forEach(getDay)
     return (
       <div
         style={styles.ruleRow}
@@ -99,40 +100,46 @@ export const EditTaskView = ({
         <span style={styles.ruleInput}>
           {days}
         </span>
+        <CustomSpan
+          style={styles.dayOfWeekRangeButtonMonToFri}
+          styleHover={styles.dayOfWeekRangeButtonHover}
+          title={'Monday to Friday'}
+          onClick={e => onChanges({weeklyDays: Array.from(dateUtils.MO_FR)})}>
+          M
+        </CustomSpan>
+        <CustomSpan
+          style={styles.dayOfWeekRangeButtonSaSu}
+          styleHover={styles.dayOfWeekRangeButtonHover}
+          title={'Weekend'}
+          onClick={e => onChanges({weeklyDays: Array.from(dateUtils.SA_SU)})}>
+          W
+        </CustomSpan>
       </div>
     )
   }
 
   const getMonthlyCustomRules = () => {
+    const getOption = (value, caption) => {
+      return (
+        <span
+          style={Object.assign({}, styles.monthlyDayOfTheLastWeek,
+            !(task.monthlyDayOfTheLastWeek ^ value)
+              ? styles.monthlyDayOfTheLastWeekSelected
+              : null
+          )}
+          onClick={e => {if (task.monthlyDayOfTheLastWeek ^ value) {
+            onChanges({monthlyDayOfTheLastWeek: value})}
+          }}>
+          {caption}
+        </span>
+      )
+    }
     return (
       <div
-        style={styles.ruleRow}
+        style={Object.assign({}, styles.ruleRow, styles.monthlyRuleRow)}
         key='monthly-custom-rules'>
-        <span
-          style={
-            !task.monthlyDayOfTheLastWeek
-            ? styles.monthlyDayOfTheLastWeekSelected
-            : null
-          }
-          onClick={(e) => {
-            if (task.monthlyDayOfTheLastWeek) {
-              onChanges({monthlyDayOfTheLastWeek: false})}
-            }
-          }>
-          {'Day of Month'}
-        </span>
-        <span
-          style={
-            task.monthlyDayOfTheLastWeek
-            ? styles.monthlyDayOfTheLastWeekSelected
-            : null
-          }
-          onClick={e => {
-            if (!task.monthlyDayOfTheLastWeek) {
-              onChanges({monthlyDayOfTheLastWeek: true})}
-          }}>
-          {'Day of the last week'}
-        </span>
+        {getOption(false, 'Day of Month')}
+        {getOption(true, 'Day of the last week')}
       </div>
     )
   }
@@ -148,14 +155,15 @@ export const EditTaskView = ({
           htmlFor="repeat-every-control">
           Repeat every:
         </label>
-        <input
-          id="repeat-every-control"
-          style={styles.ruleInput}
-          type="number"
-          min="1"
-          max="30"
-          onChange={e => onChanges({ every: e.target.value})}
-          value={task.every}/>
+        <span style={styles.ruleInput}>
+          <input
+            id="repeat-every-control"
+            type="number"
+            min="1"
+            max="30"
+            onChange={e => onChanges({ every: e.target.value})}
+            value={task.every}/>
+        </span>
       </div>
     )
     result.push(
@@ -190,6 +198,7 @@ export const EditTaskView = ({
           id="end-date-control"
           style={styles.ruleInput}
           type="date"
+          disabled={task.neverEnd}
           value={dateUtils.toISOString(task.endDate)}
           onChange={e => {
             onChanges({endDate: dateUtils.fromISOString(e.target.value)})
@@ -216,7 +225,7 @@ export const EditTaskView = ({
     if (task.repeatModeId === repeatMode.once.id) {
       rules.push(getNoRepeatRules())
     } else {
-    //repeat
+    // repeat
       if (task.repeatModeId === repeatMode.weekly.id) {
         rules.push(getWeeklyCustomRules())
       } else if (task.repeatModeId === repeatMode.monthly.id) {
@@ -242,8 +251,15 @@ export const EditTaskView = ({
         <input
           style={styles.nameInput}
           type="text"
+          autoFocus={true}
+          onFocus={e => {if (!task.id) {
+            e.target.select()
+          }}}
           defaultValue={task.name}
           onChange={e => onChanges({ name: e.target.value})}
+          onKeyDown={e => {if (e.keyCode === 13) {
+            onClose(true)
+          }}}
         />
         {getTabs()}
         {getRules()}

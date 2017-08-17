@@ -76,6 +76,6 @@ export const calendarStyles = {
     transition,
     cursor: 'pointer',
     alignSelf: 'center',
-    marginTop: '3px'
+    marginTop: '5px'
   }
 }

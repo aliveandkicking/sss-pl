@@ -1,6 +1,5 @@
 let constants = require('./serverapi-constants').constants
 let transportObjectProcessor = require('./transport-object-processor').transportObjectProcessor
-let dateUtils = require('./utils/dateutils').dateUtils // biktop remove
 
 class ServerApi {
   post (route, object) {

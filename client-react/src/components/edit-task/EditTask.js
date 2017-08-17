@@ -49,7 +49,10 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
       if (changeStartDate()) {
         dispatch(setEditingTask(new TaskModel(editingTask, {startDate: cell.data})))
       } else {
-        dispatch(setEditingTask(new TaskModel(editingTask, {endDate: cell.data})))
+        dispatch(setEditingTask(new TaskModel(editingTask, {
+          endDate: cell.data,
+          neverEnd: false
+        })))
       }
     }
   }
