@@ -11,7 +11,9 @@ export const dayStyles = {
     alignItems: 'center',
     justifyContent: 'center',
     height: '25px',
-    fontSize: '75%'
+    fontSize: '75%',
+    userSelect: 'none',
+    cursor: 'default'
   },
   content: {
     flex: '1',

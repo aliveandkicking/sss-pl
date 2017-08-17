@@ -4,7 +4,7 @@ import { EditTask } from '..'
 import { theme } from '../styles';
 
 const style = {
-  background: `linear-gradient(-45deg, ${theme.colorB}, ${theme.colorC}, ${theme.colorE})`,
+  background: `linear-gradient(-30deg, ${theme.colorC}, ${theme.colorE})`,
   fontFamily: theme.fontFamily,
   color: theme.colorText,
   height: '100%',
