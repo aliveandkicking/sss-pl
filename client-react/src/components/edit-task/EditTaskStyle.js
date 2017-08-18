@@ -143,5 +143,18 @@ export const editTaskStyles = {
   customDatesRuleText:{
     fontSize: '13px',
     marginLeft: '7px',
+  },
+  customDatesContainer: {
+    backgroundColor: '#eee',
+    padding: '2px',
+    margin: '2px',
+    flex: 1
+  },
+  customDate: {
+    backgroundColor: theme.colorB,
+    padding: '4px',
+    margin: '2px',
+    fontSize: '12px'
   }
+
 }

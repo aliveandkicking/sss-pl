@@ -187,7 +187,7 @@ export const EditTaskView = ({
           style={Object.assign({}, styles.caption, styles.customDatesRuleText)}
           styleHover={styles.captionHover}
           title={'Manage custom dates'}
-          onClick={e => onChanges({weeklyDays: Array.from(dateUtils.MO_FR)})}>
+          onClick={e => onShowingCustomDatesChange(true)}>
           {getCustomDatesText()}
         </CustomSpan>
       </div>
@@ -282,12 +282,35 @@ export const EditTaskView = ({
   }
 
   const getCustomDatesRules = () => {
-    return (
-      <div
-        key={'custom-dates'}>
 
+    const getDates = (dates) => {
+      const result = []
+      dates.forEach(data => {
+        result.push(
+          <span
+            key={data}
+            style={styles.customDate}>
+            {dateUtils.toISOString(new Date(data))}
+          </span>
+        )
+      })
+      return result
+    }
+
+    return [
+      <CustomSpan
+        style={styles.caption}
+        styleHover={styles.captionHover}
+        onClick={e =>  onShowingCustomDatesChange(false)}>
+        {'< back'}
+      </CustomSpan>,
+      <div style={styles.customDatesContainer}>
+          {getDates(task.includeDates)}
+      </div>,
+      <div style={styles.customDatesContainer}>
+          {getDates(task.skipDates)}
       </div>
-    )
+    ]
   }
 
   const getRules = () => {
