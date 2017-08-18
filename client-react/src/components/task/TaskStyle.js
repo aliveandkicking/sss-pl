@@ -28,10 +28,29 @@ export const taskStyles = {
   content: {
     position: 'relative',
     height: '100%',
-    width: '100%'
+    width: '100%',
+    transition: '400ms'
+  },
+  contentHover: {
+    boxShadow: 'inset 0px 0 8px rgba(0,0,0,0.6)'
   },
   contentSelected: {
     opacity: 0.2
+  },
+  removeButton: {
+    fontSize: '12px',
+    height: '18px',
+    margin: '0px 3px 3px',
+    opacity: 0.25,
+    overflow: 'hidden',
+    position: 'absolute',
+    right: '3px',
+    top: '0px',
+    transition: '400ms',
+    zIndex: 1
+  },
+  removeButtonHover: {
+    opacity: 1
   },
   taskName: {
     ...taskInfoItem,
@@ -52,10 +71,11 @@ export const taskStyles = {
     bottom: '0px',
     left: '0px',
     height: '18px',
-    opacity: 0.1,
+    opacity: 0.25,
     transition: '400ms',
     margin: '0px 3px 3px',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    zIndex: 1
   },
   footerHover: {
     opacity: 1

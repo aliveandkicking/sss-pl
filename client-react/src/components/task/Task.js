@@ -3,7 +3,8 @@ import { TaskView } from './TaskView'
 import {
   addDoneTask,
   removeDoneTask,
-  setEditingTask
+  setEditingTask,
+  changeTask
 } from '../../actions'
 import { dateUtils } from '../../shared/utils/dateutils'
 import { TaskModel } from '../../shared/models/task-model'
@@ -57,9 +58,14 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         dispatch(addDoneTask(ownProps.date, ownProps.task.id))
       }
     },
-    onEdit: () => dispatch(setEditingTask(new TaskModel(ownProps.task)))
+    onEdit: () => dispatch(setEditingTask(new TaskModel(ownProps.task))),
+    onDelete: () => {dispatch(changeTask(
+        new TaskModel(ownProps.task).addSkipDate(ownProps.date)))
+    }
   }
 }
+
+
 
 export const Task = connect(
   mapStateToProps,

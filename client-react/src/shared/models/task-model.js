@@ -12,7 +12,7 @@ class TaskModel {
     this.startDate = dateUtils.clearTime(new Date())
     this.endDate = dateUtils.clearTime(new Date())
     this.skipDates = []
-    this.markedDates = []
+    this.includeDates = []
     this.neverEnd = true
     this.assign(Object.values(arguments))
   }
@@ -29,7 +29,8 @@ class TaskModel {
           this.monthlyDayOfTheLastWeek = source.monthlyDayOfTheLastWeek
           this.startDate = new Date(source.startDate.getTime())
           this.endDate = new Date(source.endDate.getTime())
-          this.skipDates = source.skipDates.map(el => new Date(el.getTime()))
+          this.skipDates = Array.from(source.skipDates)
+          this.includeDates = Array.from(source.includeDates)
           this.neverEnd = source.neverEnd
         } else {
           Object.assign(this, source)
@@ -47,6 +48,22 @@ class TaskModel {
     if (!repeatMode.ids.includes(this.repeatModeId)) {
       this.repeatModeId = repeatMode.once.id
     }
+  }
+
+  addSkipDate (date) {
+    const skipDateData = dateUtils.clearTime(date).getTime()
+    if (!this.skipDates.includes(skipDateData)) {
+      this.skipDates.push(skipDateData)
+    }
+    return this
+  }
+
+  addIncludeDate (date) {
+    const includeDateData = dateUtils.clearTime(date).getTime()
+    if (!this.includeDates.includes(includeDateData)) {
+      this.includeDates.push(includeDateData)
+    }
+    return this
   }
 
   checkDailyRules (date) {

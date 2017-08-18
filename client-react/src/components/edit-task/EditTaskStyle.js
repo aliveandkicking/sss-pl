@@ -36,7 +36,7 @@ export const editTaskStyles = {
     zIndex: '2',
   },
   dialog: {
-    height: '530px',
+    height: '600px',
     width: '420px',
     background: theme.colorC,
     display: 'flex',
@@ -52,7 +52,7 @@ export const editTaskStyles = {
   },
   caption:{
     transition: '300ms',
-    cursor: 'pointer'
+    cursor: 'pointer',
   },
   captionHover:{
     color: theme.colorTextHover,
@@ -89,7 +89,7 @@ export const editTaskStyles = {
     justifyContent: 'center'
   },
   ruleRow: {
-    height: '30px',
+    height: '35px',
     display: 'flex',
     alignItems: 'center'
   },
@@ -139,5 +139,9 @@ export const editTaskStyles = {
   monthlyDayOfTheLastWeekSelected: {
     color: theme.colorText,
     borderBottom: `2px solid ${theme.colorD}`
+  },
+  customDatesRuleText:{
+    fontSize: '13px',
+    marginLeft: '7px',
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { taskStyles as styles } from './TaskStyle'
 import { stringToColor } from '../../shared/utils/string-to-color'
+import { CustomSpan } from '..';
 
 export class TaskView extends React.Component {
   constructor (props) {
@@ -16,10 +17,12 @@ export class TaskView extends React.Component {
   }
 
   getContentStyle () {
+    const color = stringToColor.getColor(this.props.task.name)
     return Object.assign({},
       styles.content,
       this.props.isDone ? styles.contentSelected : null,
-      {backgroundColor: stringToColor.getColor(this.props.task.name)}
+      this.state.hover ? styles.contentHover : null,
+      {backgroundColor: color},
     )
   }
 
@@ -32,6 +35,16 @@ export class TaskView extends React.Component {
         onClick={e => this.props.onClick()}
       >
         <div style={this.getContentStyle()}>
+          <CustomSpan
+            style={styles.removeButton}
+            styleHover={styles.removeButtonHover}
+            onClick={e => {
+                e.stopPropagation()
+                this.props.onDelete()
+            }}>
+            x
+          </CustomSpan>
+
           <div
             style={this.getStyle(this.state.infoHover, styles.taskName, styles.taskNameHover)}>
               {this.props.task.name}
@@ -41,7 +54,9 @@ export class TaskView extends React.Component {
             {this.props.taskNameAbbreviation}
           </div>
 
-          <div style={this.getStyle(this.state.hover, styles.footer, styles.footerHover)}>
+          <CustomSpan
+             style={styles.footer}
+             styleHover={styles.footerHover}>
             <span
               onMouseOver={() => this.setState({infoHover: true})}
               onMouseOut={() => this.setState({infoHover: false})}
@@ -51,7 +66,7 @@ export class TaskView extends React.Component {
             }}>
               &#9881;
             </span>
-          </div>
+          </CustomSpan>
 
         </div>
         <span style={this.getStyle(this.props.isDone, styles.checkMark, styles.checkMarkCheked)} />

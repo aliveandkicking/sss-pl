@@ -12,7 +12,8 @@ const initialState = {
       id: i,
       name: 'do exercise',
       startDate: new Date(2017, 7),
-      repeatModeId: 1
+      repeatModeId: 1,
+      includeDates: [dateUtils.clearTime(new Date())]
     }),
     [++i]: new TaskModel({
       id: i,
@@ -35,11 +36,17 @@ const initialState = {
     }),
   },
   doneTasks: {
-    [dateUtils.toISOString(new Date())]: [1, 2]
+    [dateUtils.toISOString(new Date())]: [3, 2]
   },
-  // editTask: {
-  //   task: new TaskModel()
-  // }
+  editTask: {
+    task: new TaskModel({
+      id: i,
+      name: 'do exercise',
+      startDate: new Date(2017, 7),
+      repeatModeId: 1,
+      includeDates: [dateUtils.clearTime(new Date())]
+    })
+  }
 }
 //temp
 

@@ -10,10 +10,12 @@ const createAction = function() {
   }
 }
 
+export const addDoneTask = createAction('ADD_DONE_TASK', 'date', 'taskId')
 export const changeTask = createAction('CHANGE_TASK', 'task')
-export const setInitialDate = createAction('SET_INITIAL_DATE', 'date')
+export const removeDoneTask = createAction('REMOVE_DONE_TASK', 'date', 'taskId')
+export const setEditTaskShowingCustomDates = createAction('SET_EDIT_TASK_SHOWING_CUSTOM_DATES', 'showingCustomDates')
 export const setEditTaskCalendarInitialDate = createAction('SET_EDIT_TASK_CALENDAR_INITIAL_DATE', 'date')
 export const setEditTaskCalendarMonthMode = createAction('SET_EDIT_TASK_CALENDAR_MONTH_MODE', 'monthMode')
 export const setEditingTask = createAction('SET_EDITING_TASK', 'task')
-export const addDoneTask = createAction('ADD_DONE_TASK', 'date', 'taskId')
-export const removeDoneTask = createAction('REMOVE_DONE_TASK', 'date', 'taskId')
+export const setInitialDate = createAction('SET_INITIAL_DATE', 'date')
+

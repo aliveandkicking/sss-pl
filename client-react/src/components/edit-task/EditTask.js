@@ -1,6 +1,10 @@
 import { connect } from 'react-redux'
 import { EditTaskView } from './EditTaskView'
-import { changeTask, setEditingTask } from '../../actions'
+import {
+  changeTask,
+  setEditingTask,
+  setEditTaskShowingCustomDates
+} from '../../actions'
 import { TaskModel } from '../../shared/models/task-model'
 import { repeatMode } from '../../shared/immutable/repeat-modes';
 
@@ -18,13 +22,14 @@ const processWeekDay = (weekDays, day) => {
 const mapStateToProps = (state, ownProps) => {
   return {
     editingTask: state.editTask.task,
-    tasks: state.tasks
+    tasks: state.tasks,
+    showingCustomDates: state.editTask.showingCustomDates
   }
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch } = dispatchProps
-  const { editingTask, tasks} = stateProps
+  const { editingTask, tasks, showingCustomDates} = stateProps
 
   const processCalendarClick = (cell) => {
 
@@ -90,12 +95,14 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   }
 
   return {
+    showingCustomDates,
     task: editingTask,
-    onChanges: (changes) => dispatch(setEditingTask(new TaskModel(editingTask, changes))),
+    onChanges: changes => dispatch(setEditingTask(new TaskModel(editingTask, changes))),
     onClose: close,
     onProcessWeekDay: processWeekDay,
     onCalendarCellClick: processCalendarClick,
-    onCheckCalendarCellSelection: checkCalendarCellSelection
+    onCheckCalendarCellSelection: checkCalendarCellSelection,
+    onShowingCustomDatesChange: show => dispatch(setEditTaskShowingCustomDates(show))
   }
 }
 

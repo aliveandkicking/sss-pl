@@ -11,7 +11,9 @@ export const EditTaskView = ({
   onChanges,
   onCalendarCellClick,
   onProcessWeekDay,
-  onCheckCalendarCellSelection
+  onCheckCalendarCellSelection,
+  showingCustomDates,
+  onShowingCustomDatesChange
 }) => {
   if (!task) {
     return null
@@ -144,9 +146,56 @@ export const EditTaskView = ({
     )
   }
 
-  const getCommonRepeatRules = () => {
-    const result = []
-    result.push(
+
+  const getCustomDatesRule = () => {
+
+    const getShortDateStr = dateTime => {
+      const date = new Date(dateTime)
+      return (date.getMonth() + 1) + '/' + date.getDate()
+    }
+
+    const datesToShow = 3
+
+    const getCustomDatesText = () => {
+      let text = ''
+      let processed = 0
+      for (let i = 0; (i < task.skipDates.length) && (processed < datesToShow); i++) {
+        text += `, ${getShortDateStr(task.skipDates[i])}[S]`
+        processed++
+      }
+      for (let i = 0; (i < task.includeDates.length) && (processed < datesToShow); i++) {
+        text += `, ${getShortDateStr(task.includeDates[i])}[I]`
+        processed++
+      }
+      if (!text) {
+        text = 'Manage'
+      } else {
+        text = text.substr(2) +
+          ((task.includeDates.length + task.skipDates.length) > datesToShow ? ' ...' : '')
+      }
+      return text
+    }
+
+    return (
+      <div
+        style={styles.ruleRow}
+        key='custom-dates'>
+        <label style={styles.ruleLabel}>
+          {'CustomDates:'}
+        </label>
+        <CustomSpan
+          style={Object.assign({}, styles.caption, styles.customDatesRuleText)}
+          styleHover={styles.captionHover}
+          title={'Manage custom dates'}
+          onClick={e => onChanges({weeklyDays: Array.from(dateUtils.MO_FR)})}>
+          {getCustomDatesText()}
+        </CustomSpan>
+      </div>
+    )
+  }
+
+  const getRepeatEveryRule = () => {
+    return (
       <div
         style={styles.ruleRow}
         key={'repeat-every'}>
@@ -166,7 +215,10 @@ export const EditTaskView = ({
         </span>
       </div>
     )
-    result.push(
+  }
+
+  const getStartDateRule = () => {
+    return (
       <div
         style={styles.ruleRow}
         key={'start-date'}>
@@ -185,7 +237,10 @@ export const EditTaskView = ({
           }}/>
       </div>
     )
-    result.push(
+  }
+
+  const getEndDateRule = () => {
+    return (
       <div
         style={styles.ruleRow}
         key={'end-date'}>
@@ -216,22 +271,43 @@ export const EditTaskView = ({
         </label>
       </div>
     )
-    return result
+  }
+
+  const getCommonRepeatRules = () => {
+    return [
+      getRepeatEveryRule(),
+      getStartDateRule(),
+      getEndDateRule()
+    ]
+  }
+
+  const getCustomDatesRules = () => {
+    return (
+      <div
+        key={'custom-dates'}>
+
+      </div>
+    )
   }
 
   const getRules = () => {
-    // once
     const rules = []
-    if (task.repeatModeId === repeatMode.once.id) {
-      rules.push(getNoRepeatRules())
-    } else {
-    // repeat
-      if (task.repeatModeId === repeatMode.weekly.id) {
-        rules.push(getWeeklyCustomRules())
-      } else if (task.repeatModeId === repeatMode.monthly.id) {
-        rules.push(getMonthlyCustomRules())
+    if (!showingCustomDates) {
+      // once
+      if (task.repeatModeId === repeatMode.once.id) {
+        rules.push(getNoRepeatRules())
+      } else {
+      // repeat
+        if (task.repeatModeId === repeatMode.weekly.id) {
+          rules.push(getWeeklyCustomRules())
+        } else if (task.repeatModeId === repeatMode.monthly.id) {
+          rules.push(getMonthlyCustomRules())
+        }
+        rules.push(getCommonRepeatRules())
       }
-      rules.push(getCommonRepeatRules())
+      rules.push(getCustomDatesRule())
+    } else {
+      rules.push(getCustomDatesRules())
     }
     return(
       <div style={styles.rules}>
