@@ -1,9 +1,10 @@
-import React from 'react';
-import { editTaskStyles as styles } from './EditTaskStyle';
-import { Calendar } from '..';
+import React from 'react'
+import { editTaskStyles as styles } from './EditTaskStyle'
+import { Calendar, CustomSpan } from '..'
 import { repeatMode } from '../../shared/immutable/repeat-modes'
 import { dateUtils } from '../../shared/utils/dateutils'
-import { CustomSpan } from '..';
+import { EditCustomDates } from './edit-custom-dates/EditCustomDates'
+import { CommonRepeatRules } from './common-repeat-rules/CommonRepeatRules'
 
 export const EditTaskView = ({
   task,
@@ -63,8 +64,8 @@ export const EditTaskView = ({
           {'Date:'}
         </label>
         <input
-          id="date-input"
-          type="date"
+          id='date-input'
+          type='date'
           style={styles.ruleInput}
           value={dateUtils.toISOString(task.startDate)}
           onChange={(e) => {
@@ -146,7 +147,6 @@ export const EditTaskView = ({
     )
   }
 
-
   const getCustomDatesRule = () => {
 
     const getShortDateStr = dateTime => {
@@ -194,128 +194,9 @@ export const EditTaskView = ({
     )
   }
 
-  const getRepeatEveryRule = () => {
-    return (
-      <div
-        style={styles.ruleRow}
-        key={'repeat-every'}>
-        <label
-          style={styles.ruleLabel}
-          htmlFor="repeat-every-control">
-          Repeat every:
-        </label>
-        <span style={styles.ruleInput}>
-          <input
-            id="repeat-every-control"
-            type="number"
-            min="1"
-            max="30"
-            onChange={e => onChanges({ every: e.target.value})}
-            value={task.every}/>
-        </span>
-      </div>
-    )
-  }
-
-  const getStartDateRule = () => {
-    return (
-      <div
-        style={styles.ruleRow}
-        key={'start-date'}>
-        <label
-          style={styles.ruleLabel}
-          htmlFor="start-date-control">
-          Starts on:
-        </label>
-        <input
-          id="start-date-control"
-          style={styles.ruleInput}
-          type="date"
-          value={dateUtils.toISOString(task.startDate)}
-          onChange={e => {
-            onChanges({startDate: dateUtils.fromISOString(e.target.value)})
-          }}/>
-      </div>
-    )
-  }
-
-  const getEndDateRule = () => {
-    return (
-      <div
-        style={styles.ruleRow}
-        key={'end-date'}>
-        <label
-          style={styles.ruleLabel}
-          htmlFor="end-date-control">
-          Ends on:
-        </label>
-        <input
-          id="end-date-control"
-          style={styles.ruleInput}
-          type="date"
-          disabled={task.neverEnd}
-          value={dateUtils.toISOString(task.endDate)}
-          onChange={e => {
-            onChanges({endDate: dateUtils.fromISOString(e.target.value)})
-          }}/>
-        <label htmlFor="never-end-checkbox">
-          <input
-            id="never-end-checkbox"
-            type="checkbox"
-            checked={task.neverEnd}
-            onChange={e => {
-              onChanges({neverEnd: e.target.checked})
-            }}
-          />
-          never
-        </label>
-      </div>
-    )
-  }
-
-  const getCommonRepeatRules = () => {
-    return [
-      getRepeatEveryRule(),
-      getStartDateRule(),
-      getEndDateRule()
-    ]
-  }
-
-  const getCustomDatesRules = () => {
-
-    const getDates = (dates) => {
-      const result = []
-      dates.forEach(data => {
-        result.push(
-          <span
-            key={data}
-            style={styles.customDate}>
-            {dateUtils.toISOString(new Date(data))}
-          </span>
-        )
-      })
-      return result
-    }
-
-    return [
-      <CustomSpan
-        style={styles.caption}
-        styleHover={styles.captionHover}
-        onClick={e =>  onShowingCustomDatesChange(false)}>
-        {'< back'}
-      </CustomSpan>,
-      <div style={styles.customDatesContainer}>
-          {getDates(task.includeDates)}
-      </div>,
-      <div style={styles.customDatesContainer}>
-          {getDates(task.skipDates)}
-      </div>
-    ]
-  }
-
   const getRules = () => {
-    const rules = []
     if (!showingCustomDates) {
+      const rules = []
       // once
       if (task.repeatModeId === repeatMode.once.id) {
         rules.push(getNoRepeatRules())
@@ -326,17 +207,25 @@ export const EditTaskView = ({
         } else if (task.repeatModeId === repeatMode.monthly.id) {
           rules.push(getMonthlyCustomRules())
         }
-        rules.push(getCommonRepeatRules())
+        rules.push(<CommonRepeatRules
+          key={'sssds'}
+          task={task}
+          onChanges={onChanges} />)
       }
       rules.push(getCustomDatesRule())
+      return (
+        <div style={styles.rules}>
+          {rules}
+        </div>
+      )
     } else {
-      rules.push(getCustomDatesRules())
+      console.log(task.skipDates, task.includeDates)
+      return <EditCustomDates
+        skipDates={task.skipDates}
+        includeDates={task.includeDates}
+        onHide={e => onShowingCustomDatesChange(false)}
+      />
     }
-    return(
-      <div style={styles.rules}>
-        {rules}
-      </div>
-    )
   }
 
   return (
@@ -349,8 +238,8 @@ export const EditTaskView = ({
         {getHeader()}
         <input
           style={styles.nameInput}
-          type="text"
-          autoFocus={true}
+          type='text'
+          autoFocus
           onFocus={e => {if (!task.id) {
             e.target.select()
           }}}

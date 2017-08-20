@@ -1,4 +1,4 @@
-import { theme } from '../styles/theme';
+import { theme } from '../styles/theme'
 
 const tab = {
   flex: 1,
@@ -55,7 +55,7 @@ export const editTaskStyles = {
     cursor: 'pointer',
   },
   captionHover:{
-    color: theme.colorTextHover,
+    color: theme.colorTextHover
   },
   nameInput: {
     height: '25px',
@@ -143,18 +143,5 @@ export const editTaskStyles = {
   customDatesRuleText:{
     fontSize: '13px',
     marginLeft: '7px',
-  },
-  customDatesContainer: {
-    backgroundColor: '#eee',
-    padding: '2px',
-    margin: '2px',
-    flex: 1
-  },
-  customDate: {
-    backgroundColor: theme.colorB,
-    padding: '4px',
-    margin: '2px',
-    fontSize: '12px'
   }
-
 }
