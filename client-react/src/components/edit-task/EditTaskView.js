@@ -126,6 +126,22 @@ export const EditTaskView = ({
     }
   }
 
+  const getFooter = () => {
+    return (
+      <div style={styles.footer}>
+        <CustomSpan
+          style={styles.deleteButton}
+          styleHover={styles.deleteButtonHover}
+          onClick={e => onClose(true)}>
+          Delete
+          <div style={styles.deleteTaskSymbol}>
+            x
+          </div>
+        </CustomSpan>
+      </div>
+    )
+  }
+
   return (
     <div
       style={styles.root}
@@ -140,6 +156,7 @@ export const EditTaskView = ({
           onCellClick={onCalendarCellClick}
           onCheckCellSelection={onCheckCalendarCellSelection}
         />
+        {getFooter()}
       </div>
     </div>
   )

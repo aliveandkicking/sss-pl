@@ -36,7 +36,7 @@ export const editTaskStyles = {
     zIndex: '2',
   },
   dialog: {
-    height: '610px',
+    height: '647px',
     width: '420px',
     background: theme.colorC,
     display: 'flex',
@@ -144,5 +144,35 @@ export const editTaskStyles = {
   customDatesRule: {
     borderBottom: separator,
     padding: '13px'
+  },
+  footer: {
+    borderTop: separator,
+    height: '25px',
+    marginTop: '10px',
+    display: 'flex',
+    alignItems: 'stretch',
+    justifyContent: 'flex-end'
+  },
+  deleteButton: {
+    display: 'flex',
+    width: '75px',
+    borderRadius: '3px',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    cursor: 'pointer',
+    opacity: '0.4'
+  },
+  deleteButtonHover: {
+    opacity: '1',
+    backgroundColor: 'red'
+  },
+  deleteTaskSymbol: {
+    backgroundColor: theme.colorE,
+    width: '18px',
+    height: '18px',
+    borderRadius: '9px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 }
