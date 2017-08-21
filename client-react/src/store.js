@@ -44,7 +44,21 @@ const initialState = {
       name: 'do exercise',
       startDate: new Date(2017, 7),
       repeatModeId: 1,
-      includeDates: [dateUtils.clearTime(new Date())]
+      includeDates: [
+        dateUtils.clearTime(new Date()).getTime(),
+        dateUtils.incDay(dateUtils.clearTime(new Date()), ++i).getTime(),
+        dateUtils.clearTime(new Date(2017, 6, 31)).getTime(),
+        dateUtils.incDay(dateUtils.clearTime(new Date()), ++i).getTime(),
+        dateUtils.incDay(dateUtils.clearTime(new Date()), ++i).getTime(),
+        dateUtils.incDay(dateUtils.clearTime(new Date()), ++i).getTime(),
+        dateUtils.incDay(dateUtils.clearTime(new Date()), ++i).getTime(),
+        dateUtils.incDay(dateUtils.clearTime(new Date()), ++i).getTime(),
+        dateUtils.incDay(dateUtils.clearTime(new Date()), ++i).getTime(),
+        dateUtils.incDay(dateUtils.clearTime(new Date()), ++i).getTime(),
+        dateUtils.incDay(dateUtils.clearTime(new Date()), ++i).getTime(),
+        dateUtils.incDay(dateUtils.clearTime(new Date()), ++i).getTime(),
+        dateUtils.incDay(dateUtils.clearTime(new Date()), ++i).getTime()
+      ]
     })
   }
 }

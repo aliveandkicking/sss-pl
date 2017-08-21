@@ -31,7 +31,25 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch } = dispatchProps
   const { editingTask, tasks, showingCustomDates} = stateProps
 
+  const changeEditingTask = changes =>
+    dispatch(setEditingTask(new TaskModel(editingTask, changes)))
+
   const processCalendarClick = (cell) => {
+    if (showingCustomDates) {
+      if (!cell.isWeekDay) {
+        const dateTime = cell.data.getTime()
+        if (editingTask.skipDates.includes(dateTime)) {
+          changeEditingTask({skipDates: editingTask.skipDates.filter(el => el !== dateTime)})
+        } else if (editingTask.includeDates.includes(dateTime)) {
+          changeEditingTask({includeDates: editingTask.includeDates.filter(el => el !== dateTime)})
+        } else if (editingTask.containsDate(cell.data)) {
+          changeEditingTask({skipDates: editingTask.skipDates.concat(dateTime)})
+        } else {
+          changeEditingTask({includeDates: editingTask.includeDates.concat(dateTime)})
+        }
+      }
+      return
+    }
 
     const changeStartDate = () => {
       const startDiff = cell.data.getTime() - editingTask.startDate.getTime()
@@ -40,7 +58,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         || editingTask.repeatModeId === repeatMode.once.id
         || (Math.abs(startDiff) < Math.abs(endDiff))
     }
-
     if (cell.isWeekDay) {
       const changes = {}
       if (editingTask.repeatModeId === repeatMode.weekly.id) {
@@ -49,15 +66,12 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         changes.repeatModeId = repeatMode.weekly.id
         changes.weeklyDays = [cell.data]
       }
-      dispatch(setEditingTask(new TaskModel(editingTask, changes)))
+      changeEditingTask(changes)
     } else {
       if (changeStartDate()) {
-        dispatch(setEditingTask(new TaskModel(editingTask, {startDate: cell.data})))
+        changeEditingTask({startDate: cell.data})
       } else {
-        dispatch(setEditingTask(new TaskModel(editingTask, {
-          endDate: cell.data,
-          neverEnd: false
-        })))
+        changeEditingTask({endDate: cell.data, neverEnd: false})
       }
     }
   }
@@ -81,6 +95,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
       dispatch(changeTask(taskToSubmit))
     }
     dispatch(setEditingTask(null))
+    dispatch(setEditTaskShowingCustomDates(false))
   }
 
   const checkCalendarCellSelection = (data, isWeekDay) => {
@@ -97,7 +112,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return {
     showingCustomDates,
     task: editingTask,
-    onChanges: changes => dispatch(setEditingTask(new TaskModel(editingTask, changes))),
+    onChanges: changeEditingTask,
     onClose: close,
     onProcessWeekDay: processWeekDay,
     onCalendarCellClick: processCalendarClick,

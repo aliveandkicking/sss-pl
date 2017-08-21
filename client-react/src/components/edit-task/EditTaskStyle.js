@@ -9,6 +9,8 @@ const tab = {
   textTransform: 'capitalize'
 }
 
+const separator = '1px solid rgba(200,200,200,0.3)'
+
 const dayOfWeekRangeButton = {
   marginTop: '4px',
   height: '14px',
@@ -20,8 +22,6 @@ const dayOfWeekRangeButton = {
   fontSize: '70%',
   textAlign: 'center'
 }
-
-const tabBorder = '1px solid #aaa'
 
 export const editTaskStyles = {
   root:{
@@ -36,7 +36,7 @@ export const editTaskStyles = {
     zIndex: '2',
   },
   dialog: {
-    height: '600px',
+    height: '610px',
     width: '420px',
     background: theme.colorC,
     display: 'flex',
@@ -70,15 +70,15 @@ export const editTaskStyles = {
   },
   tab: {
     ...tab,
-    borderBottom: tabBorder,
+    borderBottom: separator,
     color: '#aaa'
   },
   tabSelected: {
     ...tab,
     borderBottom: 'none',
-    borderTop: tabBorder,
-    borderRight: tabBorder,
-    borderLeft: tabBorder,
+    borderTop: separator,
+    borderRight: separator,
+    borderLeft: separator,
     color: theme.colorText
   },
   rules: {
@@ -86,7 +86,8 @@ export const editTaskStyles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'stretch',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderBottom: separator
   },
   ruleRow: {
     height: '35px',
@@ -140,8 +141,8 @@ export const editTaskStyles = {
     color: theme.colorText,
     borderBottom: `2px solid ${theme.colorD}`
   },
-  customDatesRuleText:{
-    fontSize: '13px',
-    marginLeft: '7px',
+  customDatesRule: {
+    borderBottom: separator,
+    padding: '13px'
   }
 }

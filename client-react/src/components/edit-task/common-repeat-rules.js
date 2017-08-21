@@ -1,36 +1,38 @@
 import React from 'react'
-import { commonRepeatRulesStyles as styles } from './CommonRepeatRulesStyle'
-import { dateUtils } from '../../../shared/utils/dateutils'
+import { editTaskStyles as styles } from './EditTaskStyle'
+import { dateUtils } from '../../shared/utils/dateutils'
 
-export const CommonRepeatRulesView = ({
-  onChanges,
-  task
-}) => {
+export const getCommonRepeatRules = (
+  task,
+  onChanges
+) => {
 
   const getRepeatEveryRule = () => {
     return (
-      <div style={styles.ruleRow}>
+      <div
+        key={'repeat-every-rule'}
+        style={styles.ruleRow}>
         <label
           style={styles.ruleLabel}
           htmlFor='repeat-every-control'>
           Repeat every:
         </label>
-        <span style={styles.ruleInput}>
-          <input
-            id='repeat-every-control'
-            type='number'
-            min='1'
-            max='30'
-            onChange={e => onChanges({ every: e.target.value})}
-            value={task.every} />
-        </span>
+        <input style={styles.ruleInput}
+          id='repeat-every-control'
+          type='number'
+          min='1'
+          max='30'
+          onChange={e => onChanges({ every: e.target.value})}
+          value={task.every} />
       </div>
     )
   }
 
   const getStartDateRule = () => {
     return (
-      <div style={styles.ruleRow}>
+      <div
+        key={'start-date-rule'}
+        style={styles.ruleRow}>
         <label
           style={styles.ruleLabel}
           htmlFor='start-date-control'>
@@ -50,7 +52,9 @@ export const CommonRepeatRulesView = ({
 
   const getEndDateRule = () => {
     return (
-      <div style={styles.ruleRow}>
+      <div
+        key={'end-date-rule'}
+        style={styles.ruleRow}>
         <label
           style={styles.ruleLabel}
           htmlFor='end-date-control'>
@@ -80,11 +84,9 @@ export const CommonRepeatRulesView = ({
     )
   }
 
-  return (
-    <div style={styles.root}>
-      {getRepeatEveryRule()}
-      {getStartDateRule()}
-      {getEndDateRule()}
-    </div>
-  )
+  return [
+    getRepeatEveryRule(),
+    getStartDateRule(),
+    getEndDateRule()
+  ]
 }

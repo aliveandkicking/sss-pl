@@ -116,6 +116,8 @@ class TaskModel {
     date = dateUtils.clearTime(date)
     if (this.skipDates.includes(date.getTime())) {
       return false
+    } else if (this.includeDates.includes(date.getTime())) {
+      return true
     } else if (date.getTime() === this.startDate.getTime()) {
       return true
     } else if (!this.checkPeriod(date)) {

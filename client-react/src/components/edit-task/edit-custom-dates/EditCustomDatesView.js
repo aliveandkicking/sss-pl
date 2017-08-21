@@ -6,20 +6,29 @@ import { CustomSpan } from '../..'
 export const EditCustomDatesView = ({
   skipDates,
   includeDates,
-  onHide
+  onHide,
+  onDeleteDate
 }) => {
-  const getDates = (dates) => {
+  const getDates = (skip) => {
+    const dates = skip ? skipDates : includeDates
     const result = []
     dates.forEach(data => {
+      const date = new Date(data)
       result.push(
         <span
           key={data}
           style={styles.customDate}>
-          {dateUtils.toISOString(new Date(data))}
+          {dateUtils.toISOString(date, '/')}
+          <span style={styles.customDateDayName}>
+            {dateUtils.DAY_NAMES[date.getDay()]}
+          </span>
           <CustomSpan
             style={styles.deleteCustomDateButton}
-            styleHover={styles.deleteCustomDateButtonHover}>
-          x
+            styleHover={styles.deleteCustomDateButtonHover}
+            onClick={e => onDeleteDate(skip, data)}>
+            <div style={styles.deleteCustomDateButtonSymbol}>
+              X
+            </div>
           </CustomSpan>
         </span>
       )
@@ -29,19 +38,24 @@ export const EditCustomDatesView = ({
 
   return (
     <div style={styles.root}>
-      <CustomSpan
-        style={styles.caption}
-        styleHover={styles.captionHover}
+      <div style={styles.header}>
+        <CustomSpan
+        style={styles.backButton}
+        styleHover={styles.backButtonHover}
         onClick={onHide}>
-        {'< back'}
-      </CustomSpan>
-      Dates to skip
-      <div style={styles.customDatesContainer}>
-        {getDates(includeDates)}
+        <div style={styles.backButtonSymbol}>
+          {'<'}
+        </div>
+        {'Back'}
+        </CustomSpan>
       </div>
-      Dates to include
+      Dates to include:
       <div style={styles.customDatesContainer}>
-        {getDates(skipDates)}
+        {getDates(false)}
+      </div>
+      Dates to skip:
+      <div style={styles.customDatesContainer}>
+        {getDates(true)}
       </div>
     </div>
   )
