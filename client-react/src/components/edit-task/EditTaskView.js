@@ -13,6 +13,7 @@ export const EditTaskView = ({
   task,
   onClose,
   onChanges,
+  onDelete,
   onCalendarCellClick,
   onProcessWeekDay,
   onCheckCalendarCellSelection,
@@ -129,15 +130,17 @@ export const EditTaskView = ({
   const getFooter = () => {
     return (
       <div style={styles.footer}>
-        <CustomSpan
-          style={styles.deleteButton}
-          styleHover={styles.deleteButtonHover}
-          onClick={e => onClose(true)}>
-          Delete
-          <div style={styles.deleteTaskSymbol}>
-            x
-          </div>
-        </CustomSpan>
+        {task.id &&
+          <CustomSpan
+            style={styles.deleteButton}
+            styleHover={styles.deleteButtonHover}
+            onClick={e => {
+              if (window.confirm("Delete task permanently ?")) {
+                onDelete()
+            }}}>
+            Delete &#10006;
+          </CustomSpan>
+        }
       </div>
     )
   }

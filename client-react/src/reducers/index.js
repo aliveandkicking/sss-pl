@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import { editTaskReducer } from './edit-task'
 import { dateUtils } from '../shared/utils/dateutils'
 
-const initialDate = (state = new Date(), action) => {
+const initialDate = (state = dateUtils.clearTime(new Date()), action) => {
   if (action.type === 'SET_INITIAL_DATE') {
     return dateUtils.clearTime(action.payload.date)
   }
@@ -13,6 +13,17 @@ const tasks = (state = {}, action) => {
   if (action.type === 'CHANGE_TASK') {
     const newState = {...state}
     newState[action.payload.task.id] = action.payload.task
+    return newState
+  } else if (action.type === 'DELETE_TASK') {
+    const newState = {}
+    const idToDelete = action.payload.taskId.toString()
+    for (let key in state) {
+      if (state.hasOwnProperty(key)) {
+        if (key !== idToDelete) {
+           newState[key] = state[key]
+        }
+      }
+    }
     return newState
   }
   return state

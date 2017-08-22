@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { EditTaskView } from './EditTaskView'
 import {
   changeTask,
+  deleteTask,
   setEditingTask,
   setEditTaskShowingCustomDates
 } from '../../actions'
@@ -114,6 +115,12 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     task: editingTask,
     onChanges: changeEditingTask,
     onClose: close,
+    onDelete: () => {
+      if (editingTask.id) {
+        dispatch(deleteTask(editingTask.id))
+      }
+      dispatch(setEditingTask(null))
+    },
     onProcessWeekDay: processWeekDay,
     onCalendarCellClick: processCalendarClick,
     onCheckCalendarCellSelection: checkCalendarCellSelection,

@@ -11,16 +11,14 @@ const taskInfoItem = {
   transition: '500ms',
 }
 
-const height = '75px'
-
 export const taskStyles = {
   root: {
     margin: '1px',
     cursor: 'pointer',
     position: 'relative',
     flex: 1,
-    height: height,
-    minWidth: height,
+    height: '65px',
+    minWidth: '75px',
     overflow: 'hidden',
     transition: '400ms',
     userSelect: 'none'

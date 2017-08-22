@@ -37,12 +37,12 @@ export const editTaskStyles = {
   },
   dialog: {
     height: '647px',
-    width: '420px',
+    width: '450px',
     background: theme.colorC,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'stretch',
-    padding: '10px 15px 20px'
+    padding: '10px 15px 10px'
   },
   header: {
     marginBottom: '10px',
@@ -95,7 +95,7 @@ export const editTaskStyles = {
     alignItems: 'center'
   },
   ruleLabel: {
-    width: '158px',
+    width: '170px',
     textAlign: 'right'
   },
   ruleInput: {
@@ -149,6 +149,7 @@ export const editTaskStyles = {
     borderTop: separator,
     height: '25px',
     marginTop: '10px',
+    padding: '5px 0px 0px',
     display: 'flex',
     alignItems: 'stretch',
     justifyContent: 'flex-end'
@@ -156,23 +157,17 @@ export const editTaskStyles = {
   deleteButton: {
     display: 'flex',
     width: '75px',
-    borderRadius: '3px',
+    borderRadius: '2px',
     alignItems: 'center',
     justifyContent: 'space-between',
     cursor: 'pointer',
-    opacity: '0.4'
+    opacity: '0.4',
+    padding: '4px',
+    transition: '100ms'
   },
   deleteButtonHover: {
     opacity: '1',
-    backgroundColor: 'red'
-  },
-  deleteTaskSymbol: {
-    backgroundColor: theme.colorE,
-    width: '18px',
-    height: '18px',
-    borderRadius: '9px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
+    backgroundColor: '#ff4d4d',
+    boxShadow: '0px 0 3px rgba(0,0,0,0.6)'
   }
 }
