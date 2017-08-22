@@ -22,7 +22,7 @@ export const getCommonRepeatRules = (
           type='number'
           min='1'
           max='30'
-          onChange={e => onChanges({ every: e.target.value})}
+          onChange={e => onChanges({every: e.target.value})}
           value={task.every} />
       </div>
     )
@@ -43,8 +43,10 @@ export const getCommonRepeatRules = (
           style={styles.ruleInput}
           type='date'
           value={dateUtils.toISOString(task.startDate)}
-          onChange={e => {
-            onChanges({startDate: dateUtils.fromISOString(e.target.value)})
+          onChange={e => {onChanges({startDate: e.target.value
+              ? dateUtils.fromISOString(e.target.value)
+              : dateUtils.clearTime(new Date())
+            })
           }} />
       </div>
     )
@@ -67,7 +69,9 @@ export const getCommonRepeatRules = (
           disabled={task.neverEnd}
           value={dateUtils.toISOString(task.endDate)}
           onChange={e => {
-            onChanges({endDate: dateUtils.fromISOString(e.target.value)})
+            onChanges({endDate: e.target.value
+              ? dateUtils.fromISOString(e.target.value)
+              : dateUtils.clearTime(new Date())})
           }} />
         <label htmlFor='never-end-checkbox'>
           <input

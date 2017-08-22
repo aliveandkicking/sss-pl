@@ -32,6 +32,9 @@ export class TaskView extends React.Component {
         onMouseOver={() => this.setState({hover: true})}
         onMouseOut={() => this.setState({hover: false})}
         style={styles.root}
+        draggable='true'
+        onDragStart={event =>
+          event.dataTransfer.setData('text/plain', this.props.task.id)}
         onClick={e => this.props.onClick()}
       >
         <div style={this.getContentStyle()}>

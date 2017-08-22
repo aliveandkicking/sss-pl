@@ -32,7 +32,6 @@ export const dayStyles = {
     alignItems: 'center'
   },
   addTaskButton: {
-
     backgroundColor: theme.colorC,
     height: '30px',
     width: '30px',

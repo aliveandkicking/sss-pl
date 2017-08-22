@@ -4,7 +4,7 @@ import { Task } from '../task/Task'
 import { CustomSpan } from '..'
 
 
-export const DayView = ({title, tasks, date, addTask}) => {
+export const DayView = ({caption, tasks, date, addTask}) => {
   const randerTasks = () => {
     return tasks.map(task =>
       <Task
@@ -16,9 +16,15 @@ export const DayView = ({title, tasks, date, addTask}) => {
   }
 
   return (
-    <div style={styles.root}>
+    <div
+      style={styles.root}
+      onDragOver={e => e.preventDefault()}
+      onDrop={e => {
+        e.preventDefault()
+        addTask(e.dataTransfer.getData('text/plain'))
+      }}>
       <div style={styles.caption}>
-        {title}
+        {caption}
       </div>
       <div style={styles.content}>
         {randerTasks()}
@@ -26,7 +32,7 @@ export const DayView = ({title, tasks, date, addTask}) => {
           <CustomSpan
             style={styles.addTaskButton}
             styleHover={styles.addTaskButtonHover}
-            onClick={addTask}>
+            onClick={e => addTask(null)}>
             +
           </CustomSpan>
         </span>

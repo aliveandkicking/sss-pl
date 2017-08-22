@@ -59,13 +59,20 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
       }
     },
     onEdit: () => dispatch(setEditingTask(new TaskModel(ownProps.task))),
-    onDelete: () => {dispatch(changeTask(
-        new TaskModel(ownProps.task).addSkipDate(ownProps.date)))
+    onDelete: () => {
+      const newTask = new TaskModel(ownProps.task)
+      const dateTime = ownProps.date.getTime()
+      if (newTask.includeDates.includes(dateTime)) {
+        newTask.includeDates = newTask.includeDates.filter(el => el !== dateTime)
+      }
+      if (!newTask.containsDate(ownProps.date)) {
+        dispatch(changeTask(new TaskModel(newTask)))
+      } else {
+        dispatch(changeTask(new TaskModel(newTask).addSkipDate(ownProps.date)))
+      }
     }
   }
 }
-
-
 
 export const Task = connect(
   mapStateToProps,
