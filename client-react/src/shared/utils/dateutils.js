@@ -147,6 +147,10 @@ class DateUtils {
   fromISOString (dateString) {
     return this.fromCustomString(dateString, this.DATE_SEPARATOR)
   }
+
+  today () {
+    return this.clearTime(new Date())
+  }
 }
 
 module.exports.dateUtils = new DateUtils()

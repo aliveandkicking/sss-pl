@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import { editTaskReducer } from './edit-task'
 import { dateUtils } from '../shared/utils/dateutils'
 
-const initialDate = (state = dateUtils.clearTime(new Date()), action) => {
+const initialDate = (state = dateUtils.today(), action) => {
   if (action.type === 'SET_INITIAL_DATE') {
     return dateUtils.clearTime(action.payload.date)
   }
@@ -53,11 +53,11 @@ const doneTasks = (state = {}, action) => {
   return state
 }
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   initialDate,
   tasks,
   doneTasks,
   editTask: editTaskReducer
 })
 
-export default rootReducer
+

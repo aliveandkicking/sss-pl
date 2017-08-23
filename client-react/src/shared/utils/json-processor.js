@@ -10,18 +10,23 @@ export const loadFromJsonString = (object, jsonString) => {
 }
 
 const loadFromTempObject = (object, tempObject)  => {
+
+  const getValue = (oldValue, tempValue) => {
+    if (oldValue instanceof Date) {
+      return dateUtils.fromISOString(tempValue)
+    } else if (oldValue instanceof Object) {
+      loadFromTempObject(oldValue, tempValue)
+    } else {
+      return tempValue
+    }
+  }
+
   if (!tempObject) {
     return
   }
   for (let key in tempObject) {
     if (tempObject.hasOwnProperty(key)) {
-      if (object[key] instanceof Date) {
-        object[key] = dateUtils.fromISOString(tempObject[key])
-      } else if (object[key] instanceof Object) {
-        loadFromTempObject(object[key], tempObject[key])
-      } else {
-        object[key] = tempObject[key]
-      }
+      object[key] = getValue(object[key], tempObject[key])
     }
   }
 }
