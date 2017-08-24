@@ -1,11 +1,11 @@
-import React from 'react';
-import { calendarStyles as styles  } from './CalendarStyle';
-import { CustomSpan } from '..';
+import React from 'react'
+import { calendarStyles as styles } from './CalendarStyle'
+import { CustomSpan } from '..'
+import PropTypes from 'prop-types'
 
 export const CalendarView = ({
   rows, title, onPrev, onNext, onTitleClick, onTodayClick, onCellClick
 }) => {
-
   const getCell = (cell) => {
     return (
       <CustomSpan
@@ -33,15 +33,15 @@ export const CalendarView = ({
   }
 
   const getCells = () => {
-    const data = [];
+    const data = []
     rows.forEach(cells => {
-      let row = [];
+      let row = []
       cells.forEach(cell => {
         row.push(getCell(cell))
       })
       data.push(getRow(row, cells[0].data))
-    });
-    return data;
+    })
+    return data
   }
 
   return (
@@ -81,4 +81,14 @@ export const CalendarView = ({
       </div>
     </div>
   )
+}
+
+CalendarView.propTypes = {
+  rows: PropTypes.array,
+  title: PropTypes.string,
+  onPrev: PropTypes.func,
+  onNext: PropTypes.func,
+  onTitleClick: PropTypes.func,
+  onTodayClick: PropTypes.func,
+  onCellClick: PropTypes.func
 }

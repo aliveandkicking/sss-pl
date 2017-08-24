@@ -24,7 +24,7 @@ const dayOfWeekRangeButton = {
 }
 
 export const editTaskStyles = {
-  root:{
+  root: {
     position: 'absolute',
     display: 'flex',
     justifyContent: 'center',
@@ -33,7 +33,7 @@ export const editTaskStyles = {
     width: '100%',
     backgroundColor: 'rgba(0,0,0,0.3)',
     userSelect: 'none',
-    zIndex: '2',
+    zIndex: '2'
   },
   dialog: {
     height: '647px',
@@ -48,13 +48,13 @@ export const editTaskStyles = {
     marginBottom: '10px',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
-  caption:{
+  caption: {
     transition: '300ms',
-    cursor: 'pointer',
+    cursor: 'pointer'
   },
-  captionHover:{
+  captionHover: {
     color: theme.colorTextHover
   },
   nameInput: {
@@ -66,7 +66,7 @@ export const editTaskStyles = {
     display: 'flex',
     alignItems: 'stretch',
     cursor: 'pointer',
-    marginTop: '10px',
+    marginTop: '10px'
   },
   tab: {
     ...tab,
@@ -100,7 +100,7 @@ export const editTaskStyles = {
   },
   ruleInput: {
     width: '140px',
-    marginLeft: '7px',
+    marginLeft: '7px'
   },
   ruleEndsOn: {
     marginRight: '60px',
@@ -112,22 +112,22 @@ export const editTaskStyles = {
     padding: '0px 2px',
     color: '#888'
   },
-  dayOfWeekSelected:{
+  dayOfWeekSelected: {
     color: theme.colorText,
     borderBottom: `2px solid ${theme.colorD}`
   },
-  dayOfWeekRangeButtonMonToFri:{
+  dayOfWeekRangeButtonMonToFri: {
     ...dayOfWeekRangeButton,
     marginLeft: '8px',
     backgroundColor: theme.colorText
   },
-  dayOfWeekRangeButtonSaSu:{
+  dayOfWeekRangeButtonSaSu: {
     ...dayOfWeekRangeButton,
     marginLeft: '5px',
     backgroundColor: theme.colorText
   },
-  dayOfWeekRangeButtonHover:{
-    backgroundColor: theme.colorTextHover,
+  dayOfWeekRangeButtonHover: {
+    backgroundColor: theme.colorTextHover
   },
   monthlyRuleRow: {
     marginLeft: '45px'

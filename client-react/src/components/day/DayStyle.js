@@ -1,7 +1,7 @@
 import { theme } from '../styles'
 
 export const dayStyles = {
-  root:{
+  root: {
     flex: 1,
     display: 'flex',
     flexDirection: 'column',

@@ -1,6 +1,7 @@
 import { navigationHeaderStyles as styles } from './NavigationHeaderStyle'
 import React from 'react'
 import { CustomSpan } from '..'
+import PropTypes from 'prop-types'
 
 export const NavigationHeaderView = ({onAdd, onNext, onPrev, onToday, dateCaption}) => {
   return (
@@ -40,7 +41,7 @@ export const NavigationHeaderView = ({onAdd, onNext, onPrev, onToday, dateCaptio
             onPrev()
           }}>
           <span style={styles.navigationButtonSymbol}>
-          {'<'}
+            {'<'}
           </span>
         </CustomSpan>
 
@@ -52,11 +53,19 @@ export const NavigationHeaderView = ({onAdd, onNext, onPrev, onToday, dateCaptio
             onNext()
           }}>
           <span style={styles.navigationButtonSymbol}>
-          {'>'}
+            {'>'}
           </span>
         </CustomSpan>
       </span>
 
     </div>
   )
+}
+
+NavigationHeaderView.propTypes = {
+  onAdd: PropTypes.func,
+  onNext: PropTypes.func,
+  onPrev: PropTypes.func,
+  onToday: PropTypes.func,
+  dateCaption: PropTypes.string
 }

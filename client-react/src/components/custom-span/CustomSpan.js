@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const reservedProps = ['style', 'styleHover']
 
@@ -8,7 +9,7 @@ export class CustomSpan extends React.Component {
     this.state = {hover: false}
   }
 
-  setHover(hover) {
+  setHover (hover) {
     this.setState({hover})
   }
 
@@ -29,4 +30,10 @@ export class CustomSpan extends React.Component {
       ...innerProps
     }, this.props.children)
   }
+}
+
+CustomSpan.propTypes = {
+  style: PropTypes.object,
+  styleHover: PropTypes.object,
+  children: PropTypes.any
 }

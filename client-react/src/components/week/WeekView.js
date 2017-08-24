@@ -1,14 +1,14 @@
-import React from 'react';
-import { weekStyles } from './WeekStyle';
-import { Day } from '..';
-import { WeekNavigationHeader } from '..';
-import { dateUtils } from '../../shared/utils/dateutils';
+import React from 'react'
+import { weekStyles } from './WeekStyle'
+import { Day, WeekNavigationHeader } from '..'
+import { dateUtils } from '../../shared/utils/dateutils'
+import PropTypes from 'prop-types'
 
 export const WeekView = ({initialDate}) => {
   const randerDays = () => {
     let result = []
     for (let i = 0; i < 7; i++) {
-       result.push(<Day key={i} date={dateUtils.incDay(initialDate, i)}/>)
+      result.push(<Day key={i} date={dateUtils.incDay(initialDate, i)} />)
     }
     return result
   }
@@ -23,3 +23,6 @@ export const WeekView = ({initialDate}) => {
   )
 }
 
+WeekView.propTypes = {
+  initialDate: PropTypes.object
+}

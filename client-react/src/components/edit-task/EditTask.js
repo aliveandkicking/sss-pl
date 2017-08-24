@@ -7,7 +7,7 @@ import {
   setEditTaskShowingCustomDates
 } from '../../actions'
 import { TaskModel } from '../../shared/models/task-model'
-import { repeatMode } from '../../shared/immutable/repeat-modes';
+import { repeatMode } from '../../shared/immutable/repeat-modes'
 
 const processWeekDay = (weekDays, day) => {
   const result = Array.from(weekDays)
@@ -30,7 +30,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch } = dispatchProps
-  const { editingTask, tasks, showingCustomDates} = stateProps
+  const { editingTask, tasks, showingCustomDates } = stateProps
 
   const changeEditingTask = changes =>
     dispatch(setEditingTask(new TaskModel(editingTask, changes)))
@@ -55,9 +55,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     const changeStartDate = () => {
       const startDiff = cell.data.getTime() - editingTask.startDate.getTime()
       const endDiff = cell.data.getTime() - editingTask.endDate.getTime()
-      return (startDiff < 0)
-        || editingTask.repeatModeId === repeatMode.once.id
-        || (Math.abs(startDiff) < Math.abs(endDiff))
+      return (startDiff < 0) ||
+        editingTask.repeatModeId === repeatMode.once.id ||
+        (Math.abs(startDiff) < Math.abs(endDiff))
     }
     if (cell.isWeekDay) {
       const changes = {}
@@ -78,7 +78,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   }
 
   const getNewTaskId = () => {
-    let maxId = 0;
+    let maxId = 0
     for (let key in tasks) {
       if (maxId < tasks[key].id) {
         maxId = tasks[key].id

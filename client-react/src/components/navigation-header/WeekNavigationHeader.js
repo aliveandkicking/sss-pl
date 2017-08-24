@@ -4,8 +4,8 @@ import {
   setEditingTask,
   setInitialDate
 } from '../../actions'
-import { TaskModel } from '../../shared/models/task-model';
-import { dateUtils } from '../../shared/utils/dateutils';
+import { TaskModel } from '../../shared/models/task-model'
+import { dateUtils } from '../../shared/utils/dateutils'
 
 const buildDateCaption = date => {
   const startDateData = dateUtils.decodeDate(date)
@@ -36,7 +36,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     onAdd: () => dispatch(setEditingTask(new TaskModel())),
     onNext: () => dispatch(setInitialDate(dateUtils.incDay(initialDate, dateUtils.DAYS_IN_WEEK))),
     onPrev: () => dispatch(setInitialDate(dateUtils.decDay(initialDate, dateUtils.DAYS_IN_WEEK))),
-    onToday: () => dispatch(setInitialDate(dateUtils.getStartOfWeek(new Date()))),
+    onToday: () => dispatch(setInitialDate(dateUtils.getStartOfWeek(new Date())))
   }
 }
 

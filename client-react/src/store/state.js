@@ -2,7 +2,7 @@ import { TaskModel } from '../shared/models/task-model'
 import { dateUtils } from '../shared/utils/dateutils'
 // import { buildJsonString, loadFromJsonString } from '../shared/utils/json-processor'
 
-import { serverApi } from '../shared/server-api'
+// import { serverApi } from '../shared/server-api'
 
 let i = 0
 const state = {
@@ -33,7 +33,7 @@ const state = {
       name: 'sept task',
       startDate: new Date(2017, 8),
       repeatModeId: 1
-    },
+    }
   },
   doneTasks: {
     [dateUtils.toISOString(new Date())]: [3, 2]
@@ -42,14 +42,14 @@ const state = {
     calendarInitialDate: dateUtils.clearTime(new Date()),
     calendarMonthMode: false,
     task: null,
-    showingCustomDates: false,
+    showingCustomDates: false
   }
 }
 
 const normalizeState = () => {
   for (let key in state.tasks) {
     if (state.tasks.hasOwnProperty(key)) {
-      state.tasks[key] =  new TaskModel(state.tasks[key])
+      state.tasks[key] = new TaskModel(state.tasks[key])
     }
   }
 }
@@ -57,7 +57,7 @@ const normalizeState = () => {
 export const loadState = () => {
   // loadFromJsonString(state, '')
 
-  serverApi.post({}).then(response => console.log(response))
+  // serverApi.post({}).then(response => console.log(response))
 
   normalizeState()
 
@@ -70,5 +70,3 @@ export const loadState = () => {
 export const saveState = () => {
   // buildJsonString(state)
 }
-
-

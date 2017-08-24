@@ -2,6 +2,7 @@ import React from 'react'
 import { editCustomDatesStyles as styles } from './EditCustomDatesStyle'
 import { dateUtils } from '../../../shared/utils/dateutils'
 import { CustomSpan } from '../..'
+import PropTypes from 'prop-types'
 
 export const EditCustomDatesView = ({
   skipDates,
@@ -40,13 +41,13 @@ export const EditCustomDatesView = ({
     <div style={styles.root}>
       <div style={styles.header}>
         <CustomSpan
-        style={styles.backButton}
-        styleHover={styles.backButtonHover}
-        onClick={onHide}>
-        <div style={styles.backButtonSymbol}>
-          {'<'}
-        </div>
-        {'Back'}
+          style={styles.backButton}
+          styleHover={styles.backButtonHover}
+          onClick={onHide}>
+          <div style={styles.backButtonSymbol}>
+            {'<'}
+          </div>
+          {'Back'}
         </CustomSpan>
       </div>
       Dates to include:
@@ -59,4 +60,11 @@ export const EditCustomDatesView = ({
       </div>
     </div>
   )
+}
+
+EditCustomDatesView.propTypes = {
+  skipDates: PropTypes.array,
+  includeDates: PropTypes.array,
+  onHide: PropTypes.func,
+  onDeleteDate: PropTypes.func
 }

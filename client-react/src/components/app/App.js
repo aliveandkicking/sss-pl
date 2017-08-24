@@ -1,7 +1,6 @@
 import React from 'react'
-import { Week } from '..'
-import { EditTask } from '..'
-import { theme } from '../styles';
+import { Week, EditTask } from '..'
+import { theme } from '../styles'
 
 const style = {
   background: `linear-gradient(-30deg, ${theme.colorC}, ${theme.colorE})`,
@@ -20,4 +19,4 @@ const App = () => {
   )
 }
 
-export default App;
+export default App

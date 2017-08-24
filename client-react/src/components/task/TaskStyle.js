@@ -8,7 +8,7 @@ const taskInfoItem = {
   bottom: '0px',
   left: '3px',
   right: '3px',
-  transition: '500ms',
+  transition: '500ms'
 }
 
 export const taskStyles = {
@@ -56,13 +56,13 @@ export const taskStyles = {
     fontSize: '70%'
   },
   taskNameHover: {
-    opacity: 1,
+    opacity: 1
   },
   taskAbbr: {
     ...taskInfoItem
   },
   taskAbbrHover: {
-    opacity: 0,
+    opacity: 0
   },
   footer: {
     position: 'absolute',

@@ -8,6 +8,7 @@ import { getWeeklyRepeatRules } from './weekly-repeat-rules'
 import { getMonthlyRepeatRules } from './monthly-repeat-rules'
 import { getNoRepeatRules } from './no-repeat-rules'
 import { getCustomDatesRules } from './custom-dates-rules'
+import PropTypes from 'prop-types'
 
 export const EditTaskView = ({
   task,
@@ -49,29 +50,34 @@ export const EditTaskView = ({
         style={styles.nameInput}
         type='text'
         autoFocus
-        onFocus={e => {if (!task.id) {
-          e.target.select()
-        }}}
+        onFocus={e => {
+          if (!task.id) {
+            e.target.select()
+          }
+        }}
         defaultValue={task.name}
-        onChange={e => onChanges({ name: e.target.value})}
-        onKeyDown={e => {if (e.keyCode === 13) {
-          onClose(true)
-        }}}
+        onChange={e => onChanges({name: e.target.value})}
+        onKeyDown={e => {
+          if (e.keyCode === 13) {
+            onClose(true)
+          }
+        }}
       />
     )
   }
 
   const getTabs = () => {
     const tabs = []
-    repeatMode.all.forEach((info)  => {
+    repeatMode.all.forEach((info) => {
       tabs.push(
         <span
           key={info.id}
           style={info.id === task.repeatModeId ? styles.tabSelected : styles.tab}
-          onClick={e => {onChanges({repeatModeId: info.id})}}>
+          onClick={e => { onChanges({repeatModeId: info.id}) }}>
           {info.title}
         </span>
-    )})
+      )
+    })
     return (
       <div
         key='repeat-mpdes-tabs'
@@ -135,9 +141,10 @@ export const EditTaskView = ({
             style={styles.deleteButton}
             styleHover={styles.deleteButtonHover}
             onClick={e => {
-              if (window.confirm("Delete task permanently ?")) {
+              if (window.confirm('Delete task permanently ?')) {
                 onDelete()
-            }}}>
+              }
+            }}>
             Delete &#10006;
           </CustomSpan>
         }
@@ -151,7 +158,7 @@ export const EditTaskView = ({
       onClick={e => onClose()}>
       <div
         style={styles.dialog}
-        onClick={e => {e.stopPropagation()}}>
+        onClick={e => { e.stopPropagation() }}>
         {getHeader()}
         {getNameInput()}
         {getRules()}
@@ -163,4 +170,16 @@ export const EditTaskView = ({
       </div>
     </div>
   )
+}
+
+EditTaskView.propTypes = {
+  task: PropTypes.object,
+  onClose: PropTypes.func,
+  onChanges: PropTypes.func,
+  onDelete: PropTypes.func,
+  onCalendarCellClick: PropTypes.func,
+  onProcessWeekDay: PropTypes.func,
+  onCheckCalendarCellSelection: PropTypes.func,
+  onShowingCustomDatesChange: PropTypes.func,
+  showingCustomDates: PropTypes.bool
 }

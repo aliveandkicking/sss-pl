@@ -5,7 +5,7 @@ const button = {
   transition: '200ms',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center',
+  justifyContent: 'center'
 }
 
 export const navigationHeaderStyles = {
@@ -21,12 +21,12 @@ export const navigationHeaderStyles = {
     alignItems: 'center',
     justifyContent: 'center',
     cursor: 'default',
-    marginLeft: '50px',
+    marginLeft: '50px'
   },
   rightButtonGroupContainer: {
     display: 'flex',
     alignItems: 'stretch',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-end'
   },
   button: {
     ...button,
@@ -37,7 +37,7 @@ export const navigationHeaderStyles = {
     width: '75px'
   },
   buttonHover: {
-    color: theme.colorTextHover,
+    color: theme.colorTextHover
   },
   addButtonSymbol: {
     transform: 'scale(2, 2)'

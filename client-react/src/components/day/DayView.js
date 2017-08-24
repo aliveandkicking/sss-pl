@@ -2,7 +2,7 @@ import React from 'react'
 import { dayStyles as styles } from './DayStyle'
 import { Task } from '../task/Task'
 import { CustomSpan } from '..'
-
+import PropTypes from 'prop-types'
 
 export const DayView = ({caption, tasks, date, addTask}) => {
   const randerTasks = () => {
@@ -39,4 +39,11 @@ export const DayView = ({caption, tasks, date, addTask}) => {
       </div>
     </div>
   )
+}
+
+DayView.propTypes = {
+  caption: PropTypes.string,
+  tasks: PropTypes.array,
+  date: PropTypes.object,
+  addTask: PropTypes.func
 }

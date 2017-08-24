@@ -1,7 +1,8 @@
 import React from 'react'
 import { taskStyles as styles } from './TaskStyle'
 import { stringToColor } from '../../shared/utils/string-to-color'
-import { CustomSpan } from '..';
+import { CustomSpan } from '..'
+import PropTypes from 'prop-types'
 
 export class TaskView extends React.Component {
   constructor (props) {
@@ -42,15 +43,15 @@ export class TaskView extends React.Component {
             style={styles.removeButton}
             styleHover={styles.removeButtonHover}
             onClick={e => {
-                e.stopPropagation()
-                this.props.onDelete()
+              e.stopPropagation()
+              this.props.onDelete()
             }}>
             x
           </CustomSpan>
 
           <div
             style={this.getStyle(this.state.infoHover, styles.taskName, styles.taskNameHover)}>
-              {this.props.task.name}
+            {this.props.task.name}
           </div>
           <div
             style={this.getStyle(this.state.infoHover, styles.taskAbbr, styles.taskAbbrHover)}>
@@ -58,15 +59,16 @@ export class TaskView extends React.Component {
           </div>
 
           <CustomSpan
-             style={styles.footer}
-             styleHover={styles.footerHover}>
+            style={styles.footer}
+            styleHover={styles.footerHover}>
             <span
               onMouseOver={() => this.setState({infoHover: true})}
               onMouseOut={() => this.setState({infoHover: false})}
               onClick={e => {
                 e.stopPropagation()
                 this.props.onEdit()
-            }}>
+              }
+            }>
               &#9881;
             </span>
           </CustomSpan>
@@ -76,4 +78,13 @@ export class TaskView extends React.Component {
       </div>
     )
   }
+}
+
+TaskView.propTypes = {
+  task: PropTypes.object,
+  taskNameAbbreviation: PropTypes.string,
+  isDone: PropTypes.bool,
+  onClick: PropTypes.func,
+  onEdit: PropTypes.func,
+  onDelete: PropTypes.func
 }
