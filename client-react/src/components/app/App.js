@@ -1,22 +1,49 @@
 import React from 'react'
-import { Week, EditTask } from '..'
-import { theme } from '../styles'
+import { Root } from '..'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import { rootReducer } from '../../reducers'
+import { loadState, saveState, getInitialState } from '../../store/state'
 
-const style = {
-  background: `linear-gradient(-30deg, ${theme.colorC}, ${theme.colorE})`,
-  fontFamily: theme.fontFamily,
-  color: theme.colorText,
-  height: '100%',
-  minWidth: '575px'
+const initStore = () => {
+  const store = createStore(rootReducer, getInitialState())
+  console.log(store.getState())
+  store.subscribe(() => {
+    const state = store.getState()
+    console.log(state)
+    saveState(state)
+  })
+  return store
 }
 
-const App = () => {
-  return (
-    <div style={style}>
-      <EditTask />
-      <Week />
-    </div>
-  )
+export class App extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {loaded: false}
+    loadState()
+      .then(() => {
+        this.setState({loaded: true})
+      })
+      .catch(() => {
+        this.setState({loaded: true})
+      })
+  }
+
+  render () {
+    if (this.state.loaded) {
+      return (
+        <Provider store={initStore()}>
+          <Root />
+        </Provider>
+      )
+    } else {
+      return (
+        <div>
+          loading...
+        </div>
+      )
+    }
+  }
 }
 
 export default App

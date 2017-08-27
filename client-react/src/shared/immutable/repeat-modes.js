@@ -1,4 +1,4 @@
-const mode = (id, title) => {return {id, title}}
+const mode = (id, title) => { return {id, title} }
 
 export const repeatMode = {
   once: mode(0, 'once'),

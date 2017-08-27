@@ -22,7 +22,7 @@ const task = (state = null, action) => {
   return state
 }
 
-const showingCustomDates = (state  = false, action) => {
+const showingCustomDates = (state = false, action) => {
   if (action.type === 'SET_EDIT_TASK_SHOWING_CUSTOM_DATES') {
     return action.payload.showingCustomDates
   }

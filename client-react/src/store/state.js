@@ -1,39 +1,37 @@
 import { TaskModel } from '../shared/models/task-model'
 import { dateUtils } from '../shared/utils/dateutils'
-// import { buildJsonString, loadFromJsonString } from '../shared/utils/json-processor'
-
-// import { serverApi } from '../shared/server-api'
+import { serverApi } from '../shared/server-api'
 
 let i = 0
-const state = {
+let initialState = {
   initialDate: dateUtils.clearTime(new Date()),
   tasks: {
-    [++i]: {
+    [++i]: new TaskModel({
       id: i,
       name: 'do exercise',
       startDate: new Date(2017, 7),
       repeatModeId: 1,
       includeDates: [dateUtils.clearTime(new Date())]
-    },
-    [++i]: {
+    }),
+    [++i]: new TaskModel({
       id: i,
       name: 'task with long name',
       startDate: new Date(2017, 7),
       repeatModeId: 1
-    },
-    [++i]: {
+    }),
+    [++i]: new TaskModel({
       id: i,
       name: 'repeat every 2',
       startDate: new Date(2017, 7),
       repeatModeId: 1,
       every: 2
-    },
-    [++i]: {
+    }),
+    [++i]: new TaskModel({
       id: i,
       name: 'sept task',
       startDate: new Date(2017, 8),
       repeatModeId: 1
-    }
+    })
   },
   doneTasks: {
     [dateUtils.toISOString(new Date())]: [3, 2]
@@ -47,26 +45,41 @@ const state = {
 }
 
 const normalizeState = () => {
-  for (let key in state.tasks) {
-    if (state.tasks.hasOwnProperty(key)) {
-      state.tasks[key] = new TaskModel(state.tasks[key])
+  initialState.initialDate = dateUtils.fromISOString(initialState.initialDate)
+  for (let key in initialState.tasks) {
+    if (initialState.tasks.hasOwnProperty(key)) {
+      let task = initialState.tasks[key]
+      task.startDate = dateUtils.fromISOString(task.startDate)
+      task.endDate = dateUtils.fromISOString(task.endDate)
+      initialState.tasks[key] = new TaskModel(initialState.tasks[key])
     }
   }
+  initialState.editTask.calendarInitialDate = dateUtils.fromISOString(initialState.editTask.calendarInitialDate)
+  if (initialState.editTask.task) {
+    let task = initialState.editTask.task
+    task.startDate = dateUtils.fromISOString(task.startDate)
+    task.endDate = dateUtils.fromISOString(task.endDate)
+    initialState.editTask.task = new TaskModel(task)
+  }
+  console.log('normalized', initialState)
 }
 
 export const loadState = () => {
-  // loadFromJsonString(state, '')
-
-  // serverApi.post({}).then(response => console.log(response))
-
-  normalizeState()
-
-  return {
-    loaded: false,
-    state
-  }
+  return serverApi.post('load', {})
+    .then(response => {
+      console.log(response)
+      initialState = JSON.parse(response)
+      normalizeState()
+    })
+    .catch(() => {})
 }
 
-export const saveState = () => {
-  // buildJsonString(state)
+export const saveState = (state) => {
+  serverApi.post('save', state).then(response => {
+    console.log(response)
+  })
+}
+
+export const getInitialState = () => {
+  return initialState
 }

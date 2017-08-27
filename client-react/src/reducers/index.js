@@ -20,7 +20,7 @@ const tasks = (state = {}, action) => {
     for (let key in state) {
       if (state.hasOwnProperty(key)) {
         if (key !== idToDelete) {
-           newState[key] = state[key]
+          newState[key] = state[key]
         }
       }
     }
@@ -60,4 +60,9 @@ export const rootReducer = combineReducers({
   editTask: editTaskReducer
 })
 
-
+// export const rootReducer = (state, action) => {
+//   if (action.type === 'LOAD_STATE') {
+//     return state
+//   }
+//   return reducers(state, action)
+// }

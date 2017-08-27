@@ -1,7 +1,9 @@
-import { dateUtils } from './dateutils';
+import { dateUtils } from './dateutils'
 
 export const buildJsonString = (object) => {
-  return JSON.stringify(getJsonValue(object))
+  const json = JSON.stringify(getJsonValue(object))
+  console.log(json)
+  return json
 }
 
 export const loadFromJsonString = (object, jsonString) => {
