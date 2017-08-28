@@ -3,15 +3,17 @@ import { Root } from '..'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import { rootReducer } from '../../reducers'
-import { loadState, saveState, getInitialState } from '../../store/state'
+import { stateHelper } from '../../store/state-helper'
 
 const initStore = () => {
-  const store = createStore(rootReducer, getInitialState())
+  const store = createStore(rootReducer, stateHelper.initialState)
   console.log(store.getState())
   store.subscribe(() => {
     const state = store.getState()
     console.log(state)
-    saveState(state)
+    stateHelper.saveState(state)
+      .then(response => console.log(response))
+      .catch(response => console.log(response))
   })
   return store
 }
@@ -20,7 +22,7 @@ export class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = {loaded: false}
-    loadState()
+    stateHelper.loadState()
       .then(() => {
         this.setState({loaded: true})
       })

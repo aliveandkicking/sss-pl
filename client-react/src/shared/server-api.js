@@ -1,7 +1,5 @@
-import { buildJsonString } from './utils/json-processor'
-
 class ServerApi {
-  post (operation, object) {
+  post (operation, data) {
     const result = new Promise((resolve, reject) => {
       try {
         let httpRequest = new XMLHttpRequest()
@@ -18,7 +16,7 @@ class ServerApi {
         httpRequest.open('POST', 'bridge.php?operation=' + operation, true)
         httpRequest.setRequestHeader('Access-Control-Allow-Origin', '*')
         httpRequest.setRequestHeader('Content-type', 'text/html')
-        httpRequest.send(buildJsonString(object))
+        httpRequest.send(data)
       } catch (error) {
         reject(error)
       }
