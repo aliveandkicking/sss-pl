@@ -5,6 +5,7 @@ import { serverApi } from '../shared/server-api'
 let i = 0
 const defInitialState = {
   initialDate: dateUtils.clearTime(new Date()),
+  taskListVisible: false,
   tasks: {
     [++i]: new TaskModel({
       id: i,

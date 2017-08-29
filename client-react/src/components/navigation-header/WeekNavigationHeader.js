@@ -36,7 +36,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     onAdd: () => dispatch(setEditingTask(new TaskModel())),
     onNext: () => dispatch(setInitialDate(dateUtils.incDay(initialDate, dateUtils.DAYS_IN_WEEK))),
     onPrev: () => dispatch(setInitialDate(dateUtils.decDay(initialDate, dateUtils.DAYS_IN_WEEK))),
-    onToday: () => dispatch(setInitialDate(dateUtils.getStartOfWeek(new Date())))
+    onToday: () => dispatch(setInitialDate(dateUtils.getStartOfWeek(new Date()))),
   }
 }
 

@@ -9,6 +9,13 @@ const initialDate = (state = dateUtils.today(), action) => {
   return state
 }
 
+const taskListVisible = (state = false, action) => {
+  if (action.type === 'CHANGE_TASK_LIST_VISIBILITY') {
+    return dateUtils.clearTime(action.payload.date)
+  }
+  return state
+}
+
 const tasks = (state = {}, action) => {
   if (action.type === 'CHANGE_TASK') {
     const newState = {...state}
@@ -55,6 +62,7 @@ const doneTasks = (state = {}, action) => {
 
 export const rootReducer = combineReducers({
   initialDate,
+  taskListVisible,
   tasks,
   doneTasks,
   editTask: editTaskReducer

@@ -1,20 +1,25 @@
-import React from 'react'
-import { Week, EditTask } from '..'
-import { theme } from '../styles'
+import { connect } from 'react-redux'
+import { RootView } from './RootView'
 
-const style = {
-  background: `linear-gradient(-30deg, ${theme.colorC}, ${theme.colorE})`,
-  fontFamily: theme.fontFamily,
-  color: theme.colorText,
-  height: '100%',
-  minWidth: '575px'
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    showTaskList: true
+  }
 }
 
-export const Root = () => {
-  return (
-    <div style={style}>
-      <EditTask />
-      <Week />
-    </div>
-  )
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const { dispatch } = dispatchProps
+  const { showTaskList } = stateProps
+
+  return {
+    showTaskList
+  }
 }
+
+export const Root = connect(
+  mapStateToProps,
+  null,
+  mergeProps
+)(RootView)
+
