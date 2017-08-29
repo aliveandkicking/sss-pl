@@ -1,24 +1,24 @@
 import { connect } from 'react-redux'
-import { RootView } from './RootView'
+import { MainMenuView } from './MainMenuView'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    showTaskList: true
+
   }
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const { dispatch } = dispatchProps
-  const { showTaskList } = stateProps
+  // const { dispatch } = dispatchProps
+  // const { showTaskList } = stateProps
 
   return {
-    showTaskList
+    visible: 1
   }
 }
 
-export const Root = connect(
+export const MainMenu = connect(
   mapStateToProps,
   null,
   mergeProps
-)(RootView)
+)(MainMenuView)
 

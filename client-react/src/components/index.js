@@ -1,5 +1,6 @@
 export { CustomSpan } from './custom-span/CustomSpan'
 export { WeekNavigationHeader } from './navigation-header/WeekNavigationHeader'
+export { MainMenu } from './main-menu/MainMenu'
 export { Day } from './day/Day'
 export { Task } from './task/Task'
 export { Week } from './week/Week'
