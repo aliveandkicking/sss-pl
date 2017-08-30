@@ -8,5 +8,10 @@ export const theme = {
   colorText: '#dedede',
   colorTextHover: '#8C9DD9',
 
-  fontFamily: 'Verdana, sans-serif'
+  fontFamily: 'Verdana, sans-serif',
+
+  mainMenuCollapsedWidth: '50px',
+  minWidth: '625px',
+  minContentWidth: '575px',
+  minContentHeight: '610px'
 }

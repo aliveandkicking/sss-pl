@@ -1,18 +1,42 @@
 import { connect } from 'react-redux'
 import { MainMenuView } from './MainMenuView'
+import { TaskModel } from '../../shared/models/task-model'
+import {
+  setMainMenuExpandedState,
+  setEditingTask,
+  setTaskListVisibility
+} from '../../actions'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-
+    expanded: state.mainMenuExpanded,
+    taskListVisible: state.taskListVisible,
+    editingTask:  state.editTask.task
   }
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  // const { dispatch } = dispatchProps
-  // const { showTaskList } = stateProps
+  const { dispatch } = dispatchProps
+  const { expanded, taskListVisible, editingTask } = stateProps
 
   return {
-    visible: 1
+    expanded,
+    onChangeExpandedState: expand => dispatch(setMainMenuExpandedState(expand)),
+    onNewTask: () => {
+      if (!editingTask) {
+        dispatch(setEditingTask(new TaskModel()))
+      }
+    },
+    onShowTaskList: () => {
+      if (!taskListVisible) {
+        dispatch(setTaskListVisibility(true))
+      }
+    },
+    onShowWeek: () => {
+      if (taskListVisible) {
+        dispatch(setTaskListVisibility(false))
+      }
+    }
   }
 }
 
@@ -21,4 +45,3 @@ export const MainMenu = connect(
   null,
   mergeProps
 )(MainMenuView)
-

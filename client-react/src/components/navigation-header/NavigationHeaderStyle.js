@@ -17,11 +17,12 @@ export const navigationHeaderStyles = {
     userSelect: 'none'
   },
   dateCaption: {
+    flex: 1,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     cursor: 'default',
-    marginLeft: '50px'
+    marginLeft: '158px'
   },
   rightButtonGroupContainer: {
     display: 'flex',
@@ -38,9 +39,6 @@ export const navigationHeaderStyles = {
   },
   buttonHover: {
     color: theme.colorTextHover
-  },
-  addButtonSymbol: {
-    transform: 'scale(2, 2)'
   },
   navigationButtonSymbol: {
     transform: 'scale(1, 1.5)'

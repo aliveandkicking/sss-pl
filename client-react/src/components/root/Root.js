@@ -3,7 +3,7 @@ import { RootView } from './RootView'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    showTaskList: true
+    showTaskList: state.taskListVisible
   }
 }
 

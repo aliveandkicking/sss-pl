@@ -19,5 +19,6 @@ export const setEditTaskCalendarInitialDate = createAction('SET_EDIT_TASK_CALEND
 export const setEditTaskCalendarMonthMode = createAction('SET_EDIT_TASK_CALENDAR_MONTH_MODE', 'monthMode')
 export const setEditingTask = createAction('SET_EDITING_TASK', 'task')
 export const setInitialDate = createAction('SET_INITIAL_DATE', 'date')
-export const changeTaskListVisibility = createAction('CHANGE_TASK_LIST_VISIBILITY', 'visible')
+export const setTaskListVisibility = createAction('SET_TASK_LIST_VISIBILITY', 'visible')
+export const setMainMenuExpandedState = createAction('SET_MAIN_MENU_EXPANDED_STATE', 'expanded')
 

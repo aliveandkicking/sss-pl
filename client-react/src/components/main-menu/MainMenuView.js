@@ -1,27 +1,59 @@
 import React from 'react'
 import { mainMenuStyles as styles } from './MainMenuStyle'
+import { CustomSpan } from '..'
 
-export const MainMenuView = ({ visible }) => {
+export const MainMenuView = ({
+  expanded,
+  onChangeExpandedState,
+  onNewTask,
+  onShowTaskList,
+  onShowWeek
+}) => {
 
-  console.log(visible)
+  const getItem = (iconSymbol, text, action) => {
+    return(
+      <CustomSpan
+        style={styles.item}
+        styleHover={styles.itemHover}
+        onClick={e => {
+          onChangeExpandedState(false)
+          action()
+          }}>
+        <span style={styles.itemIcon}>
+        {iconSymbol}
+        </span>
+        <span style={styles.itemCaption}>
+          {text}
+        </span>
+      </CustomSpan>
+    )
+  }
 
   return (
     <div style={Object.assign({}, styles.root,
-      visible ? styles.rootExpanded : styles.rootColapsed)}>
-      <div style={styles.body}>
+      expanded ? styles.rootExpanded : styles.rootColapsed)}
+      onClick={e => onChangeExpandedState(!expanded)}>
+
+      <div style={Object.assign({}, styles.body,
+        expanded ? styles.bodyExpanded : styles.bodyColapsed)}
+        onClick={e => e.stopPropagation()}>
+
         <div style={styles.header}>
-          <span>
-            X
-          </span>
-
+          <CustomSpan
+            style={styles.mainMenuButton}
+            styleHover={styles.mainMenuItemHover}
+            onClick={e => onChangeExpandedState(!expanded)}>
+          &#9776;
+          </CustomSpan>
         </div>
+
+        <div style={styles.group}>
+          {getItem('+', 'New Task', onNewTask)}
+          {getItem('▤', 'Task List', onShowTaskList)}
+          {getItem('Ⓦ', 'Week', onShowWeek)}
+        </div>
+
       </div>
-
-
-
-      <span>
-
-      </span>
     </div>
   )
 }

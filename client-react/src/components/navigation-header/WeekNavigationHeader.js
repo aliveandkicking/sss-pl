@@ -1,10 +1,6 @@
 import { connect } from 'react-redux'
 import { NavigationHeaderView } from './NavigationHeaderView'
-import {
-  setEditingTask,
-  setInitialDate
-} from '../../actions'
-import { TaskModel } from '../../shared/models/task-model'
+import { setInitialDate } from '../../actions'
 import { dateUtils } from '../../shared/utils/dateutils'
 
 const buildDateCaption = date => {
@@ -33,7 +29,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
   return {
     dateCaption: buildDateCaption(initialDate),
-    onAdd: () => dispatch(setEditingTask(new TaskModel())),
     onNext: () => dispatch(setInitialDate(dateUtils.incDay(initialDate, dateUtils.DAYS_IN_WEEK))),
     onPrev: () => dispatch(setInitialDate(dateUtils.decDay(initialDate, dateUtils.DAYS_IN_WEEK))),
     onToday: () => dispatch(setInitialDate(dateUtils.getStartOfWeek(new Date()))),

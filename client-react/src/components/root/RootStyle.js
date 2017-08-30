@@ -6,7 +6,9 @@ export const rootStyles = {
     fontFamily: theme.fontFamily,
     color: theme.colorText,
     height: '100%',
-    minWidth: '575px',
-    marginLeft: '40px'
+    minWidth: theme.minContentWidth,
+    minHeight: theme.minContentHeight,
+    marginLeft: theme.mainMenuCollapsedWidth,
+    overflowY: 'auto'
   }
 }

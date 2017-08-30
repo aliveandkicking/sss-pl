@@ -6,17 +6,6 @@ import PropTypes from 'prop-types'
 export const NavigationHeaderView = ({onAdd, onNext, onPrev, onToday, dateCaption}) => {
   return (
     <div style={styles.root}>
-      <CustomSpan
-        style={styles.button}
-        styleHover={styles.buttonHover}
-        onClick={e => {
-          e.preventDefault()
-          onAdd()
-        }}>
-        <span style={styles.addButtonSymbol}>
-          +
-        </span>
-      </CustomSpan>
 
       <span style={styles.dateCaption}>
         {dateCaption}
@@ -26,20 +15,14 @@ export const NavigationHeaderView = ({onAdd, onNext, onPrev, onToday, dateCaptio
         <CustomSpan
           style={styles.todayButton}
           styleHover={styles.buttonHover}
-          onClick={e => {
-            e.preventDefault()
-            onToday()
-          }}>
+          onClick={e => onToday()}>
           Today
         </CustomSpan>
 
         <CustomSpan
           style={styles.button}
           styleHover={styles.buttonHover}
-          onClick={e => {
-            e.preventDefault()
-            onPrev()
-          }}>
+          onClick={e => onPrev()}>
           <span style={styles.navigationButtonSymbol}>
             {'<'}
           </span>
@@ -48,10 +31,7 @@ export const NavigationHeaderView = ({onAdd, onNext, onPrev, onToday, dateCaptio
         <CustomSpan
           style={styles.button}
           styleHover={styles.buttonHover}
-          onClick={e => {
-            e.preventDefault()
-            onNext()
-          }}>
+          onClick={e => onNext()}>
           <span style={styles.navigationButtonSymbol}>
             {'>'}
           </span>

@@ -10,8 +10,15 @@ const initialDate = (state = dateUtils.today(), action) => {
 }
 
 const taskListVisible = (state = false, action) => {
-  if (action.type === 'CHANGE_TASK_LIST_VISIBILITY') {
-    return dateUtils.clearTime(action.payload.date)
+  if (action.type === 'SET_TASK_LIST_VISIBILITY') {
+    return action.payload.visible
+  }
+  return state
+}
+
+const mainMenuExpanded = (state = false, action) => {
+  if (action.type === 'SET_MAIN_MENU_EXPANDED_STATE') {
+    return action.payload.expanded
   }
   return state
 }
@@ -62,15 +69,9 @@ const doneTasks = (state = {}, action) => {
 
 export const rootReducer = combineReducers({
   initialDate,
+  mainMenuExpanded,
   taskListVisible,
   tasks,
   doneTasks,
   editTask: editTaskReducer
 })
-
-// export const rootReducer = (state, action) => {
-//   if (action.type === 'LOAD_STATE') {
-//     return state
-//   }
-//   return reducers(state, action)
-// }
