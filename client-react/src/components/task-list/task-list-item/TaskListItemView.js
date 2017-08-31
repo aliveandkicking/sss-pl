@@ -1,30 +1,62 @@
 import React from 'react'
 import { taskListItemStyles as styles } from './TaskListItemStyle'
 import { stringToColor } from '../../../shared/utils/string-to-color'
-import PropTypes from 'prop-types'
+import { dateUtils } from '../../../shared/utils/dateutils'
 import { repeatMode } from '../../../shared/immutable/repeat-modes'
+import PropTypes from 'prop-types'
+import { CustomSpan } from '../..'
 
-export class TaskListItemView extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {hover: false}
+export const TaskListItemView = ({ task, onEdit, isValid }) => {
+
+  const getRootStyle = () => {
+    const color = stringToColor.getColor(task.name)
+    return Object.assign({}, styles.root,  {backgroundColor: color})
   }
 
-  render () {
-    return (
-      <div style={styles.root}>
+  const getInfoText = () => {
+    let result
+    if (task.repeatModeId === repeatMode.once.id) {
+      result = `${repeatMode.once.title} -
+      ${dateUtils.toISOString(task.startDate)}`
+    } else {
+      const repatModeName = repeatMode.all[task.repeatModeId].title
+      result =`${repatModeName} (every ${task.every + repatModeName.charAt(0)} ) `
+      result += `from ${dateUtils.toISOString(task.startDate)} `
+      result += `to ${dateUtils.toISOString(task.endDate)}`
+    }
+    return result
+  }
+
+  return (
+    <CustomSpan
+      style={getRootStyle()}
+      styleHover={styles.rootHover}
+      onClick={e => onEdit()}>
+      <div style={styles.content}>
         <div style={styles.name}>
-          {this.props.task.name}
+          {task.name}
         </div>
         <div style={styles.info}>
-          {repeatMode.all[this.props.task.repeatModeId].title}
-          {' | every: ' + this.props.task.every}
+          {getInfoText()}
         </div>
       </div>
-    )
-  }
+
+      <div style={styles.markersConstainer}>
+        <span
+          style={Object.assign({},
+            styles.marker,
+            isValid ? styles.markerInactiveActive : null
+          )}
+          title='Is Invalid'>
+          &#9432;
+        </span>
+      </div>
+    </CustomSpan>
+  )
 }
 
 TaskListItemView.propTypes = {
-  task: PropTypes.object
+  task: PropTypes.object,
+  onEdit: PropTypes.func,
+  isValid: PropTypes.bool
 }

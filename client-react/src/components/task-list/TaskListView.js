@@ -5,14 +5,6 @@ import { TaskListItem } from './task-list-item/TaskListItem'
 
 export const TaskListView = ({tasks}) => {
 
-  const header = () => {
-    return (
-      <div>
-        ...
-      </div>
-    )
-  }
-
   const getItems = () => {
     const result = []
     for (let key in tasks) {
@@ -25,7 +17,6 @@ export const TaskListView = ({tasks}) => {
 
   return (
     <div style={styles.root}>
-      {header()}
       {getItems()}
     </div>
   )

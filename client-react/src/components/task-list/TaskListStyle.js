@@ -4,9 +4,11 @@ export const taskListStyles = {
     display: 'flex',
     flexDirection: 'column'
   },
-  body: {
+  content: {
     flex: 1,
     display: 'flex',
-    alignItems: 'stretch'
+    alignItems: 'stretch',
+    flexDirection: 'column',
+    overflowY: 'auto'
   }
 }
