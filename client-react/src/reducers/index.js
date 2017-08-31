@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import { editTaskReducer } from './edit-task'
-import { dateUtils } from '../shared/utils/dateutils'
+import { dateUtils } from '../core/dateutils'
 
 const initialDate = (state = dateUtils.today(), action) => {
   if (action.type === 'SET_INITIAL_DATE') {

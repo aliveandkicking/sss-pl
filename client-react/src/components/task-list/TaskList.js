@@ -8,7 +8,6 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const { dispatch } = dispatchProps
   const { tasks } = stateProps
 
   return {

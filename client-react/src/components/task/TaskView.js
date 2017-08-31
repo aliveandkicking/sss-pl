@@ -1,6 +1,6 @@
 import React from 'react'
 import { taskStyles as styles } from './TaskStyle'
-import { stringToColor } from '../../shared/utils/string-to-color'
+import { stringToColor } from '../../core/string-to-color'
 import { CustomSpan } from '..'
 import PropTypes from 'prop-types'
 

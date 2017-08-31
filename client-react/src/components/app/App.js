@@ -3,7 +3,7 @@ import { Root } from '..'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import { rootReducer } from '../../reducers'
-import { stateHelper } from '../../store/state-helper'
+import { stateHelper } from '../../core/state-helper'
 
 const initStore = () => {
   const store = createStore(rootReducer, stateHelper.initialState)

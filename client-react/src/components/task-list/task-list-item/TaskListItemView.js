@@ -1,8 +1,8 @@
 import React from 'react'
 import { taskListItemStyles as styles } from './TaskListItemStyle'
-import { stringToColor } from '../../../shared/utils/string-to-color'
-import { dateUtils } from '../../../shared/utils/dateutils'
-import { repeatMode } from '../../../shared/immutable/repeat-modes'
+import { stringToColor } from '../../../core/string-to-color'
+import { dateUtils } from '../../../core/dateutils'
+import { repeatMode } from '../../../core/repeat-modes'
 import PropTypes from 'prop-types'
 import { CustomSpan } from '../..'
 
@@ -47,7 +47,7 @@ export const TaskListItemView = ({ task, onEdit, isValid }) => {
             styles.marker,
             isValid ? styles.markerInactiveActive : null
           )}
-          title='Is Invalid'>
+          title={isValid ? 'Valid' : 'Invalid'}>
           &#9432;
         </span>
       </div>

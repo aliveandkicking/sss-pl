@@ -1,5 +1,5 @@
-const dateUtils = require('../utils/dateutils').dateUtils
-const { repeatMode } = require('../immutable/repeat-modes')
+const dateUtils = require('./dateutils').dateUtils
+const { repeatMode } = require('./repeat-modes')
 
 class TaskModel {
   constructor () {

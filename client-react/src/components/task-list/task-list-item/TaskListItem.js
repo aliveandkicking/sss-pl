@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 import { TaskListItemView } from './TaskListItemView'
-import { dateUtils } from '../../../shared/utils/dateutils'
+import { dateUtils } from '../../../core/dateutils'
 import { setEditingTask } from '../../../actions'
-import { TaskModel } from '../../../shared/models/task-model'
+import { TaskModel } from '../../../core/task-model'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -12,7 +12,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const taskIsValid = (task) => {
   let date = new Date(task.startDate)
-  const endDateValue = task.endDate.getTime()
+  const endDateValue = task.neverEnd
+      ? dateUtils.incYear(task.startDate, 3).getTime()
+      : task.endDate.getTime()
   while (date.getTime() <= endDateValue) {
     if (task.containsDate(date)) {
       return true

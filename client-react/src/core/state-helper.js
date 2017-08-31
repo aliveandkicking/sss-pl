@@ -1,6 +1,6 @@
-import { TaskModel } from '../shared/models/task-model'
-import { dateUtils } from '../shared/utils/dateutils'
-import { serverApi } from '../shared/server-api'
+import { TaskModel } from './task-model'
+import { dateUtils } from './dateutils'
+import { serverApi } from './server-api'
 
 let i = 0
 const defInitialState = {

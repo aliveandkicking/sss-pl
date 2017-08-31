@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { MainMenuView } from './MainMenuView'
-import { TaskModel } from '../../shared/models/task-model'
+import { TaskModel } from '../../core/task-model'
 import {
   setMainMenuExpandedState,
   setEditingTask,

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { WeekView } from './WeekView'
-import { dateUtils } from '../../shared/utils/dateutils';
+import { dateUtils } from '../../core/dateutils';
 
 const mapStateToProps = (state, ownProps) => {
   return {

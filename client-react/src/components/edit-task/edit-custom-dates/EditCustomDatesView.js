@@ -1,6 +1,6 @@
 import React from 'react'
 import { editCustomDatesStyles as styles } from './EditCustomDatesStyle'
-import { dateUtils } from '../../../shared/utils/dateutils'
+import { dateUtils } from '../../../core/dateutils'
 import { CustomSpan } from '../..'
 import PropTypes from 'prop-types'
 

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { dateUtils } from '../shared/utils/dateutils'
+import { dateUtils } from '../core/dateutils'
 
 const calendarInitialDate = (state = dateUtils.today(), action) => {
   if (action.type === 'SET_EDIT_TASK_CALENDAR_INITIAL_DATE') {

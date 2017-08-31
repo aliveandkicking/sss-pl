@@ -6,8 +6,8 @@ import {
   setEditingTask,
   setEditTaskShowingCustomDates
 } from '../../actions'
-import { TaskModel } from '../../shared/models/task-model'
-import { repeatMode } from '../../shared/immutable/repeat-modes'
+import { TaskModel } from '../../core/task-model'
+import { repeatMode } from '../../core/repeat-modes'
 
 const processWeekDay = (weekDays, day) => {
   const result = Array.from(weekDays)

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { CalendarView } from './CalendarView'
-import { dateUtils } from '../../shared/utils/dateutils'
+import { dateUtils } from '../../core/dateutils'
 import {
   setEditTaskCalendarInitialDate,
   setEditTaskCalendarMonthMode

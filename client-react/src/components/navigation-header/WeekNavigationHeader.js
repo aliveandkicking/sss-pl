@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { NavigationHeaderView } from './NavigationHeaderView'
 import { setInitialDate } from '../../actions'
-import { dateUtils } from '../../shared/utils/dateutils'
+import { dateUtils } from '../../core/dateutils'
 
 const buildDateCaption = date => {
   const startDateData = dateUtils.decodeDate(date)

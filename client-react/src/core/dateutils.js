@@ -80,12 +80,12 @@ class DateUtils {
     return new Date(year, month, day > daysInMonth ? daysInMonth : day)
   }
 
-  incYear (date) {
-    return new Date([date.getFullYear() + 1, date.getMonth(), date.getDate()])
+  incYear (date, numberOfYears = 1) {
+    return new Date([date.getFullYear() + numberOfYears, date.getMonth(), date.getDate()])
   }
 
-  decYear (date, numberOfDays = 1) {
-    return new Date([date.getFullYear() - 1, date.getMonth(), date.getDate()])
+  decYear (date, numberOfYears = 1) {
+    return new Date([date.getFullYear() - numberOfYears, date.getMonth(), date.getDate()])
   }
 
   getStartOfMonth (date) {

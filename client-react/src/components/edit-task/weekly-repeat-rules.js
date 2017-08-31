@@ -1,6 +1,6 @@
 import React from 'react'
 import { editTaskStyles as styles } from './EditTaskStyle'
-import { dateUtils } from '../../shared/utils/dateutils'
+import { dateUtils } from '../../core/dateutils'
 import { CustomSpan } from '..'
 
 export const getWeeklyRepeatRules = (

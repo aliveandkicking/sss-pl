@@ -1,7 +1,7 @@
 import React from 'react'
 import { editTaskStyles as styles } from './EditTaskStyle'
 import { Calendar, CustomSpan } from '..'
-import { repeatMode } from '../../shared/immutable/repeat-modes'
+import { repeatMode } from '../../core/repeat-modes'
 import { EditCustomDates } from './edit-custom-dates/EditCustomDates'
 import { getCommonRepeatRules } from './common-repeat-rules'
 import { getWeeklyRepeatRules } from './weekly-repeat-rules'
