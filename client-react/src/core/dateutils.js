@@ -81,11 +81,11 @@ class DateUtils {
   }
 
   incYear (date, numberOfYears = 1) {
-    return new Date([date.getFullYear() + numberOfYears, date.getMonth(), date.getDate()])
+    return new Date(date.getFullYear() + numberOfYears, date.getMonth(), date.getDate())
   }
 
   decYear (date, numberOfYears = 1) {
-    return new Date([date.getFullYear() - numberOfYears, date.getMonth(), date.getDate()])
+    return new Date(date.getFullYear() - numberOfYears, date.getMonth(), date.getDate())
   }
 
   getStartOfMonth (date) {

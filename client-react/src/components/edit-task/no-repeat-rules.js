@@ -16,7 +16,7 @@ export const getNoRepeatRules = (startDate, onChanges) => {
         id='date-input'
         type='date'
         style={styles.ruleInput}
-        value={dateUtils.toISOString(startDate)}
+        defaultValue={dateUtils.toISOString(startDate)}
         onChange={(e) => {
           onChanges({startDate: e.target.value
             ? dateUtils.fromISOString(e.target.value)

@@ -56,7 +56,7 @@ const getMonths = () => {
 
 const getTitle = (monthMode, date) => {
   return monthMode
-     ? date.getFullYear()
+     ? date.getFullYear().toString()
      : `${dateUtils.MONTH_NAMES[date.getMonth()]} ${date.getFullYear()}`
 }
 

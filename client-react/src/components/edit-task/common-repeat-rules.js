@@ -41,7 +41,7 @@ export const getCommonRepeatRules = (
           id='start-date-control'
           style={styles.ruleInput}
           type='date'
-          value={dateUtils.toISOString(task.startDate)}
+          defaultValue={dateUtils.toISOString(task.startDate)}
           onChange={e => {
             onChanges({startDate: e.target.value
               ? dateUtils.fromISOString(e.target.value)
@@ -67,7 +67,7 @@ export const getCommonRepeatRules = (
           style={styles.ruleInput}
           type='date'
           disabled={task.neverEnd}
-          value={dateUtils.toISOString(task.endDate)}
+          defaultValue={dateUtils.toISOString(task.endDate)}
           onChange={e => {
             onChanges({endDate: e.target.value
               ? dateUtils.fromISOString(e.target.value)
