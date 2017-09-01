@@ -46,11 +46,13 @@ const mapStateToProps = (state, ownProps) => {
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch } = dispatchProps
   const { isDone } = stateProps
+  const { date } = ownProps
 
   return {
     task: ownProps.task,
     taskNameAbbreviation: getTaskNameAbbreviation(ownProps.task.name),
     isDone,
+    date,
     onClick: () => {
       if (isDone) {
         dispatch(removeDoneTask(ownProps.date, ownProps.task.id))

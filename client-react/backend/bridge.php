@@ -14,10 +14,10 @@
 	$stmt = $conn->prepare("SELECT process_data(?, ?) as res");
 	$stmt->bind_param('ss', $_REQUEST['operation'], $entityBody);	
 	$stmt->execute();	
-    $stmt->bind_result($res);
-	$row = $stmt->fetch();
+    $stmt->bind_result($result);	
+	$stmt->fetch();
 	
-    echo $res;
+    echo stripslashes($result);
 
 	$stmt->close();	
 	$conn->close();

@@ -5,7 +5,8 @@ import { serverApi } from './server-api'
 let i = 0
 const defInitialState = {
   initialDate: dateUtils.clearTime(new Date()),
-  taskListVisible: true,
+  taskListVisible: false,
+  mainMenuExpanded: false,
   tasks: {
     [++i]: new TaskModel({
       id: i,
@@ -64,44 +65,54 @@ class StateHelper {
   }
 
   loadFromString (jsonString) {
-    this.initialState = JSON.parse(jsonString)
-
-    this.initialState.initialDate = dateUtils.fromISOString(defInitialState.initialDate)
-    for (let key in this.initialState.tasks) {
-      if (this.initialState.tasks.hasOwnProperty(key)) {
-        this.initialState.tasks[key] =
-          this.rawDataToTaskModel(this.initialState.tasks[key])
+    try {
+      this.initialState = JSON.parse(jsonString)
+  
+      this.initialState.initialDate = dateUtils.fromISOString(this.initialState.initialDate)
+      for (let key in this.initialState.tasks) {
+        if (this.initialState.tasks.hasOwnProperty(key)) {
+          this.initialState.tasks[key] =
+            this.rawDataToTaskModel(this.initialState.tasks[key])
+        }
       }
-    }
-    this.initialState.editTask.calendarInitialDate =
-      dateUtils.fromISOString(this.initialState.editTask.calendarInitialDate)
-    if (this.initialState.editTask.task) {
-      this.initialState.editTask.task =
-        this.rawDataToTaskModel(this.initialState.editTask.task)
+      this.initialState.editTask.calendarInitialDate =
+        dateUtils.fromISOString(this.initialState.editTask.calendarInitialDate)
+      if (this.initialState.editTask.task) {
+        this.initialState.editTask.task =
+          this.rawDataToTaskModel(this.initialState.editTask.task)
+      }
+    } catch (error) {
+      console.log(error)
+      this.initialState = defInitialState
     }
   }
 
   buildJsonString (state) {
-    const tempObj = {}
+    const tempObj = {
+      initialDate: dateUtils.toISOString(state.initialDate),
+      mainMenuExpanded: state.mainMenuExpanded,
+      taskListVisible: state.taskListVisible,
+      tasks: {},
+      doneTasks: state.doneTasks,
+      editTask: Object.assign({}, state.editTask)
+    }
 
-    tempObj.initialDate = dateUtils.toISOString(defInitialState.initialDate)
-
-    tempObj.tasks = {}
     for (let key in state.tasks) {
       if (state.tasks.hasOwnProperty(key)) {
         tempObj.tasks[key] = this.taskModelToRawData(state.tasks[key])
       }
     }
 
-    tempObj.editTask = {}
     tempObj.editTask.calendarInitialDate =
-      dateUtils.toISOString(state.editTask.calendarInitialDate)
+      dateUtils.toISOString(tempObj.editTask.calendarInitialDate)
 
-    if (this.initialState.editTask.task) {
-      this.initialState.editTask.task = this.taskModelToRawData(state.editTask.task)
+    if (state.editTask.task) {
+      tempObj.editTask.task = this.taskModelToRawData(state.editTask.task)
     } else {
       tempObj.editTask.task = null
     }
+
+    return JSON.stringify(tempObj)
   }
 
   loadState () {

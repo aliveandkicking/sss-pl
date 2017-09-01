@@ -4,7 +4,13 @@ import { Task } from '../task/Task'
 import { CustomSpan } from '..'
 import PropTypes from 'prop-types'
 
-export const DayView = ({caption, tasks, date, addTask}) => {
+export const DayView = ({
+  caption,
+  tasks,
+  date,
+  addTask,
+  dropTask
+}) => {
   const randerTasks = () => {
     return tasks.map(task =>
       <Task
@@ -18,10 +24,21 @@ export const DayView = ({caption, tasks, date, addTask}) => {
   return (
     <div
       style={styles.root}
-      onDragOver={e => e.preventDefault()}
+      onDragOver={e => {
+        e.preventDefault()
+        if (e.ctrlKey) {
+          e.dataTransfer.dropEffect = 'copy';
+        }
+      }}
       onDrop={e => {
         e.preventDefault()
-        addTask(e.dataTransfer.getData('text/plain'))
+        try {
+          const dropedData = JSON.parse(e.dataTransfer.getData('text/plain'))
+          console.log(dropedData)
+          dropTask(dropedData.id, dropedData.date, e.ctrlKey)
+        } catch (error) {
+          console(error)
+        }
       }}>
       <div style={styles.caption}>
         {caption}

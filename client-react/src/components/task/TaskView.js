@@ -1,6 +1,7 @@
 import React from 'react'
 import { taskStyles as styles } from './TaskStyle'
 import { stringToColor } from '../../core/string-to-color'
+import { dateUtils } from '../../core/dateutils'
 import { CustomSpan } from '..'
 import PropTypes from 'prop-types'
 
@@ -35,7 +36,13 @@ export class TaskView extends React.Component {
         style={styles.root}
         draggable='true'
         onDragStart={event =>
-          event.dataTransfer.setData('text/plain', this.props.task.id)}
+          event.dataTransfer.setData('text/plain', JSON.stringify(
+              {
+                id: this.props.task.id,
+                date: dateUtils.toISOString(this.props.date)
+              }
+            )
+          )}
         onClick={e => this.props.onClick()}
       >
         <div style={this.getContentStyle()}>
