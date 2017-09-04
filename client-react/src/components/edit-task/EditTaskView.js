@@ -12,13 +12,14 @@ import PropTypes from 'prop-types'
 
 export const EditTaskView = ({
   task,
+  predefinedNames,
+  showingCustomDates,
   onClose,
   onChanges,
   onDelete,
   onCalendarCellClick,
   onProcessWeekDay,
   onCheckCalendarCellSelection,
-  showingCustomDates,
   onShowingCustomDatesChange
 }) => {
   if (!task) {
@@ -46,23 +47,30 @@ export const EditTaskView = ({
 
   const getNameInput = () => {
     return (
-      <input
-        style={styles.nameInput}
-        type='text'
-        autoFocus
-        onFocus={e => {
-          if (!task.id) {
-            e.target.select()
-          }
-        }}
-        defaultValue={task.name}
-        onChange={e => onChanges({name: e.target.value})}
-        onKeyDown={e => {
-          if (e.keyCode === 13) {
-            onClose(true)
-          }
-        }}
-      />
+      <span style={styles.nameInputContainer}>
+        <datalist  style={styles.nameInputList} id='predefined-names'>
+          {predefinedNames.map(name => <option value={name}/>)}
+        </datalist>
+        <input
+          style={styles.nameInput}
+          list='predefined-names'
+          type='text'
+          autoFocus
+          onFocus={e => {
+            if (!task.id) {
+              e.target.select()
+              console
+            }
+          }}
+          defaultValue={task.name}
+          onChange={e => onChanges({name: e.target.value})}
+          onKeyDown={e => {
+            if (e.keyCode === 13) {
+              onClose(true)
+            }
+          }}
+        />
+      </span>
     )
   }
 

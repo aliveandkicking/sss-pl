@@ -4,6 +4,9 @@ import { Task } from '../task/Task'
 import { CustomSpan } from '..'
 import PropTypes from 'prop-types'
 
+// export class App extends React.Component {
+//   constructor (props) {
+
 export const DayView = ({
   caption,
   tasks,
@@ -51,6 +54,12 @@ export const DayView = ({
             styleHover={styles.addTaskButtonHover}
             onClick={e => addTask(null)}>
             +
+          </CustomSpan>
+          <CustomSpan
+            style={styles.quickAddTaskButton}
+            styleHover={styles.addTaskButtonHover}
+            onClick={e => addTask(null)}>
+            &#9660;
           </CustomSpan>
         </span>
       </div>

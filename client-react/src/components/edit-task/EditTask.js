@@ -87,6 +87,16 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     return ++maxId
   }
 
+  const getPredefinedNames = () => {
+    const result = []
+    for (let key in tasks) {
+      if (tasks.hasOwnProperty(key)) {
+        result.push(tasks[key].name)
+      }
+    }
+    return result
+  }
+
   const close = (submit) => {
     if (submit) {
       const taskToSubmit = new TaskModel(editingTask)
@@ -111,8 +121,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   }
 
   return {
-    showingCustomDates,
     task: editingTask,
+    predefinedNames: getPredefinedNames(),
+    showingCustomDates,
     onChanges: changeEditingTask,
     onClose: close,
     onDelete: () => {

@@ -1,5 +1,18 @@
 import { theme } from '../styles'
 
+const addButton = {
+  backgroundColor: theme.colorC,
+  borderRadius: '3px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  cursor: 'pointer',
+  userSelect: 'none',
+  margin: '2px 1px',
+  transition: '500ms',
+  opacity: '0.3'
+}
+
 export const dayStyles = {
   root: {
     flex: 1,
@@ -25,29 +38,23 @@ export const dayStyles = {
     alignContent: 'flex-start'
   },
   addTaskRow: {
-    height: '40px',
+    height: '30px',
     minWidth: '100%',
     display: 'flex',
     justifyContent: 'flex-end',
-    alignItems: 'center'
+    alignItems: 'stretch',
   },
   addTaskButton: {
-    backgroundColor: theme.colorC,
-    height: '30px',
-    width: '30px',
-    borderRadius: '15px',
-    marginRight: '5px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    cursor: 'pointer',
-    userSelect: 'none',
-    transition: '500ms',
-    opacity: '0.4'
+    flex: 4,
+    ...addButton
+  },
+  quickAddTaskButton: {
+    flex: 1,
+    fontSize: '8px',
+    ...addButton
   },
 
   addTaskButtonHover: {
-    opacity: 1,
-    boxShadow: 'inset 0px 0 5px rgba(0,0,0,0.6)'
+    opacity: 1
   }
 }

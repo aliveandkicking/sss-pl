@@ -63,7 +63,11 @@ export const editTaskStyles = {
   captionHover: {
     color: theme.colorTextHover
   },
+  nameInputContainer: {
+    height: '25px'
+  },
   nameInput: {
+    width: '100%',
     height: '25px',
     fontSize: '120%',
     fontWeight: 'bold'
