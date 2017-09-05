@@ -11,7 +11,6 @@ const formatCaption = date => {
   return `${dateUtils.DAY_NAMES[date.getDay()]} ${date.getDate()}-${date.getMonth() + 1}`
 }
 
-
 const mapStateToProps = (state, ownProps) => {
   return {
     tasks: state.tasks
@@ -23,41 +22,69 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { tasks } = stateProps
   const { date } = ownProps
 
+  const getPredefinedNames = () => {
+    const result = []
+    for (let key in tasks) {
+      if (tasks.hasOwnProperty(key)) {
+        result.push(tasks[key].name)
+      }
+    }
+    return result
+  }
+
   const dropTask = (sourceId, sourceDateStr, copy) => {
     if ((!sourceId) || (!sourceDateStr)) {
+      return
+    }
+    const sourceDate = dateUtils.fromISOString(sourceDateStr)
+    if (sourceDate.getTime() === date.getTime()) {
       return
     }
     const task = Object.values(tasks).find(task => task.id.toString() === sourceId.toString())
     if (task) {
       const newTask = new TaskModel(task)
-      if (!newTask.containsDate(date)) {
-        const dateTime = date.getTime()
-        if (newTask.skipDates.includes(dateTime)) {
-          newTask.skipDates = newTask.skipDates.filter(el => el !== dateTime)
-        }
-        if (!newTask.containsDate(date)) {
-          newTask.addIncludeDate(date)
-        }
-      }
+      newTask.includeDate(date)
       if (!copy) {
-        const sourceDate = dateUtils.fromISOString(sourceDateStr)
-        const sourceDateTime = sourceDate.getTime()
-        if (newTask.includeDates.includes(sourceDateTime)) {
-          newTask.includeDates = newTask.includeDates.filter(el => el !== sourceDateTime)
-        }
-        if (newTask.containsDate(sourceDate)) {
-          newTask.addSkipDate(sourceDate)
-        }
+        newTask.excludeDate(sourceDate)
       }
       dispatch(changeTask(newTask))
     }
+  }
+
+  const getNewTaskId = () => {
+    let maxId = 0
+    for (let key in tasks) {
+      if (maxId < tasks[key].id) {
+        maxId = tasks[key].id
+      }
+    }
+    return ++maxId
+  }
+
+  const addTask = name => {
+    for (let key in tasks) {
+      if (tasks.hasOwnProperty(key)) {
+        if (tasks[key].name === name) {
+          const modifiedTask = new TaskModel(tasks[key]).includeDate(date)
+            dispatch(changeTask(modifiedTask))
+            return
+          }
+        }
+      }
+    dispatch(changeTask(new TaskModel({
+      name,
+      startDate: date,
+      id: getNewTaskId()
+    })))
   }
 
   return {
     caption: formatCaption(date),
     date,
     tasks: Object.values(tasks).filter(task => task.containsDate(date)),
-    addTask: () => dispatch(setEditingTask(new TaskModel({startDate: date}))),
+    predefinedTaskNames: getPredefinedNames(),
+    onAddNewTask: () => dispatch(setEditingTask(new TaskModel({startDate: date}))),
+    onAddTask: addTask,
     dropTask: dropTask
   }
 }

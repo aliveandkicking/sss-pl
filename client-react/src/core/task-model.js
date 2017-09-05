@@ -109,6 +109,30 @@ class TaskModel {
     return true
   }
 
+  includeDate (date) {
+    if (!this.containsDate(date)) {
+      const dateTime = dateUtils.clearTime(date).getTime()
+      if (this.skipDates.includes(dateTime)) {
+        this.skipDates = this.skipDates.filter(el => el !== dateTime)
+      }
+      if (!this.containsDate(date)) {
+        this.addIncludeDate(date)
+      }
+    }
+    return this
+  }
+
+  excludeDate (date) {
+    const dateTime = dateUtils.clearTime(date).getTime()
+    if (this.includeDates.includes(dateTime)) {
+      this.includeDates = this.includeDates.filter(el => el !== dateTime)
+    }
+    if (this.containsDate(date)) {
+      this.addSkipDate(date)
+    }
+    return this
+  }
+
   containsDate (date) {
     if (!date) {
       return false

@@ -48,8 +48,8 @@ export const EditTaskView = ({
   const getNameInput = () => {
     return (
       <span style={styles.nameInputContainer}>
-        <datalist  style={styles.nameInputList} id='predefined-names'>
-          {predefinedNames.map(name => <option value={name}/>)}
+        <datalist id='predefined-names'>
+          {predefinedNames.map(name => <option key={name} value={name}/>)}
         </datalist>
         <input
           style={styles.nameInput}
@@ -59,7 +59,6 @@ export const EditTaskView = ({
           onFocus={e => {
             if (!task.id) {
               e.target.select()
-              console
             }
           }}
           defaultValue={task.name}
