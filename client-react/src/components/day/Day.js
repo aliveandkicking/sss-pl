@@ -62,6 +62,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   }
 
   const addTask = name => {
+    if (!name) {
+      return
+    }
     for (let key in tasks) {
       if (tasks.hasOwnProperty(key)) {
         if (tasks[key].name === name) {

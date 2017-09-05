@@ -53,6 +53,8 @@ export class DayView extends React.Component {
               if (e.keyCode === 13) {
                 this.setState({quickAddDialogVisible: false})
                 this.props.onAddTask(this.state.quickAddDialogTaskName)
+              } else if (e.keyCode === 27) {
+                this.setState({quickAddDialogVisible: false})
               }
             }}
             onChange={e => this.setState({quickAddDialogTaskName: e.target.value})}/>

@@ -67,7 +67,7 @@ class StateHelper {
   loadFromString (jsonString) {
     try {
       this.initialState = JSON.parse(jsonString)
-  
+
       this.initialState.initialDate = dateUtils.fromISOString(this.initialState.initialDate)
       for (let key in this.initialState.tasks) {
         if (this.initialState.tasks.hasOwnProperty(key)) {
@@ -81,9 +81,11 @@ class StateHelper {
         this.initialState.editTask.task =
           this.rawDataToTaskModel(this.initialState.editTask.task)
       }
+      return true
     } catch (error) {
       console.log(error)
       this.initialState = defInitialState
+      return false
     }
   }
 
@@ -115,12 +117,16 @@ class StateHelper {
     return JSON.stringify(tempObj)
   }
 
-  loadState () {
+  loadState (session) {
     return serverApi.post('load', {})
-      .then(response => this.loadFromString(response))
+      .then(response => {
+        if (!this.loadFromString(response)) {
+          throw new Error('Cannot load')
+        }
+      })
   }
 
-  saveState (state) {
+  saveState (state, session) {
     return serverApi.post('save', this.buildJsonString(state))
   }
 }

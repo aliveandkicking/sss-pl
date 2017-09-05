@@ -60,7 +60,7 @@ export const dayStyles = {
   quickAddDialog: {
     position: 'absolute',
     height: '50px',
-    width: '200px',
+    width: '220px',
     top: '30px',
     zIndex: 2,
   },

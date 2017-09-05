@@ -1,5 +1,5 @@
 class ServerApi {
-  post (operation, data) {
+  post (operation, session, data) {
     const result = new Promise((resolve, reject) => {
       try {
         let httpRequest = new XMLHttpRequest()
@@ -13,7 +13,7 @@ class ServerApi {
             }
           }
         }
-        httpRequest.open('POST', 'bridge.php?operation=' + operation, true)
+        httpRequest.open('POST', `bridge.php?operation=${operation}&session=${session}` , true)
         httpRequest.setRequestHeader('Access-Control-Allow-Origin', '*')
         httpRequest.setRequestHeader('Content-type', 'text/html')
         httpRequest.send(data)
