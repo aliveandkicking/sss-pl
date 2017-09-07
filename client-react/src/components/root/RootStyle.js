@@ -10,5 +10,10 @@ export const rootStyles = {
     minHeight: theme.minContentHeight,
     marginLeft: theme.mainMenuCollapsedWidth,
     overflowY: 'auto'
+  },
+  info: {
+    position: 'absolute',
+    bottom: '5px',
+    right: '5px'
   }
 }

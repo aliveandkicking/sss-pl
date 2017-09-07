@@ -9,6 +9,9 @@ export const RootView = ({ showTaskList }) => {
       {showTaskList ? <TaskList /> : <Week />}
       <EditTask />
       <MainMenu />
+      {/* <div style={styles.info}>
+        sssds
+      </div> */}
     </div>
   )
 }

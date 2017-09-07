@@ -83,7 +83,7 @@ class StateHelper {
       }
       return true
     } catch (error) {
-      console.log(error)
+      console.log(jsonString, error)
       this.initialState = defInitialState
       return false
     }
@@ -118,7 +118,7 @@ class StateHelper {
   }
 
   loadState (session) {
-    return serverApi.post('load', {})
+    return serverApi.post('load', session, {})
       .then(response => {
         if (!this.loadFromString(response)) {
           throw new Error('Cannot load')
@@ -126,8 +126,8 @@ class StateHelper {
       })
   }
 
-  saveState (state, session) {
-    return serverApi.post('save', this.buildJsonString(state))
+  saveState (session, state) {
+    return serverApi.post('save', session, this.buildJsonString(state))
   }
 }
 

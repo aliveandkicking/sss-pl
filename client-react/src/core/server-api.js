@@ -13,7 +13,9 @@ class ServerApi {
             }
           }
         }
-        httpRequest.open('POST', `bridge.php?operation=${operation}&session=${session}` , true)
+        const url = `bridge.php?operation=${operation}&session=${session}`
+        // console.log(url)
+        httpRequest.open('POST', url , true)
         httpRequest.setRequestHeader('Access-Control-Allow-Origin', '*')
         httpRequest.setRequestHeader('Content-type', 'text/html')
         httpRequest.send(data)
