@@ -8,7 +8,9 @@ import {
   CHANGE_TASK,
   DELETE_TASK,
   ADD_DONE_TASK,
-  REMOVE_DONE_TASK
+  REMOVE_DONE_TASK,
+  SET_STATUS_TEXT,
+  SET_NEED_SAVE
 } from '../actions'
 
 const initialDate = (state = dateUtils.today(), action) => {
@@ -28,6 +30,20 @@ const taskListVisible = (state = false, action) => {
 const mainMenuExpanded = (state = false, action) => {
   if (action.type === SET_MAIN_MENU_EXPANDED_STATE) {
     return action.payload.expanded
+  }
+  return state
+}
+
+const statusText = (state = 'working', action) => {
+  if (action.type === SET_STATUS_TEXT) {
+    return action.payload.text
+  }
+  return state
+}
+
+const needSave = (state = false, action) => {
+  if (action.type === SET_NEED_SAVE) {
+    return action.payload.needSave
   }
   return state
 }
@@ -77,8 +93,10 @@ const doneTasks = (state = {}, action) => {
 }
 
 export const rootReducer = combineReducers({
+  needSave,
   initialDate,
   mainMenuExpanded,
+  statusText,
   taskListVisible,
   tasks,
   doneTasks,

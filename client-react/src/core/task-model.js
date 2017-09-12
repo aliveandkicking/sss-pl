@@ -14,6 +14,8 @@ class TaskModel {
     this.skipDates = []
     this.includeDates = []
     this.neverEnd = true
+    this.timesPerDay = 1
+    this.tag = ''
     this.assign(Object.values(arguments))
   }
 
@@ -32,6 +34,8 @@ class TaskModel {
           this.skipDates = Array.from(source.skipDates)
           this.includeDates = Array.from(source.includeDates)
           this.neverEnd = source.neverEnd
+          this.timesPerDay = source.timesPerDay
+          this.tag = source.tag
         } else {
           Object.assign(this, source)
         }

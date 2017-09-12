@@ -13,5 +13,5 @@ export const theme = {
   mainMenuCollapsedWidth: '50px',
   minWidth: '625px',
   minContentWidth: '575px',
-  minContentHeight: '610px'
+  minContentHeight: '657px'
 }

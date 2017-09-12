@@ -13,6 +13,7 @@ import PropTypes from 'prop-types'
 export const EditTaskView = ({
   task,
   predefinedNames,
+  predefinedTags,
   showingCustomDates,
   onClose,
   onChanges,
@@ -62,13 +63,23 @@ export const EditTaskView = ({
             }
           }}
           defaultValue={task.name}
-          onChange={e => onChanges({name: e.target.value})}
+          onChange={e => e.target.value ? onChanges({name: e.target.value}) : null}
           onKeyDown={e => {
             if (e.keyCode === 13) {
               onClose(true)
             }
           }}
         />
+        <span style={styles.timesPerDaySymbol}>
+          &times;
+        </span>
+        <input style={styles.timesPerDayInput}
+            id='repeat-per-day'
+            type='number'
+            min='1'
+            max='10'
+            onChange={e => e.target.value ? onChanges({timesPerDay: e.target.value}) : null}
+            value={task.timesPerDay} />
       </span>
     )
   }
@@ -143,6 +154,16 @@ export const EditTaskView = ({
   const getFooter = () => {
     return (
       <div style={styles.footer}>
+        <datalist id='predefined-tags'>
+          {predefinedTags.map(name => <option key={name} value={name}/>)}
+        </datalist>
+        <input
+          style={styles.tagInput}
+          list='predefined-tags'
+          type='text'
+          placeholder='Tags'
+          defaultValue={task.tag}
+          onChange={e => onChanges({tag: e.target.value})} />
         {task.id &&
           <CustomSpan
             style={styles.deleteButton}

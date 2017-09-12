@@ -1,4 +1,6 @@
 export { CustomSpan } from './custom-span/CustomSpan'
+export { Login } from './login/Login'
+export { StatusBar } from './status-bar/StatusBar'
 export { WeekNavigationHeader } from './navigation-header/WeekNavigationHeader'
 export { MainMenu } from './main-menu/MainMenu'
 export { Day } from './day/Day'

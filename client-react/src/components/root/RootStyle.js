@@ -9,11 +9,11 @@ export const rootStyles = {
     minWidth: theme.minContentWidth,
     minHeight: theme.minContentHeight,
     marginLeft: theme.mainMenuCollapsedWidth,
-    overflowY: 'auto'
+    display: 'flex',
+    flexDirection: 'column',
   },
-  info: {
-    position: 'absolute',
-    bottom: '5px',
-    right: '5px'
+  content: {
+    flex: 1,
+    overflowY: 'auto'
   }
 }

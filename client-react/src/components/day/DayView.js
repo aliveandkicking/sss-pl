@@ -15,13 +15,26 @@ export class DayView extends React.Component {
   }
 
   getTasks () {
-    return this.props.tasks.map(task =>
-      <Task
-        key={task.id}
-        task={task}
-        date={this.props.date}
-      />
-    )
+    const result = []
+    this.props.tasksGroupedByTag.forEach(tagGroup => {
+      result.push(
+        <div
+          key={tagGroup[0].tag}
+          style={styles.taskGroup}>
+          <span style={styles.taskGroupLabel}>
+            {/* {tagGroup[0].tag} */}
+          </span>
+          {tagGroup.map(task =>
+            <Task
+              key={task.id}
+              task={task}
+              date={this.props.date}
+            />)
+          }
+        </div>
+      )
+    })
+    return result
   }
 
   getQuickAddDialog () {
@@ -97,25 +110,25 @@ export class DayView extends React.Component {
         </div>
         <div style={styles.content}>
           {this.getTasks()}
-          <span style={styles.addTaskRow}>
-            <CustomSpan
-              style={styles.addTaskButton}
-              styleHover={styles.addTaskButtonHover}
-              onClick={e => this.props.onAddNewTask()}>
-              +
-            </CustomSpan>
-            <CustomSpan
-              style={Object.assign({}, styles.quickAddTaskButton,
-                this.state.quickAddDialogVisible ? styles.addTaskButtonHover : null
-              )}
-              styleHover={styles.addTaskButtonHover}
-              title='Quick Add'
-              onClick={e => this.setState({quickAddDialogVisible: true})}>
-              &#9660;
-            </CustomSpan>
-            {this.getQuickAddDialog()}
-          </span>
         </div>
+        <span style={styles.addTaskRow}>
+          <CustomSpan
+            style={styles.addTaskButton}
+            styleHover={styles.addTaskButtonHover}
+            onClick={e => this.props.onAddNewTask()}>
+            +
+          </CustomSpan>
+          <CustomSpan
+            style={Object.assign({}, styles.quickAddTaskButton,
+              this.state.quickAddDialogVisible ? styles.addTaskButtonHover : null
+            )}
+            styleHover={styles.addTaskButtonHover}
+            title='Quick Add'
+            onClick={e => this.setState({quickAddDialogVisible: true})}>
+            &#9660;
+          </CustomSpan>
+          {this.getQuickAddDialog()}
+        </span>
       </div>
     )
   }
@@ -123,7 +136,7 @@ export class DayView extends React.Component {
 
 DayView.propTypes = {
   caption: PropTypes.string.isRequired,
-  tasks: PropTypes.array.isRequired,
+  tasksGroupedByTag: PropTypes.array.isRequired,
   predefinedTaskNames: PropTypes.array.isRequired,
   date: PropTypes.object.isRequired,
   onAddNewTask: PropTypes.func.isRequired,

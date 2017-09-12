@@ -81,10 +81,25 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     })))
   }
 
+  const getTasksGroupedByTag = () => {
+    const result = []
+    Object.values(tasks).forEach(task => {
+      if (task.containsDate(date)) {
+        let tagGroup = result.find(tagGroup => tagGroup[0].tag === task.tag)
+        if (tagGroup) {
+          tagGroup.push(task)
+        } else {
+          result.push([task])
+        }
+      }
+    })
+    return result.sort((first, second) => first[0].tag > second[0].tag)
+  }
+
   return {
     caption: formatCaption(date),
     date,
-    tasks: Object.values(tasks).filter(task => task.containsDate(date)),
+    tasksGroupedByTag: getTasksGroupedByTag(),
     predefinedTaskNames: getPredefinedNames(),
     onAddNewTask: () => dispatch(setEditingTask(new TaskModel({startDate: date}))),
     onAddTask: addTask,

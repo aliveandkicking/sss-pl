@@ -97,6 +97,16 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     return result
   }
 
+  const getPredefinedTags = () => {
+    const result = []
+    for (let key in tasks) {
+      if (tasks.hasOwnProperty(key)) {
+        result.push(tasks[key].tag)
+      }
+    }
+    return result
+  }
+
   const close = (submit) => {
     if (submit) {
       const taskToSubmit = new TaskModel(editingTask)
@@ -123,6 +133,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return {
     task: editingTask,
     predefinedNames: getPredefinedNames(),
+    predefinedTags: getPredefinedTags(),
     showingCustomDates,
     onChanges: changeEditingTask,
     onClose: close,

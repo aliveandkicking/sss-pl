@@ -21,7 +21,7 @@ export const getCommonRepeatRules = (
           type='number'
           min='1'
           max='30'
-          onChange={e => onChanges({every: e.target.value})}
+          onChange={e =>  e.target.value ? onChanges({every: e.target.value}) : null}
           value={task.every} />
       </div>
     )

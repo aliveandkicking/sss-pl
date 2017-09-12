@@ -41,7 +41,7 @@ export const editTaskStyles = {
     overflow: 'hidden'
   },
   dialog: {
-    height: '647px',
+    height: '657px',
     width: '450px',
     background: theme.colorC,
     display: 'flex',
@@ -52,9 +52,11 @@ export const editTaskStyles = {
   },
   header: {
     marginBottom: '10px',
+    paddingBottom: '10px',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    borderBottom: separator,
   },
   caption: {
     transition: '300ms',
@@ -64,13 +66,24 @@ export const editTaskStyles = {
     color: theme.colorTextHover
   },
   nameInputContainer: {
-    height: '25px'
+    height: '30px',
+    display: 'flex',
+    alignItems: 'stretch',
+
   },
   nameInput: {
-    width: '100%',
-    height: '25px',
     fontSize: '120%',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    flex: 1
+  },
+  timesPerDaySymbol: {
+    alignSelf: 'center',
+    margin: '0px 5px'
+  },
+  timesPerDayInput: {
+    fontSize: '120%',
+    width: '40px',
+    textAlign: 'center'
   },
   tabs: {
     display: 'flex',
@@ -159,10 +172,14 @@ export const editTaskStyles = {
     borderTop: separator,
     height: '25px',
     marginTop: '10px',
-    padding: '5px 0px 0px',
+    padding: '10px 0px 0px',
     display: 'flex',
     alignItems: 'stretch',
-    justifyContent: 'flex-end'
+    justifyContent: 'space-between'
+  },
+  tagInput: {
+    width: '120px',
+    marginRight: '5px'
   },
   deleteButton: {
     display: 'flex',

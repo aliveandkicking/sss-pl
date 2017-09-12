@@ -10,7 +10,6 @@ const createAction = function() {
   }
 }
 
-
 export const ADD_DONE_TASK ='ADD_DONE_TASK'
 export const addDoneTask = createAction(ADD_DONE_TASK, 'date', 'taskId')
 
@@ -43,6 +42,12 @@ export const setTaskListVisibility = createAction(SET_TASK_LIST_VISIBILITY, 'vis
 
 export const SET_MAIN_MENU_EXPANDED_STATE = 'SET_MAIN_MENU_EXPANDED_STATE'
 export const setMainMenuExpandedState = createAction(SET_MAIN_MENU_EXPANDED_STATE, 'expanded')
+
+export const SET_STATUS_TEXT = 'SET_STATUS_TEXT'
+export const setStatusText = createAction(SET_STATUS_TEXT, 'text')
+
+export const SET_NEED_SAVE = 'SET_NEED_SAVE'
+export const setNeedSave = createAction(SET_NEED_SAVE, 'needSave')
 
 
 

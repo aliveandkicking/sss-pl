@@ -13,26 +13,30 @@ const defInitialState = {
       name: 'do exercise',
       startDate: new Date(2017, 7),
       repeatModeId: 1,
-      includeDates: [dateUtils.clearTime(new Date())]
+      includeDates: [dateUtils.clearTime(new Date())],
+      tag: 'Work'
     }),
     [++i]: new TaskModel({
       id: i,
       name: 'task with long name',
       startDate: new Date(2017, 7),
-      repeatModeId: 1
+      repeatModeId: 1,
+      tag: 'Home'
     }),
     [++i]: new TaskModel({
       id: i,
       name: 'repeat every 2',
       startDate: new Date(2017, 7),
       repeatModeId: 1,
-      every: 2
+      every: 2,
+      tag: 'Home'
     }),
     [++i]: new TaskModel({
       id: i,
       name: 'sept task',
       startDate: new Date(2017, 8),
-      repeatModeId: 1
+      repeatModeId: 1,
+      tag: 'Work'
     })
   },
   doneTasks: {
