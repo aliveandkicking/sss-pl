@@ -1,14 +1,13 @@
 import { combineReducers } from 'redux'
 import { editTaskReducer } from './edit-task'
 import { dateUtils } from '../core/dateutils'
+import { doneTasks } from './done-tasks'
 import {
   SET_INITIAL_DATE,
   SET_TASK_LIST_VISIBILITY,
   SET_MAIN_MENU_EXPANDED_STATE,
   CHANGE_TASK,
   DELETE_TASK,
-  ADD_DONE_TASK,
-  REMOVE_DONE_TASK,
   SET_STATUS_TEXT,
   SET_NEED_SAVE
 } from '../actions'
@@ -62,30 +61,6 @@ const tasks = (state = {}, action) => {
           newState[key] = state[key]
         }
       }
-    }
-    return newState
-  }
-  return state
-}
-
-const doneTasks = (state = {}, action) => {
-  if (action.type === ADD_DONE_TASK) {
-    const dateStr = dateUtils.toISOString(action.payload.date)
-    const newState = Object.assign({}, state)
-    if (!Array.isArray(newState[dateStr])) {
-      newState[dateStr] = []
-    }
-    if (!newState[dateStr].includes(action.payload.taskId)) {
-      newState[dateStr] = newState[dateStr].concat(action.payload.taskId)
-    }
-    return newState
-  }
-  if (action.type === REMOVE_DONE_TASK) {
-    const dateStr = dateUtils.toISOString(action.payload.date)
-    const newState = Object.assign({}, state)
-    if (Array.isArray(newState[dateStr])) {
-      newState[dateStr] = newState[dateStr]
-        .filter(taskId => action.payload.taskId !== taskId)
     }
     return newState
   }

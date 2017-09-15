@@ -21,9 +21,6 @@ export class DayView extends React.Component {
         <div
           key={tagGroup[0].tag}
           style={styles.taskGroup}>
-          <span style={styles.taskGroupLabel}>
-            {/* {tagGroup[0].tag} */}
-          </span>
           {tagGroup.map(task =>
             <Task
               key={task.id}

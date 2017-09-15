@@ -33,16 +33,27 @@ export const taskStyles = {
     boxShadow: 'inset 0px 0 8px rgba(0,0,0,0.6)'
   },
   contentSelected: {
-    opacity: 0.2
+    opacity: 0.3
+  },
+  tagMark: {
+    height: '10px',
+    width: '10px',
+    borderRadius: '6px',
+    overflow: 'hidden',
+    position: 'absolute',
+    left: '3px',
+    top: '4px',
+    transition: '400ms',
+    zIndex: 1,
+    border: '1px solid rgba(0,0,0, 0.2)',
   },
   removeButton: {
     fontSize: '12px',
     height: '18px',
-    margin: '0px 3px 3px',
     opacity: 0.25,
     overflow: 'hidden',
     position: 'absolute',
-    right: '3px',
+    right: '6px',
     top: '0px',
     transition: '400ms',
     zIndex: 1
@@ -64,18 +75,31 @@ export const taskStyles = {
   taskAbbrHover: {
     opacity: 0
   },
-  footer: {
+  editButton: {
     position: 'absolute',
-    bottom: '0px',
-    left: '0px',
+    bottom: '3px',
+    left: '3px',
     height: '18px',
     opacity: 0.25,
     transition: '400ms',
-    margin: '0px 3px 3px',
     overflow: 'hidden',
     zIndex: 1
   },
-  footerHover: {
+  editButtonHover: {
+    opacity: 1
+  },
+  progressBar: {
+    height: '15px',
+    width: '50px',
+    position: 'absolute',
+    bottom: '0px',
+    right: '4px',
+    opacity: 0.4,
+    transition: '400ms',
+    fontSize: '11px',
+    textAlign: 'right'
+  },
+  progressBarHover: {
     opacity: 1
   },
   checkMark: {

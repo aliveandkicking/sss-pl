@@ -40,7 +40,7 @@ const defInitialState = {
     })
   },
   doneTasks: {
-    [dateUtils.toISOString(new Date())]: [3, 2]
+    [dateUtils.toISOString(new Date())]: [[3,1,1], [1,1,1], [2,1,2]]
   },
   editTask: {
     calendarInitialDate: dateUtils.clearTime(new Date()),

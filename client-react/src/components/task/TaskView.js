@@ -22,9 +22,9 @@ export class TaskView extends React.Component {
     const color = stringToColor.getColor(this.props.task.name)
     return Object.assign({},
       styles.content,
-      this.props.isDone ? styles.contentSelected : null,
+      this.props.doneInfo[1] === this.props.doneInfo[2] ? styles.contentSelected : null,
       this.state.hover ? styles.contentHover : null,
-      {backgroundColor: color},
+      {backgroundColor: color}
     )
   }
 
@@ -47,6 +47,16 @@ export class TaskView extends React.Component {
       >
         <div style={this.getContentStyle()}>
           <CustomSpan
+            style={Object.assign({},
+              styles.tagMark,
+              {backgroundColor: stringToColor.getColor(this.props.task.tag)}
+            )}
+            styleHover={styles.tagMarkHover}
+            title={this.props.task.tag}
+            >
+          </CustomSpan>
+
+          <CustomSpan
             style={styles.removeButton}
             styleHover={styles.removeButtonHover}
             onClick={e => {
@@ -66,22 +76,33 @@ export class TaskView extends React.Component {
           </div>
 
           <CustomSpan
-            style={styles.footer}
-            styleHover={styles.footerHover}>
+            style={styles.editButton}
+            styleHover={styles.editButtonHover}>
             <span
               onMouseOver={() => this.setState({infoHover: true})}
               onMouseOut={() => this.setState({infoHover: false})}
               onClick={e => {
                 e.stopPropagation()
                 this.props.onEdit()
-              }
-            }>
+              }}>
               &#9881;
             </span>
           </CustomSpan>
 
+          <span
+            style={Object.assign({},
+              styles.progressBar,
+              this.state.hover && styles.progressBarHover)}
+            title={''}
+            >
+           {`x ${this.props.doneInfo[1]}/${this.props.doneInfo[2]}`}
+          </span>
+
         </div>
-        <span style={this.getStyle(this.props.isDone, styles.checkMark, styles.checkMarkCheked)} />
+        <span style={this.getStyle(
+          this.props.doneInfo[1] === this.props.doneInfo[2],
+          styles.checkMark,
+          styles.checkMarkCheked)} />
       </div>
     )
   }
@@ -90,7 +111,7 @@ export class TaskView extends React.Component {
 TaskView.propTypes = {
   task: PropTypes.object,
   taskNameAbbreviation: PropTypes.string,
-  isDone: PropTypes.bool,
+  doneInfo: PropTypes.array,
   onClick: PropTypes.func,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func

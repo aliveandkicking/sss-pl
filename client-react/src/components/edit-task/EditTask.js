@@ -101,7 +101,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     const result = []
     for (let key in tasks) {
       if (tasks.hasOwnProperty(key)) {
-        result.push(tasks[key].tag)
+        if (!result.includes(tasks[key].tag)) {
+          result.push(tasks[key].tag)
+        }
       }
     }
     return result

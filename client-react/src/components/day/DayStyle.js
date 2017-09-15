@@ -19,7 +19,7 @@ export const dayStyles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'stretch',
-    margin: '0px 3px'
+    margin: '0px 2px'
   },
   caption: {
     display: 'flex',
@@ -39,12 +39,13 @@ export const dayStyles = {
     position: 'relative'
   },
   taskGroupLabel: {
-    left: '10px',
-    top: '1px',
-    width: '75px',
-    height: '10px',
+    left: '5px',
+    top: '5px',
+    width: '14px',
+    height: '14px',
+    borderRadius: '7px',
     backgroundColor: '#888',
-    boxShadow: '0px 0px 6px #555',
+    boxShadow: '0px 0px 10px #555',
     position: 'absolute',
     zIndex: 1
   },

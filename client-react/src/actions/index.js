@@ -11,16 +11,16 @@ const createAction = function() {
 }
 
 export const ADD_DONE_TASK ='ADD_DONE_TASK'
-export const addDoneTask = createAction(ADD_DONE_TASK, 'date', 'taskId')
+export const addDoneTask = createAction(ADD_DONE_TASK, 'date', 'taskId', 'timesPerDay')
+
+export const REMOVE_DONE_TASK = 'REMOVE_DONE_TASK'
+export const removeDoneTask = createAction(REMOVE_DONE_TASK, 'date', 'taskId', 'timesPerDay')
 
 export const CHANGE_TASK = 'CHANGE_TASK'
 export const changeTask = createAction(CHANGE_TASK, 'task')
 
 export const DELETE_TASK = 'DELETE_TASK'
 export const deleteTask = createAction(DELETE_TASK, 'taskId')
-
-export const REMOVE_DONE_TASK = 'REMOVE_DONE_TASK'
-export const removeDoneTask = createAction(REMOVE_DONE_TASK, 'date', 'taskId')
 
 export const SET_EDIT_TASK_SHOWING_CUSTOM_DATES = 'SET_EDIT_TASK_SHOWING_CUSTOM_DATES'
 export const setEditTaskShowingCustomDates = createAction(SET_EDIT_TASK_SHOWING_CUSTOM_DATES, 'showingCustomDates')
