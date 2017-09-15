@@ -43,7 +43,13 @@ export class TaskView extends React.Component {
               }
             )
           )}
-        onClick={e => this.props.onClick()}
+        onMouseUp={e => {
+          if (e.button === 0) {
+            this.props.onClick()
+          } else if (e.button === 1) {
+            this.props.onRemoveDoneTask()
+          }
+        }}
       >
         <div style={this.getContentStyle()}>
           <CustomSpan
@@ -89,14 +95,17 @@ export class TaskView extends React.Component {
             </span>
           </CustomSpan>
 
+        {
+          (this.props.doneInfo[1] < this.props.doneInfo[2]) &&
           <span
             style={Object.assign({},
               styles.progressBar,
               this.state.hover && styles.progressBarHover)}
-            title={''}
+              title='Middle Click to Decrease'
             >
-           {`x ${this.props.doneInfo[1]}/${this.props.doneInfo[2]}`}
+          {`x ${this.props.doneInfo[1]}/${this.props.doneInfo[2]}`}
           </span>
+        }
 
         </div>
         <span style={this.getStyle(
@@ -113,6 +122,7 @@ TaskView.propTypes = {
   taskNameAbbreviation: PropTypes.string,
   doneInfo: PropTypes.array,
   onClick: PropTypes.func,
+  onRemoveDoneTask: PropTypes.func,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func
 }

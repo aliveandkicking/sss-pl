@@ -39,7 +39,7 @@ const mapStateToProps = (state, ownProps) => {
   const doneInfo = state.doneTasks[dateStr] && state.doneTasks[dateStr]
     .find(info => (info[0] === ownProps.task.id))
   return {
-    doneInfo: doneInfo || [ownProps.task.id,0,1]
+    doneInfo: doneInfo || [ownProps.task.id, 0, ownProps.task.timesPerDay]
   }
 }
 
@@ -54,10 +54,16 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     doneInfo,
     date,
     onClick: () => {
+      console.log(doneInfo)
       if (doneInfo[1] === doneInfo[2]) {
-        dispatch(removeDoneTask(date, task.id, task.timesPerDay))
+        dispatch(removeDoneTask(date, doneInfo[0], doneInfo[2]))
       } else {
-        dispatch(addDoneTask(date, task.id, task.timesPerDay))
+        dispatch(addDoneTask(date, doneInfo[0], doneInfo[2]))
+      }
+    },
+    onRemoveDoneTask: () => {
+      if (doneInfo[1] > 0) {
+        dispatch(removeDoneTask(date, doneInfo[0], doneInfo[2]))
       }
     },
     onEdit: () => dispatch(setEditingTask(new TaskModel(task))),

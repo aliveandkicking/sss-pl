@@ -46,7 +46,7 @@ export const EditTaskView = ({
     )
   }
 
-  const getNameInput = () => {
+  const getNameRow = () => {
     return (
       <span style={styles.nameInputContainer}>
         <datalist id='predefined-names'>
@@ -78,7 +78,9 @@ export const EditTaskView = ({
             type='number'
             min='1'
             max='10'
-            onChange={e => e.target.value ? onChanges({timesPerDay: e.target.value}) : null}
+            onChange={e => e.target.value && onChanges({
+              timesPerDay: parseInt(e.target.value, 10)
+            })}
             value={task.timesPerDay} />
       </span>
     )
@@ -188,7 +190,7 @@ export const EditTaskView = ({
         style={styles.dialog}
         onClick={e => { e.stopPropagation() }}>
         {getHeader()}
-        {getNameInput()}
+        {getNameRow()}
         {getRules()}
         <Calendar
           onCellClick={onCalendarCellClick}

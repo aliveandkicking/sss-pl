@@ -14,7 +14,8 @@ const addDoneTask = (state, action) => {
 
   let index = newState[dateStr].findIndex(info => info[0] === action.payload.taskId)
   if (index < 0) {
-    newState[dateStr] = newState[dateStr].concat([[action.payload.taskId, 1, 1]])
+    newState[dateStr] = newState[dateStr]
+      .concat([[action.payload.taskId, 1, action.payload.timesPerDay]])
   } else {
     let info = newState[dateStr][index]
     newState[dateStr][index] = [info[0], info[1] + 1, info[2]]
