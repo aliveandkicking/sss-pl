@@ -1,8 +1,7 @@
 import { connect } from 'react-redux'
 import { TaskView } from './TaskView'
 import {
-  addDoneTask,
-  removeDoneTask,
+  changeDoneTask,
   setEditingTask,
   changeTask
 } from '../../actions'
@@ -54,17 +53,25 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     doneInfo,
     date,
     onClick: () => {
-      console.log(doneInfo)
-      if (doneInfo[1] === doneInfo[2]) {
-        dispatch(removeDoneTask(date, doneInfo[0], doneInfo[2]))
-      } else {
-        dispatch(addDoneTask(date, doneInfo[0], doneInfo[2]))
-      }
+      let newDoneInfo = Array.from(doneInfo)
+      newDoneInfo[1] === newDoneInfo[2] ? --newDoneInfo[1] : ++newDoneInfo[1]
+      dispatch(changeDoneTask(date, newDoneInfo))
     },
     onRemoveDoneTask: () => {
       if (doneInfo[1] > 0) {
-        dispatch(removeDoneTask(date, doneInfo[0], doneInfo[2]))
+        let newDoneInfo = [doneInfo[0], doneInfo[1] - 1, doneInfo[2]]
+        dispatch(changeDoneTask(date, newDoneInfo))
       }
+    },
+    onChangeTimesPerDay: value => {
+      let newDoneInfo = [doneInfo[0], doneInfo[1], doneInfo[2] + value]
+      if (newDoneInfo[2] < 1) {
+        newDoneInfo[2] = 1
+      }
+      if (newDoneInfo[2] < newDoneInfo[1]) {
+        newDoneInfo[2] = newDoneInfo[1]
+      }
+      dispatch(changeDoneTask(date, newDoneInfo))
     },
     onEdit: () => dispatch(setEditingTask(new TaskModel(task))),
     onDelete: () => {

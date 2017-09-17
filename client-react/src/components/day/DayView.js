@@ -47,11 +47,10 @@ export class DayView extends React.Component {
       <div style={mergedStyle}>
         <div
           style={styles.quickAddDialogBackground}
-          onClick={e => this.setState({quickAddDialogVisible: false})}>
-        </div>
+          onClick={e => this.setState({quickAddDialogVisible: false})} />
         <div style={styles.quickAddDialogContent}>
           <datalist id='predefined-names'>
-            {this.props.predefinedTaskNames.map(name => <option key={name} value={name}/>)}
+            {this.props.predefinedTaskNames.map(name => <option key={name} value={name} />)}
           </datalist>
           <input
             type='text'
@@ -67,7 +66,7 @@ export class DayView extends React.Component {
                 this.setState({quickAddDialogVisible: false})
               }
             }}
-            onChange={e => this.setState({quickAddDialogTaskName: e.target.value})}/>
+            onChange={e => this.setState({quickAddDialogTaskName: e.target.value})} />
           <CustomSpan
             style={styles.quickAddDialogAddButton}
             styleHover={styles.quickAddDialogAddButtonHover}
@@ -89,7 +88,7 @@ export class DayView extends React.Component {
         onDragOver={e => {
           e.preventDefault()
           if (e.ctrlKey) {
-            e.dataTransfer.dropEffect = 'copy';
+            e.dataTransfer.dropEffect = 'copy'
           }
         }}
         onDrop={e => {

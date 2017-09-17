@@ -29,7 +29,8 @@ const defInitialState = {
       startDate: new Date(2017, 7),
       repeatModeId: 1,
       every: 2,
-      tag: 'Home'
+      tag: 'Home',
+      timesPerDay: 4
     }),
     [++i]: new TaskModel({
       id: i,
@@ -40,7 +41,7 @@ const defInitialState = {
     })
   },
   doneTasks: {
-    [dateUtils.toISOString(new Date())]: [[3,1,1], [1,1,1], [2,1,2]]
+    [dateUtils.toISOString(new Date())]: [[3, 1, 1], [1, 1, 1], [2, 1, 2]]
   },
   editTask: {
     calendarInitialDate: dateUtils.clearTime(new Date()),

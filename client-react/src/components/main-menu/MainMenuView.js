@@ -1,6 +1,7 @@
 import React from 'react'
 import { mainMenuStyles as styles } from './MainMenuStyle'
 import { CustomSpan } from '..'
+import PropTypes from 'prop-types'
 
 export const MainMenuView = ({
   expanded,
@@ -9,18 +10,17 @@ export const MainMenuView = ({
   onShowTaskList,
   onShowWeek
 }) => {
-
   const getItem = (iconSymbol, text, action) => {
-    return(
+    return (
       <CustomSpan
         style={styles.item}
         styleHover={styles.itemHover}
         onClick={e => {
           onChangeExpandedState(false)
           action()
-          }}>
+        }}>
         <span style={styles.itemIcon}>
-        {iconSymbol}
+          {iconSymbol}
         </span>
         <span style={styles.itemCaption}>
           {text}
@@ -57,3 +57,12 @@ export const MainMenuView = ({
     </div>
   )
 }
+
+MainMenuView.propTypes = {
+  expanded: PropTypes.bool.isRequired,
+  onChangeExpandedState: PropTypes.func.isRequired,
+  onNewTask: PropTypes.func.isRequired,
+  onShowTaskList: PropTypes.func.isRequired,
+  onShowWeek: PropTypes.func.isRequired
+}
+

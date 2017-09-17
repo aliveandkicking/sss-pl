@@ -27,7 +27,7 @@ export const mainMenuStyles = {
     overflow: 'hidden'
   },
   bodyExpanded: {
-    width: '250px',
+    width: '250px'
   },
   bodyColapsed: {
     width: theme.mainMenuCollapsedWidth
@@ -66,9 +66,9 @@ export const mainMenuStyles = {
   },
   itemIcon: {
     fontSize: '34px',
-    cursor: 'pointer',
+    width: theme.mainMenuCollapsedWidth,
     textAlign: 'center',
-    margin: '0px 11px 4px',
+    margin: '0px 11px 4px 0px'
   },
   itemCaption: {
     flex: 1

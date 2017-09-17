@@ -14,7 +14,7 @@ class DateUtils {
     [this.JAN, this.DEC] = [0, 11]
     this.MONTH_IN_YEAR = 12
     this.MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    this.MONTH_NAMES_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    this.MONTH_NAMES_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   }
 
   sameDay (dateOne, dateTwo) {
@@ -38,7 +38,7 @@ class DateUtils {
     return (this.sameDay(date, dateToCompare) || (date < dateToCompare))
   }
 
-  daysInMonth(year, month) {
+  daysInMonth (year, month) {
     return new Date(year, month + 1, 0).getDate()
   }
 
@@ -112,7 +112,7 @@ class DateUtils {
     return date.getTime() + date.getTimezoneOffset()
   }
 
-  getDaysBetween (startDate, endDate) { //biktop time zone
+  getDaysBetween (startDate, endDate) { // biktop time zone
     return Math.abs(Math.floor(
       (Date.UTC(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()) -
       Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate())) /

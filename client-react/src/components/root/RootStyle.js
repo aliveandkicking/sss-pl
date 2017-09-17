@@ -10,7 +10,7 @@ export const rootStyles = {
     minHeight: theme.minContentHeight,
     marginLeft: theme.mainMenuCollapsedWidth,
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column'
   },
   content: {
     flex: 1,

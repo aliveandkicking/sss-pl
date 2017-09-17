@@ -165,7 +165,7 @@ export const EditTaskView = ({
           type='text'
           placeholder='Tags'
           defaultValue={task.tag}
-          onChange={e => onChanges({tag: e.target.value})} />
+          onChange={e => onChanges({tag: e.target.value.trim()})} />
         {task.id &&
           <CustomSpan
             style={styles.deleteButton}

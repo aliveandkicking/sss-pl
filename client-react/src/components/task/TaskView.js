@@ -36,31 +36,34 @@ export class TaskView extends React.Component {
         style={styles.root}
         draggable='true'
         onDragStart={event =>
-          event.dataTransfer.setData('text/plain', JSON.stringify(
-              {
-                id: this.props.task.id,
-                date: dateUtils.toISOString(this.props.date)
-              }
-            )
-          )}
-        onMouseUp={e => {
-          if (e.button === 0) {
-            this.props.onClick()
-          } else if (e.button === 1) {
-            this.props.onRemoveDoneTask()
+          event.dataTransfer.setData('text/plain', JSON.stringify({
+            id: this.props.task.id,
+            date: dateUtils.toISOString(this.props.date)
           }
-        }}
-      >
+        ))}
+        onClick={e => {
+          if (e.ctrlKey) {
+            e.shiftKey
+            ? this.props.onChangeTimesPerDay(-1)
+            : this.props.onChangeTimesPerDay(1)
+          } else {
+            e.shiftKey
+            ? this.props.onRemoveDoneTask()
+            : this.props.onClick()
+          }
+        }}>
         <div style={this.getContentStyle()}>
-          <CustomSpan
-            style={Object.assign({},
-              styles.tagMark,
-              {backgroundColor: stringToColor.getColor(this.props.task.tag)}
-            )}
-            styleHover={styles.tagMarkHover}
-            title={this.props.task.tag}
-            >
-          </CustomSpan>
+
+          {
+            (this.props.task.tag.length > 0) &&
+            <CustomSpan
+              style={Object.assign({},
+                styles.tagMark,
+                {backgroundColor: stringToColor.getColor(this.props.task.tag)}
+              )}
+              styleHover={styles.tagMarkHover}
+              title={this.props.task.tag} />
+          }
 
           <CustomSpan
             style={styles.removeButton}
@@ -88,24 +91,23 @@ export class TaskView extends React.Component {
               onMouseOver={() => this.setState({infoHover: true})}
               onMouseOut={() => this.setState({infoHover: false})}
               onClick={e => {
-                e.stopPropagation()
                 this.props.onEdit()
+                return e.stopPropagation()
               }}>
               &#9881;
             </span>
           </CustomSpan>
 
-        {
-          (this.props.doneInfo[1] < this.props.doneInfo[2]) &&
-          <span
-            style={Object.assign({},
-              styles.progressBar,
-              this.state.hover && styles.progressBarHover)}
-              title='Middle Click to Decrease'
-            >
-          {`x ${this.props.doneInfo[1]}/${this.props.doneInfo[2]}`}
-          </span>
-        }
+          {
+            (this.props.doneInfo[1] < this.props.doneInfo[2]) &&
+            (this.props.doneInfo[2] > 1) &&
+            <span
+              style={Object.assign({},
+                styles.progressBar,
+                this.state.hover && styles.progressBarHover)}>
+              {`x ${this.props.doneInfo[1]}/${this.props.doneInfo[2]}`}
+            </span>
+          }
 
         </div>
         <span style={this.getStyle(
@@ -118,11 +120,13 @@ export class TaskView extends React.Component {
 }
 
 TaskView.propTypes = {
+  date: PropTypes.object,
   task: PropTypes.object,
   taskNameAbbreviation: PropTypes.string,
   doneInfo: PropTypes.array,
   onClick: PropTypes.func,
   onRemoveDoneTask: PropTypes.func,
+  onChangeTimesPerDay: PropTypes.func,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func
 }
