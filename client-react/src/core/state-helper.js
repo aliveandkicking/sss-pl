@@ -81,6 +81,7 @@ class StateHelper {
       this.initialState = JSON.parse(jsonString)
 
       this.initialState.initialDate = dateUtils.fromISOString(this.initialState.initialDate)
+
       for (let key in this.initialState.tasks) {
         if (this.initialState.tasks.hasOwnProperty(key)) {
           this.initialState.tasks[key] =
@@ -105,7 +106,7 @@ class StateHelper {
     const tempObj = {
       initialDate: dateUtils.toISOString(state.initialDate),
       mainMenuExpanded: state.mainMenuExpanded,
-      taskListVisible: state.taskListVisible,
+      pageId: state.pageId,
       tasks: {},
       doneTasks: state.doneTasks,
       editTask: Object.assign({}, state.editTask)
