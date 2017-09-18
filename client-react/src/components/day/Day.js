@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import { DayView } from './DayView'
-import { dateUtils } from '../../core/dateutils'
-import { TaskModel } from '../../core/task-model'
+import { dateUtils, TaskModel } from '../../core'
 import {
   setEditingTask,
   changeTask
@@ -69,11 +68,11 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
       if (tasks.hasOwnProperty(key)) {
         if (tasks[key].name === name) {
           const modifiedTask = new TaskModel(tasks[key]).includeDate(date)
-            dispatch(changeTask(modifiedTask))
-            return
-          }
+          dispatch(changeTask(modifiedTask))
+          return
         }
       }
+    }
     dispatch(changeTask(new TaskModel({
       name,
       startDate: date,

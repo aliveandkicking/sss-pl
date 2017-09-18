@@ -18,7 +18,7 @@ export const taskListItemStyles = {
     flex: 1,
     padding: '3px 10px',
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   info: {
     display: 'flex',

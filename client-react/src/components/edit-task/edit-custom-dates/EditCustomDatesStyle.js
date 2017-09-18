@@ -16,18 +16,18 @@ export const editCustomDatesStyles = {
     marginBottom: '10px',
     borderBottom: '1px solid rgba(200,200,200,0.3)'
   },
-  backButton:{
+  backButton: {
     transition: '300ms',
     cursor: 'pointer',
     display: 'flex',
     width: '150px'
   },
-  backButtonHover:{
+  backButtonHover: {
     color: theme.colorTextHover
   },
   backButtonSymbol: {
     margin: '0px 5px 3px 0px',
-    transform: 'scale(0.8, 1.3)',
+    transform: 'scale(0.8, 1.3)'
   },
   customDatesContainer: {
     backgroundColor: '#eee',

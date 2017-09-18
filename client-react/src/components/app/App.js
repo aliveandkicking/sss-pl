@@ -3,7 +3,7 @@ import { Root, Login } from '..'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import { rootReducer } from '../../reducers'
-import { stateHelper } from '../../core/state-helper'
+import { stateHelper } from '../../core'
 import {
   setStatusText,
   setNeedSave,
@@ -11,7 +11,7 @@ import {
   SET_STATUS_TEXT
 } from '../../actions'
 
-function middleware({getState}) {
+function middleware ({getState}) {
   return next => action => {
     const result = next(action)
     if (![SET_NEED_SAVE, SET_STATUS_TEXT].includes(action.type)) {
@@ -35,7 +35,7 @@ export class App extends React.Component {
     this.saveTimeout = null
 
     if (!DEV) {
-      this.session = localStorage.getItem('session')
+      this.session = window.localStorage.getItem('session')
       if (this.session) {
         this.tryLoadState()
       }
@@ -64,7 +64,7 @@ export class App extends React.Component {
               console.log('catch >>>', response)
               this.store.dispatch(setStatusText('ERROR: could not save state'))
             })
-        }, 200);
+        }, 200)
       }
     })
   }
@@ -73,11 +73,11 @@ export class App extends React.Component {
     stateHelper.loadState(this.session)
     .then(() => {
       this.setState({loaded: true})
-      localStorage.setItem('session', this.session)
+      window.localStorage.setItem('session', this.session)
       this.store.dispatch(setStatusText('loaded'))
     })
     .catch(() => {
-      if (prompt('Proceed with sandbox mode?', 'y')) {
+      if (window.prompt('Proceed with sandbox mode?', 'y')) {
         this.setState({loaded: true})
         this.sandbox = true
         this.store.dispatch(setStatusText('using sandbox'))

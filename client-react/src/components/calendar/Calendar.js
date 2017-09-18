@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
 import { CalendarView } from './CalendarView'
-import { dateUtils } from '../../core/dateutils'
+import { dateUtils } from '../../core'
 import {
   setEditTaskCalendarInitialDate,
   setEditTaskCalendarMonthMode
 } from '../../actions'
 
-const numberOfWeeks = 7;
-const monthsInRow = 4;
+const numberOfWeeks = 7
+const monthsInRow = 4
 
 const getWeeks = (date, onCheckCellSelection) => {
   const weeks = [dateUtils.DAYS_OF_WEEK_MONDAY_BASED.map(day => {
@@ -21,7 +21,7 @@ const getWeeks = (date, onCheckCellSelection) => {
 
   let startOfWeek = dateUtils.getStartOfWeek(dateUtils.getStartOfMonth(date))
   for (let j = 0; j < numberOfWeeks; j++) {
-    let week = [];
+    let week = []
     for (let i = 0; i < dateUtils.DAYS_IN_WEEK; i++) {
       let day = dateUtils.incDay(startOfWeek, i)
       week.push({
@@ -34,13 +34,13 @@ const getWeeks = (date, onCheckCellSelection) => {
     weeks.push(week)
     startOfWeek = dateUtils.incDay(startOfWeek, dateUtils.DAYS_IN_WEEK)
   }
-  return weeks;
+  return weeks
 }
 
 const getMonths = () => {
-  const months = [];
-  for (let j = 0; j < dateUtils.MONTH_IN_YEAR/monthsInRow; j++) {
-    let row = [];
+  const months = []
+  for (let j = 0; j < dateUtils.MONTH_IN_YEAR / monthsInRow; j++) {
+    let row = []
     for (let i = 0; i < monthsInRow; i++) {
       let monthIndex = j * monthsInRow + i
       row.push({
@@ -51,7 +51,7 @@ const getMonths = () => {
     }
     months.push(row)
   }
-  return months;
+  return months
 }
 
 const getTitle = (monthMode, date) => {
@@ -63,7 +63,7 @@ const getTitle = (monthMode, date) => {
 const mapStateToProps = (state, ownProps) => {
   return {
     monthMode: state.editTask.calendarMonthMode,
-    initialDate: state.editTask.calendarInitialDate,
+    initialDate: state.editTask.calendarInitialDate
   }
 }
 
@@ -79,14 +79,16 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
       dispatch(setEditTaskCalendarInitialDate(
         monthMode
           ? dateUtils.incYear(initialDate)
-          : dateUtils.incMonth(initialDate))
-    )},
+          : dateUtils.incMonth(initialDate)
+      ))
+    },
     onPrev: () => {
       dispatch(setEditTaskCalendarInitialDate(
         monthMode
           ? dateUtils.decYear(initialDate)
-          : dateUtils.decMonth(initialDate))
-    )},
+          : dateUtils.decMonth(initialDate)
+     ))
+    },
     onTitleClick: () =>
       dispatch(setEditTaskCalendarMonthMode(!monthMode)),
     onTodayClick: () => {
@@ -98,9 +100,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         dispatch(setEditTaskCalendarInitialDate(
           new Date(initialDate.getFullYear(), cell.data, 1)))
         dispatch(setEditTaskCalendarMonthMode(false))
-      } else
-        if (ownProps.onCellClick) {
-          ownProps.onCellClick(cell)
+      } else if (ownProps.onCellClick) {
+        ownProps.onCellClick(cell)
       }
     }
   }

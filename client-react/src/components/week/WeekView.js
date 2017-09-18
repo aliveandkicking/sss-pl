@@ -1,7 +1,7 @@
 import React from 'react'
 import { weekStyles } from './WeekStyle'
 import { Day, WeekNavigationHeader } from '..'
-import { dateUtils } from '../../core/dateutils'
+import { dateUtils } from '../../core'
 import PropTypes from 'prop-types'
 
 export const WeekView = ({initialDate}) => {

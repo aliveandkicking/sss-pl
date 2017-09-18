@@ -1,8 +1,8 @@
 export const weekStyles = {
-  root:{
+  root: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'stretch',
+    alignItems: 'stretch'
   },
   body: {
     flex: 1,

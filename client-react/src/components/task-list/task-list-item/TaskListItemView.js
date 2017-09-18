@@ -1,16 +1,13 @@
 import React from 'react'
 import { taskListItemStyles as styles } from './TaskListItemStyle'
-import { stringToColor } from '../../../core/string-to-color'
-import { dateUtils } from '../../../core/dateutils'
-import { repeatMode } from '../../../core/repeat-modes'
+import { stringToColor, repeatMode, dateUtils } from '../../../core'
 import PropTypes from 'prop-types'
 import { CustomSpan } from '../..'
 
 export const TaskListItemView = ({ task, onEdit, isValid }) => {
-
   const getRootStyle = () => {
     const color = stringToColor.getColor(task.name)
-    return Object.assign({}, styles.root,  {backgroundColor: color})
+    return Object.assign({}, styles.root, { backgroundColor: color })
   }
 
   const getInfoText = () => {
@@ -20,7 +17,7 @@ export const TaskListItemView = ({ task, onEdit, isValid }) => {
       ${dateUtils.toISOString(task.startDate)}`
     } else {
       const repatModeName = repeatMode.all[task.repeatModeId].title
-      result =`${repatModeName} (every ${task.every + repatModeName.charAt(0)} ) `
+      result = `${repatModeName} (every ${task.every + repatModeName.charAt(0)} ) `
       result += `from ${dateUtils.toISOString(task.startDate)} `
       result += `to ${dateUtils.toISOString(task.endDate)}`
     }

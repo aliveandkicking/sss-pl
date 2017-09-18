@@ -10,8 +10,8 @@ export const getMonthlyRepeatRules = (monthlyDayOfTheLastWeek, onChanges) => {
             ? styles.monthlyDayOfTheLastWeekSelected
             : null
         )}
-        onClick={e => {if (monthlyDayOfTheLastWeek ^ value) {
-          onChanges({monthlyDayOfTheLastWeek: value})}
+        onClick={e => {
+          (monthlyDayOfTheLastWeek ^ value) && onChanges({monthlyDayOfTheLastWeek: value})
         }}>
         {caption}
       </span>

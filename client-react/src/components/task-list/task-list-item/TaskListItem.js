@@ -1,8 +1,7 @@
 import { connect } from 'react-redux'
 import { TaskListItemView } from './TaskListItemView'
-import { dateUtils } from '../../../core/dateutils'
+import { dateUtils, TaskModel } from '../../../core'
 import { setEditingTask } from '../../../actions'
-import { TaskModel } from '../../../core/task-model'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -28,11 +27,10 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch } = dispatchProps
   const { task } = stateProps
 
-
   return {
     task,
     isValid: taskIsValid(task),
-    onEdit: () => dispatch(setEditingTask(new TaskModel(task))),
+    onEdit: () => dispatch(setEditingTask(new TaskModel(task)))
   }
 }
 

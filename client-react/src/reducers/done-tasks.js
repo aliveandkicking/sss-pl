@@ -1,4 +1,4 @@
-import { dateUtils } from '../core/dateutils'
+import { dateUtils } from '../core'
 import {
   CHANGE_DONE_TASK
 } from '../actions'

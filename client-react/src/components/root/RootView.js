@@ -1,13 +1,17 @@
 import React from 'react'
 import { Week, EditTask, TaskList, MainMenu, StatusBar } from '..'
 import { rootStyles as styles } from './RootStyle'
+import { pages } from '../../core'
 import PropTypes from 'prop-types'
 
-export const RootView = ({ showTaskList }) => {
+export const RootView = ({ pageId }) => {
   return (
     <div style={styles.root}>
       <div style={styles.content}>
-        {showTaskList ? <TaskList /> : <Week />}
+        {
+          (pageId === pages.taskList.id ? <TaskList /> : false) ||
+          <Week />
+        }
       </div>
       <StatusBar />
       <EditTask />
@@ -17,5 +21,5 @@ export const RootView = ({ showTaskList }) => {
 }
 
 RootView.propTypes = {
-  showTaskList: PropTypes.bool.isRequired
+  pageId: PropTypes.number.isRequired
 }

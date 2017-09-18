@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { dateUtils } from '../core/dateutils'
+import { dateUtils } from '../core'
 import {
   SET_EDIT_TASK_CALENDAR_INITIAL_DATE,
   SET_EDIT_TASK_CALENDAR_MONTH_MODE,

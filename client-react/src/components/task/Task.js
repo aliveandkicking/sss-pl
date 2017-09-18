@@ -5,8 +5,7 @@ import {
   setEditingTask,
   changeTask
 } from '../../actions'
-import { dateUtils } from '../../core/dateutils'
-import { TaskModel } from '../../core/task-model'
+import { dateUtils, TaskModel } from '../../core'
 
 const getTaskNameAbbreviation = name => {
   let result = ''

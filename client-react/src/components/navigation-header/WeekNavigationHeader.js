@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { NavigationHeaderView } from './NavigationHeaderView'
 import { setInitialDate } from '../../actions'
-import { dateUtils } from '../../core/dateutils'
+import { dateUtils } from '../../core'
 
 const buildDateCaption = date => {
   const startDateData = dateUtils.decodeDate(date)
@@ -31,7 +31,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     dateCaption: buildDateCaption(initialDate),
     onNext: () => dispatch(setInitialDate(dateUtils.incDay(initialDate, dateUtils.DAYS_IN_WEEK))),
     onPrev: () => dispatch(setInitialDate(dateUtils.decDay(initialDate, dateUtils.DAYS_IN_WEEK))),
-    onToday: () => dispatch(setInitialDate(dateUtils.getStartOfWeek(new Date()))),
+    onToday: () => dispatch(setInitialDate(dateUtils.getStartOfWeek(new Date())))
   }
 }
 

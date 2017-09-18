@@ -1,5 +1,5 @@
 export const taskListStyles = {
-  root:{
+  root: {
     display: 'flex',
     flexDirection: 'column'
   },

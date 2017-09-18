@@ -56,7 +56,7 @@ export const editTaskStyles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    borderBottom: separator,
+    borderBottom: separator
   },
   caption: {
     transition: '300ms',
@@ -68,7 +68,7 @@ export const editTaskStyles = {
   nameInputContainer: {
     height: '30px',
     display: 'flex',
-    alignItems: 'stretch',
+    alignItems: 'stretch'
 
   },
   nameInput: {

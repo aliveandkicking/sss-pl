@@ -45,7 +45,7 @@ export const taskStyles = {
     top: '4px',
     transition: '400ms',
     zIndex: 1,
-    border: '1px solid rgba(0,0,0, 0.2)',
+    border: '1px solid rgba(0,0,0, 0.2)'
   },
   removeButton: {
     fontSize: '12px',

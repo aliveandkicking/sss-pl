@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux'
 import { editTaskReducer } from './edit-task'
-import { dateUtils } from '../core/dateutils'
+import { dateUtils, pages } from '../core'
 import { doneTasks } from './done-tasks'
+
 import {
   SET_INITIAL_DATE,
-  SET_TASK_LIST_VISIBILITY,
+  SET_PAGE_ID,
   SET_MAIN_MENU_EXPANDED_STATE,
   CHANGE_TASK,
   DELETE_TASK,
@@ -19,9 +20,11 @@ const initialDate = (state = dateUtils.today(), action) => {
   return state
 }
 
-const taskListVisible = (state = false, action) => {
-  if (action.type === SET_TASK_LIST_VISIBILITY) {
-    return action.payload.visible
+const pageId = (state = 0, action) => {
+  if (action.type === SET_PAGE_ID) {
+    if (pages.ids.includes(action.payload.id)) {
+      return action.payload.id
+    }
   }
   return state
 }
@@ -69,10 +72,10 @@ const tasks = (state = {}, action) => {
 
 export const rootReducer = combineReducers({
   needSave,
+  pageId,
   initialDate,
   mainMenuExpanded,
   statusText,
-  taskListVisible,
   tasks,
   doneTasks,
   editTask: editTaskReducer

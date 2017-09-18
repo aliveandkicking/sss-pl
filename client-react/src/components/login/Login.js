@@ -1,5 +1,6 @@
 import React from 'react'
 import { loginStyles as styles } from './LoginStyle'
+import PropTypes from 'prop-types'
 
 export const Login = ({onSubmit}) => {
   return (
@@ -16,4 +17,8 @@ export const Login = ({onSubmit}) => {
       />
     </div>
   )
+}
+
+Login.propTypes = {
+  onSubmit: PropTypes.func
 }

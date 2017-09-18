@@ -34,8 +34,8 @@ export const setEditingTask = createAction(SET_EDITING_TASK, 'task')
 export const SET_INITIAL_DATE = 'SET_INITIAL_DATE'
 export const setInitialDate = createAction(SET_INITIAL_DATE, 'date')
 
-export const SET_TASK_LIST_VISIBILITY = 'SET_TASK_LIST_VISIBILITY'
-export const setTaskListVisibility = createAction(SET_TASK_LIST_VISIBILITY, 'visible')
+export const SET_PAGE_ID = 'SET_PAGE'
+export const setPageId = createAction(SET_PAGE_ID, 'id')
 
 export const SET_MAIN_MENU_EXPANDED_STATE = 'SET_MAIN_MENU_EXPANDED_STATE'
 export const setMainMenuExpandedState = createAction(SET_MAIN_MENU_EXPANDED_STATE, 'expanded')

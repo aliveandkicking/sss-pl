@@ -1,14 +1,14 @@
-import { theme } from '../styles/theme';
+import { theme } from '../styles/theme'
 
 const transition = '200ms'
 const gridColor = 'rgba(255, 255, 255, 0.07)'
 
 export const calendarStyles = {
-  root:{
+  root: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    userSelect: 'none',
+    userSelect: 'none'
   },
   content: {
     display: 'flex',
@@ -26,7 +26,7 @@ export const calendarStyles = {
   },
   caption: {
     transition,
-    cursor: 'pointer',
+    cursor: 'pointer'
   },
   navigationButton: {
     transform: 'scale(0.8, 1.3)',
@@ -37,20 +37,20 @@ export const calendarStyles = {
     color: theme.colorTextHover,
     transition
   },
-  body:{
+  body: {
     flex: 1,
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column',
     alignItems: 'stretch',
     borderBottom: `1px solid ${gridColor}`,
-    borderRight: `1px solid ${gridColor}`,
+    borderRight: `1px solid ${gridColor}`
   },
   row: {
     flex: 1,
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'stretch',
+    alignItems: 'stretch'
   },
   cell: {
     flex: '1',
@@ -59,7 +59,7 @@ export const calendarStyles = {
     cursor: 'pointer',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   cellGrayed: {
     color: '#999'
@@ -70,7 +70,7 @@ export const calendarStyles = {
   },
   cellHover: {
     color: theme.colorE,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   todayButton: {
     transition,

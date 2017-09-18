@@ -1,23 +1,23 @@
 import { connect } from 'react-redux'
 import { MainMenuView } from './MainMenuView'
-import { TaskModel } from '../../core/task-model'
+import { TaskModel, pages } from '../../core'
 import {
   setMainMenuExpandedState,
   setEditingTask,
-  setTaskListVisibility
+  setPageId
 } from '../../actions'
 
 const mapStateToProps = (state, ownProps) => {
   return {
     expanded: state.mainMenuExpanded,
-    taskListVisible: state.taskListVisible,
-    editingTask:  state.editTask.task
+    pageId: state.pageId,
+    editingTask: state.editTask.task
   }
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch } = dispatchProps
-  const { expanded, taskListVisible, editingTask } = stateProps
+  const { expanded, pageId, editingTask } = stateProps
 
   return {
     expanded,
@@ -28,13 +28,13 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
       }
     },
     onShowTaskList: () => {
-      if (!taskListVisible) {
-        dispatch(setTaskListVisibility(true))
+      if (pageId !== pages.taskList.id) {
+        dispatch(setPageId(pages.taskList.id))
       }
     },
     onShowWeek: () => {
-      if (taskListVisible) {
-        dispatch(setTaskListVisibility(false))
+      if (pageId !== pages.weekTasks.id) {
+        dispatch(setPageId(pages.weekTasks.id))
       }
     }
   }

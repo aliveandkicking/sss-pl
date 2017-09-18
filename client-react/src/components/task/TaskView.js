@@ -1,7 +1,6 @@
 import React from 'react'
 import { taskStyles as styles } from './TaskStyle'
-import { stringToColor } from '../../core/string-to-color'
-import { dateUtils } from '../../core/dateutils'
+import { stringToColor, dateUtils } from '../../core'
 import { CustomSpan } from '..'
 import PropTypes from 'prop-types'
 

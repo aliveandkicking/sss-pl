@@ -3,20 +3,11 @@ import { RootView } from './RootView'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    showTaskList: state.taskListVisible
-  }
-}
-
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const { showTaskList } = stateProps
-  return {
-    showTaskList
+    pageId: state.pageId
   }
 }
 
 export const Root = connect(
-  mapStateToProps,
-  null,
-  mergeProps
+  mapStateToProps
 )(RootView)
 

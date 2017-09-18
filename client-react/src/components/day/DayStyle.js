@@ -55,7 +55,7 @@ export const dayStyles = {
     position: 'relative',
     display: 'flex',
     justifyContent: 'flex-end',
-    alignItems: 'stretch',
+    alignItems: 'stretch'
   },
   addTaskButton: {
     flex: 4,
@@ -74,7 +74,7 @@ export const dayStyles = {
     height: '50px',
     width: '220px',
     top: '30px',
-    zIndex: 2,
+    zIndex: 2
   },
   quickAddDialogLeftSide: {
     left: '0px'
@@ -87,7 +87,7 @@ export const dayStyles = {
     right: '0px',
     top: '0px',
     bottom: '0px',
-    position: 'fixed',
+    position: 'fixed'
   },
   quickAddDialogContent: {
     width: '100%',

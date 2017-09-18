@@ -112,7 +112,7 @@ class DateUtils {
     return date.getTime() + date.getTimezoneOffset()
   }
 
-  getDaysBetween (startDate, endDate) { // biktop time zone
+  getDaysBetween (startDate, endDate) {
     return Math.abs(Math.floor(
       (Date.UTC(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()) -
       Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate())) /

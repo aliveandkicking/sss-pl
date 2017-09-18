@@ -5,7 +5,7 @@ import { serverApi } from './server-api'
 let i = 0
 const defInitialState = {
   initialDate: dateUtils.clearTime(new Date()),
-  taskListVisible: false,
+  pageId: 0,
   mainMenuExpanded: false,
   tasks: {
     [++i]: new TaskModel({
@@ -38,6 +38,13 @@ const defInitialState = {
       startDate: new Date(2017, 8),
       repeatModeId: 1,
       tag: 'Work'
+    }),
+    [++i]: new TaskModel({
+      id: i,
+      name: 'clinger winger',
+      startDate: new Date(2017, 8),
+      repeatModeId: 1,
+      every: 2
     })
   },
   doneTasks: {

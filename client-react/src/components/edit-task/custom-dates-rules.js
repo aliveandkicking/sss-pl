@@ -1,9 +1,8 @@
 import React from 'react'
 import { editTaskStyles as styles } from './EditTaskStyle'
-import {  CustomSpan } from '..'
+import { CustomSpan } from '..'
 
 export const getCustomDatesRules = (skipDates, includeDates, onShowingCustomDatesChange) => {
-
   const getShortDateStr = dateTime => {
     const date = new Date(dateTime)
     return (date.getMonth() + 1) + '-' + date.getDate()

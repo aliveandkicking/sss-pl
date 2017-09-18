@@ -1,6 +1,6 @@
 import React from 'react'
 import { editTaskStyles as styles } from './EditTaskStyle'
-import { dateUtils } from '../../core/dateutils'
+import { dateUtils } from '../../core'
 
 export const getNoRepeatRules = (startDate, onChanges) => {
   return (
@@ -21,7 +21,7 @@ export const getNoRepeatRules = (startDate, onChanges) => {
           onChanges({startDate: e.target.value
             ? dateUtils.fromISOString(e.target.value)
             : dateUtils.clearTime(new Date())})
-        }}/>
+        }} />
     </div>
   )
 }

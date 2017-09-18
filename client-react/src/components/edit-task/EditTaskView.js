@@ -1,7 +1,7 @@
 import React from 'react'
 import { editTaskStyles as styles } from './EditTaskStyle'
 import { Calendar, CustomSpan } from '..'
-import { repeatMode } from '../../core/repeat-modes'
+import { repeatMode } from '../../core'
 import { EditCustomDates } from './edit-custom-dates/EditCustomDates'
 import { getCommonRepeatRules } from './common-repeat-rules'
 import { getWeeklyRepeatRules } from './weekly-repeat-rules'
@@ -50,7 +50,7 @@ export const EditTaskView = ({
     return (
       <span style={styles.nameInputContainer}>
         <datalist id='predefined-names'>
-          {predefinedNames.map(name => <option key={name} value={name}/>)}
+          {predefinedNames.map(name => <option key={name} value={name} />)}
         </datalist>
         <input
           style={styles.nameInput}
@@ -74,14 +74,14 @@ export const EditTaskView = ({
           &times;
         </span>
         <input style={styles.timesPerDayInput}
-            id='repeat-per-day'
-            type='number'
-            min='1'
-            max='10'
-            onChange={e => e.target.value && onChanges({
-              timesPerDay: parseInt(e.target.value, 10)
-            })}
-            value={task.timesPerDay} />
+          id='repeat-per-day'
+          type='number'
+          min='1'
+          max='10'
+          onChange={e => e.target.value && onChanges({
+            timesPerDay: parseInt(e.target.value, 10)
+          })}
+          value={task.timesPerDay} />
       </span>
     )
   }
@@ -157,7 +157,7 @@ export const EditTaskView = ({
     return (
       <div style={styles.footer}>
         <datalist id='predefined-tags'>
-          {predefinedTags.map(name => <option key={name} value={name}/>)}
+          {predefinedTags.map(name => <option key={name} value={name} />)}
         </datalist>
         <input
           style={styles.tagInput}
@@ -211,5 +211,7 @@ EditTaskView.propTypes = {
   onProcessWeekDay: PropTypes.func,
   onCheckCalendarCellSelection: PropTypes.func,
   onShowingCustomDatesChange: PropTypes.func,
-  showingCustomDates: PropTypes.bool
+  showingCustomDates: PropTypes.bool,
+  predefinedNames: PropTypes.array,
+  predefinedTags: PropTypes.array
 }
