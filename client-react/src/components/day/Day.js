@@ -12,13 +12,14 @@ const formatCaption = date => {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    tasks: state.tasks
+    tasks: state.tasks,
+    doneTasks: state.doneTasks
   }
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch } = dispatchProps
-  const { tasks } = stateProps
+  const { tasks, doneTasks } = stateProps
   const { date } = ownProps
 
   const getPredefinedNames = () => {
@@ -95,10 +96,22 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     return result.sort((first, second) => first[0].tag > second[0].tag)
   }
 
+  const tasksGroupedByTag = getTasksGroupedByTag()
+
+  const isComplete = tasksGroupedByTag.every(tagGroup => tagGroup.every(
+    task => {
+      const dateStr = dateUtils.toISOString(ownProps.date)
+      const doneInfo = doneTasks[dateStr] && doneTasks[dateStr]
+        .find(info => (info[0] === task.id))
+      return doneInfo && (doneInfo[1] === doneInfo[2])
+    }
+  ))
+
   return {
     caption: formatCaption(date),
     date,
-    tasksGroupedByTag: getTasksGroupedByTag(),
+    tasksGroupedByTag,
+    isComplete,
     predefinedTaskNames: getPredefinedNames(),
     onAddNewTask: () => dispatch(setEditingTask(new TaskModel({startDate: date}))),
     onAddTask: addTask,

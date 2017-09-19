@@ -17,7 +17,7 @@ export const taskStyles = {
     cursor: 'pointer',
     position: 'relative',
     flex: 1,
-    height: '65px',
+    height: '63px',
     minWidth: '75px',
     overflow: 'hidden',
     transition: '400ms',
@@ -33,7 +33,7 @@ export const taskStyles = {
     boxShadow: 'inset 0px 0 8px rgba(0,0,0,0.6)'
   },
   contentSelected: {
-    opacity: 0.3
+    opacity: 0.2
   },
   tagMark: {
     height: '10px',
