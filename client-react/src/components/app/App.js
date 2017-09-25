@@ -23,7 +23,7 @@ function middleware ({getState}) {
   }
 }
 
-const DEV = false
+const DEV = true
 
 export class App extends React.Component {
   constructor (props) {

@@ -22,16 +22,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { tasks, doneTasks } = stateProps
   const { date } = ownProps
 
-  const getPredefinedNames = () => {
-    const result = []
-    for (let key in tasks) {
-      if (tasks.hasOwnProperty(key)) {
-        result.push(tasks[key].name)
-      }
-    }
-    return result
-  }
-
   const dropTask = (sourceId, sourceDateStr, copy) => {
     if ((!sourceId) || (!sourceDateStr)) {
       return
@@ -52,27 +42,17 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   }
 
   const getNewTaskId = () => {
-    let maxId = 0
-    for (let key in tasks) {
-      if (maxId < tasks[key].id) {
-        maxId = tasks[key].id
-      }
-    }
-    return ++maxId
+    return Object.keys(tasks)
+      .reduce((maxId, key) => (maxId < tasks[key].id) ? tasks[key].id : maxId, 0) + 1
   }
 
   const addTask = name => {
     if (!name) {
       return
     }
-    for (let key in tasks) {
-      if (tasks.hasOwnProperty(key)) {
-        if (tasks[key].name === name) {
-          const modifiedTask = new TaskModel(tasks[key]).includeDate(date)
-          dispatch(changeTask(modifiedTask))
-          return
-        }
-      }
+    const existingTask = Object.values(tasks).find(task => task.name === name)
+    if (existingTask) {
+      return dispatch(changeTask(new TaskModel(existingTask).includeDate(date)))
     }
     dispatch(changeTask(new TaskModel({
       name,
@@ -112,7 +92,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     date,
     tasksGroupedByTag,
     isComplete,
-    predefinedTaskNames: getPredefinedNames(),
+    predefinedTaskNames: Object.keys(tasks).map(key => tasks[key].name),
     onAddNewTask: () => dispatch(setEditingTask(new TaskModel({startDate: date}))),
     onAddTask: addTask,
     dropTask: dropTask

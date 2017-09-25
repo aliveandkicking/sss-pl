@@ -1,12 +1,13 @@
-const createAction = function () {
-  const initialData = arguments
-  return function () {
-    const payload = {}
-    for (let i = 1; i < initialData.length; i++) {
-      payload[initialData[i]] = arguments[i - 1]
+const createAction = (type, ...payloadFields) => {
+  return (...payloadData) => {
+    if (payloadFields.length !== payloadData.length) {
+      console.error('payloadFields.length !== payloadData.length')
+      return {}
     }
-    console.log(initialData[0], payload)
-    return {type: initialData[0], payload}
+    const payload = payloadFields.reduce(
+      (payloadObj, field, i) => Object.assign(payloadObj, {[field]: payloadData[i]}), {})
+    console.log(type, payload)
+    return {type, payload}
   }
 }
 

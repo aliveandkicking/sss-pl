@@ -77,36 +77,18 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   }
 
   const getNewTaskId = () => {
-    let maxId = 0
-    for (let key in tasks) {
-      if (maxId < tasks[key].id) {
-        maxId = tasks[key].id
-      }
-    }
-    return ++maxId
-  }
-
-  const getPredefinedNames = () => {
-    const result = []
-    for (let key in tasks) {
-      if (tasks.hasOwnProperty(key)) {
-        result.push(tasks[key].name)
-      }
-    }
-    return result
+    return Object.keys(tasks)
+      .reduce((maxId, key) => (maxId < tasks[key].id) ? tasks[key].id : maxId, 0) + 1
   }
 
   const getPredefinedTags = () => {
     const result = []
-    for (let key in tasks) {
-      if (tasks.hasOwnProperty(key)) {
-        if (!result.includes(tasks[key].tag)) {
-          result.push(tasks[key].tag)
-        }
-      }
-    }
+    Object.keys(tasks).forEach(
+      key => !result.includes(tasks[key].tag) && result.push(tasks[key].tag))
     return result
   }
+
+  Object.keys(tasks).map(key => tasks[key].name)
 
   const close = (submit) => {
     if (submit) {
@@ -133,7 +115,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
   return {
     task: editingTask,
-    predefinedNames: getPredefinedNames(),
+    predefinedNames: Object.keys(tasks).map(key => tasks[key].name),
     predefinedTags: getPredefinedTags(),
     showingCustomDates,
     onChanges: changeEditingTask,
