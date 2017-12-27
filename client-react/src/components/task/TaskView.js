@@ -21,7 +21,9 @@ export class TaskView extends React.Component {
     return Object.assign({},
       styles.content,
       this.props.doneInfo[1] === this.props.doneInfo[2] ? styles.contentSelected : null,
-      this.state.hover ? styles.contentHover : null
+      this.state.hover ? styles.contentHover : null,
+      this.props.task.tag &&
+        {backgroundColor: stringToColor.getColor(this.props.task.tag)}
     )
   }
 
@@ -54,10 +56,7 @@ export class TaskView extends React.Component {
           {
             (this.props.task.tag.length > 0) &&
             <CustomSpan
-              style={Object.assign({},
-                styles.tagMark,
-                {backgroundColor: stringToColor.getColor(this.props.task.tag)}
-              )}
+              style={styles.tagMark}
               styleHover={styles.tagMarkHover}
               title={this.props.task.tag} />
           }

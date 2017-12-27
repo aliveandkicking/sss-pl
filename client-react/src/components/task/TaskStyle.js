@@ -17,36 +17,38 @@ export const taskStyles = {
     cursor: 'pointer',
     position: 'relative',
     flex: 1,
-    height: '63px',
+    height: '55px',
     minWidth: '75px',
     overflow: 'hidden',
     transition: '400ms',
     userSelect: 'none'
   },
   content: {
+    borderRadius: '2px',
     position: 'relative',
     height: '100%',
     width: '100%',
-    transition: '400ms',
-    backgroundColor: '#574'
+    transition: '200ms',
+    backgroundColor: '#666'
   },
   contentHover: {
-    boxShadow: 'inset 0px 0 8px rgba(0,0,0,0.6)'
+    boxShadow: 'inset 0px 0px 1px rgba(255,255,255,1)'
   },
   contentSelected: {
     opacity: 0.2
   },
   tagMark: {
-    height: '10px',
-    width: '10px',
-    borderRadius: '6px',
+    height: '8px',
+    width: '8px',
+    borderRadius: '5px',
     overflow: 'hidden',
     position: 'absolute',
-    left: '3px',
+    left: '4px',
     top: '4px',
     transition: '400ms',
     zIndex: 1,
-    border: '1px solid rgba(0,0,0, 0.2)'
+    border: '1px solid rgba(0,0,0,0.2)',
+    backgroundColor: 'rgba(255,255,255,0.2)'
   },
   removeButton: {
     fontSize: '12px',
@@ -65,7 +67,7 @@ export const taskStyles = {
   taskName: {
     ...taskInfoItem,
     opacity: 0,
-    fontSize: '70%'
+    fontSize: '60%'
   },
   taskNameHover: {
     opacity: 1
