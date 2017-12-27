@@ -21,7 +21,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     tagInfo,
     onEditTagData: change => {
       if (editingTag) {
-        dispatch(setTagData({tag: editingTag, ...change}))
+        dispatch(setTagData(editingTag, change))
       }
     },
     onClose: () => dispatch(setEditingTag(null))

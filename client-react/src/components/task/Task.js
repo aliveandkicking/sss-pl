@@ -24,19 +24,21 @@ const mapStateToProps = (state, ownProps) => {
   const doneInfo = state.doneTasks[dateStr] && state.doneTasks[dateStr]
     .find(info => (info[0] === ownProps.task.id))
   return {
-    doneInfo: doneInfo || [ownProps.task.id, 0, ownProps.task.timesPerDay]
+    doneInfo: doneInfo || [ownProps.task.id, 0, ownProps.task.timesPerDay],
+    tagInfo: state.tags[ownProps.task.tag]
   }
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch } = dispatchProps
-  const { doneInfo } = stateProps
+  const { doneInfo, tagInfo } = stateProps
   const { date, task } = ownProps
 
   return {
     task,
     taskNameAbbreviation: getTaskNameAbbreviation(task.name),
     doneInfo,
+    tagInfo,
     date,
     onTagClick: () => dispatch(setEditingTag(task.tag)),
     onClick: () => {

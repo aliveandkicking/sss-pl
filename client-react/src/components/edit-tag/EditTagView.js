@@ -1,6 +1,7 @@
 import React from 'react'
 import { editTagStyles as styles } from './EditTagStyle'
 import PropTypes from 'prop-types'
+import { CustomSpan } from '..'
 
 export const EditTagView = ({
   tagInfo,
@@ -21,17 +22,37 @@ export const EditTagView = ({
         style={styles.dialog}
         onClick={e => { e.stopPropagation() }}
       >
-        {editingTag}
-        <input
-          type='color'
-          defaultValue={tagInfo && tagInfo.color ? tagInfo.color : '#666666'}
-          onChange={e => onEditTagData({color: e.target.value})}
-        />
-        <input
-          type='number'
-          defaultValue={tagInfo && tagInfo.sortOrder ? tagInfo.sortOrder : 1}
-          onChange={e => onEditTagData({sortOrder: parseInt(e.target.value, 10)})}
-        />
+        <div style={styles.header}>
+          {`Edit tag "${editingTag}"`}
+          <CustomSpan
+            style={styles.closeButton}
+            styleHover={styles.closeButtonHover}
+            onClick={onClose}
+          >
+            x
+          </CustomSpan>
+        </div>
+
+        <label style={styles.label}>
+          Tag color
+          <input
+            type='color'
+            style={styles.input}
+            defaultValue={tagInfo && tagInfo.color ? tagInfo.color : '#666666'}
+            onChange={e => onEditTagData({color: e.target.value})}
+            />
+        </label>
+
+        <label style={styles.label}>
+          Sort order
+          <input
+            style={styles.input}
+            type='number'
+            defaultValue={tagInfo && tagInfo.sortOrder ? tagInfo.sortOrder : 1}
+            onChange={e => onEditTagData({sortOrder: parseInt(e.target.value, 10)})}
+          />
+        </label>
+
       </div>
     </div>
   )

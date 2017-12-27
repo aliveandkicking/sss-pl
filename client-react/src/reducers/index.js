@@ -74,10 +74,10 @@ const tasks = (state = {}, action) => {
 
 const tags = (state = {}, action) => {
   if (action.type === SET_TAG_DATA) {
-    if (action.payload.data.tag) {
+    if (action.payload.tag) {
       const newState = {...state}
-      newState[action.payload.data.tag] = {
-        ...newState[action.payload.data.tag],
+      newState[action.payload.tag] = {
+        ...newState[action.payload.tag],
         ...action.payload.data
       }
       return newState

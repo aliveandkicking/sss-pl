@@ -25,8 +25,8 @@ export class TaskView extends React.Component {
       styles.content,
       this.props.doneInfo[1] === this.props.doneInfo[2] ? styles.contentSelected : null,
       this.state.hover ? styles.contentHover : null,
-      this.props.task.tag &&
-        {backgroundColor: stringToColor.getColor(this.props.task.tag)}
+      this.props.tagInfo && this.props.tagInfo.color &&
+        {backgroundColor: this.props.tagInfo.color}
     )
   }
 
@@ -126,6 +126,7 @@ export class TaskView extends React.Component {
 TaskView.propTypes = {
   date: PropTypes.object,
   task: PropTypes.object,
+  tagInfo: PropTypes.object,
   taskNameAbbreviation: PropTypes.string,
   doneInfo: PropTypes.array,
   onClick: PropTypes.func,

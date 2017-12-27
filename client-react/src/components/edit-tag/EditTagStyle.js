@@ -18,13 +18,45 @@ export const editTagStyles = {
     overflow: 'hidden'
   },
   dialog: {
-    height: '200px',
+    height: '140px',
     width: '300px',
     background: theme.colorC,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'stretch',
     padding: '10px 15px 10px',
-    marginRight: theme.mainMenuCollapsedWidth
+    marginBottom: '300px',
+    marginRight: theme.mainMenuCollapsedWidth,
+    borderRadius: '2px'
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '30px',
+    borderBottom: '1px solid rgba(200,200,200,0.3)',
+    marginBottom: '10px',
+    position: 'relative',
+    paddingBottom: '10px'
+  },
+  closeButton: {
+    position: 'absolute',
+    right: '0px',
+    top: 'auto',
+    bottom: 'auto',
+    cursor: 'pointer'
+  },
+  closeButtonHover: {
+    color: theme.colorTextHover
+  },
+  label: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    margin: '6px',
+    cursor: 'pointer'
+  },
+  input: {
+    width: '70px'
   }
 }
