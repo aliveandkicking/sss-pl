@@ -3,7 +3,8 @@ import { TaskView } from './TaskView'
 import {
   changeDoneTask,
   setEditingTask,
-  changeTask
+  changeTask,
+  setEditingTag
 } from '../../actions'
 import { dateUtils, TaskModel } from '../../core'
 
@@ -37,6 +38,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     taskNameAbbreviation: getTaskNameAbbreviation(task.name),
     doneInfo,
     date,
+    onTagClick: () => dispatch(setEditingTag(task.tag)),
     onClick: () => {
       let newDoneInfo = Array.from(doneInfo)
       newDoneInfo[1] === newDoneInfo[2] ? --newDoneInfo[1] : ++newDoneInfo[1]

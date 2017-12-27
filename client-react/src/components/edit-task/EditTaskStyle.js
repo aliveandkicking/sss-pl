@@ -175,7 +175,7 @@ export const editTaskStyles = {
     padding: '10px 0px 0px',
     display: 'flex',
     alignItems: 'stretch',
-    justifyContent: 'space-between'
+    // justifyContent: 'space-between'
   },
   tagInput: {
     width: '120px',
@@ -190,7 +190,8 @@ export const editTaskStyles = {
     cursor: 'pointer',
     opacity: '0.4',
     padding: '4px',
-    transition: '100ms'
+    transition: '100ms',
+    marginLeft: 'auto'
   },
   deleteButtonHover: {
     opacity: '1',

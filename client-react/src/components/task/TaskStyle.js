@@ -45,10 +45,13 @@ export const taskStyles = {
     position: 'absolute',
     left: '4px',
     top: '4px',
-    transition: '400ms',
+    transition: '200ms',
     zIndex: 1,
     border: '1px solid rgba(0,0,0,0.2)',
     backgroundColor: 'rgba(255,255,255,0.2)'
+  },
+  tagMarkHover: {
+    backgroundColor: 'rgba(255,255,255,0.4)'
   },
   removeButton: {
     fontSize: '12px',

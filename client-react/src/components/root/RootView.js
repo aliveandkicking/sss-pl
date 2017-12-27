@@ -1,5 +1,12 @@
 import React from 'react'
-import { Week, EditTask, TaskList, MainMenu, StatusBar } from '..'
+import {
+  Week,
+  EditTask,
+  TaskList,
+  MainMenu,
+  StatusBar,
+  EditTag
+} from '..'
 import { rootStyles as styles } from './RootStyle'
 import { pages } from '../../core'
 import PropTypes from 'prop-types'
@@ -16,6 +23,7 @@ export const RootView = ({ pageId }) => {
       <StatusBar />
       <EditTask />
       <MainMenu />
+      <EditTag />
     </div>
   )
 }

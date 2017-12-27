@@ -10,7 +10,9 @@ import {
   CHANGE_TASK,
   DELETE_TASK,
   SET_STATUS_TEXT,
-  SET_NEED_SAVE
+  SET_NEED_SAVE,
+  SET_TAG_DATA,
+  SET_EDITING_TAG
 } from '../actions'
 
 const initialDate = (state = dateUtils.today(), action) => {
@@ -70,6 +72,27 @@ const tasks = (state = {}, action) => {
   return state
 }
 
+const tags = (state = {}, action) => {
+  if (action.type === SET_TAG_DATA) {
+    if (action.payload.data.tag) {
+      const newState = {...state}
+      newState[action.payload.data.tag] = {
+        ...newState[action.payload.data.tag],
+        ...action.payload.data
+      }
+      return newState
+    }
+  }
+  return state
+}
+
+const editingTag = (state = null, action) => {
+  if (action.type === SET_EDITING_TAG) {
+    return action.payload.tag
+  }
+  return state
+}
+
 export const rootReducer = combineReducers({
   needSave,
   pageId,
@@ -77,6 +100,8 @@ export const rootReducer = combineReducers({
   mainMenuExpanded,
   statusText,
   tasks,
+  tags,
   doneTasks,
+  editingTag,
   editTask: editTaskReducer
 })

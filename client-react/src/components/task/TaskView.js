@@ -7,7 +7,10 @@ import PropTypes from 'prop-types'
 export class TaskView extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {hover: false, infoHover: false}
+    this.state = {
+      hover: false,
+      infoHover: false
+    }
   }
 
   getStyle (needMerge, baseStyle, styleToMerge) {
@@ -58,7 +61,12 @@ export class TaskView extends React.Component {
             <CustomSpan
               style={styles.tagMark}
               styleHover={styles.tagMarkHover}
-              title={this.props.task.tag} />
+              title={this.props.task.tag}
+              onClick={event => {
+                this.props.onTagClick()
+                event.stopPropagation()
+              }}
+            />
           }
 
           <CustomSpan
@@ -124,5 +132,6 @@ TaskView.propTypes = {
   onRemoveDoneTask: PropTypes.func,
   onChangeTimesPerDay: PropTypes.func,
   onEdit: PropTypes.func,
-  onDelete: PropTypes.func
+  onDelete: PropTypes.func,
+  onTagClick: PropTypes.func
 }

@@ -46,3 +46,9 @@ export const setStatusText = createAction(SET_STATUS_TEXT, 'text')
 
 export const SET_NEED_SAVE = 'SET_NEED_SAVE'
 export const setNeedSave = createAction(SET_NEED_SAVE, 'needSave')
+
+export const SET_TAG_DATA = 'SET_TAG_DATA'
+export const setTagData = createAction(SET_TAG_DATA, 'data')
+
+export const SET_EDITING_TAG = 'SET_EDITING_TAG'
+export const setEditingTag = createAction(SET_EDITING_TAG, 'tag')
