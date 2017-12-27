@@ -27,7 +27,8 @@ export const taskStyles = {
     position: 'relative',
     height: '100%',
     width: '100%',
-    transition: '400ms'
+    transition: '400ms',
+    backgroundColor: '#574'
   },
   contentHover: {
     boxShadow: 'inset 0px 0 8px rgba(0,0,0,0.6)'

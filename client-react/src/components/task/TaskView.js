@@ -18,12 +18,10 @@ export class TaskView extends React.Component {
   }
 
   getContentStyle () {
-    const color = stringToColor.getColor(this.props.task.name)
     return Object.assign({},
       styles.content,
       this.props.doneInfo[1] === this.props.doneInfo[2] ? styles.contentSelected : null,
-      this.state.hover ? styles.contentHover : null,
-      {backgroundColor: color}
+      this.state.hover ? styles.contentHover : null
     )
   }
 
