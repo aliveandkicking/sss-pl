@@ -6,8 +6,6 @@ export const getCommonRepeatRules = (
   task,
   onChanges
 ) => {
-  console.log(1)
-
   const getRepeatEveryRule = () => {
     return (
       <div

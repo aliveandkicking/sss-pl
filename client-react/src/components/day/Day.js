@@ -13,13 +13,14 @@ const formatCaption = date => {
 const mapStateToProps = (state, ownProps) => {
   return {
     tasks: state.tasks,
-    doneTasks: state.doneTasks
+    doneTasks: state.doneTasks,
+    tagsInfo: state.tags
   }
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch } = dispatchProps
-  const { tasks, doneTasks } = stateProps
+  const { tasks, doneTasks, tagsInfo } = stateProps
   const { date } = ownProps
 
   const dropTask = (sourceId, sourceDateStr, copy) => {
@@ -73,7 +74,13 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         }
       }
     })
-    return result.sort((first, second) => first[0].tag > second[0].tag)
+    return result.sort((first, second) => {
+      const firstIndex =
+        (tagsInfo[first[0].tag] && tagsInfo[first[0].tag].sortOrder) || 0
+      const secondIndex =
+        (tagsInfo[second[0].tag] && tagsInfo[second[0].tag].sortOrder) || 0
+      return firstIndex - secondIndex
+    })
   }
 
   const tasksGroupedByTag = getTasksGroupedByTag()
