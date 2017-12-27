@@ -1,7 +1,7 @@
 import React from 'react'
 import { Root, Login } from '..'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import { rootReducer } from '../../reducers'
 import { stateHelper } from '../../core'
 import {
@@ -43,7 +43,14 @@ export class App extends React.Component {
   }
 
   initStore () {
-    this.store = createStore(rootReducer, stateHelper.initialState, applyMiddleware(middleware))
+    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+    this.store = createStore(
+      rootReducer,
+      stateHelper.initialState,
+      composeEnhancers(
+        applyMiddleware(middleware)
+      )
+    )
     console.log('initial state >>> ', this.store.getState())
 
     this.store.subscribe(() => {

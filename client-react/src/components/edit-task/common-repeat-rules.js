@@ -22,9 +22,9 @@ export const getCommonRepeatRules = (
           min='1'
           max='30'
           onChange={e => e.target.value && onChanges({
-            timesPerDay: parseInt(e.target.value, 10)
+            every: parseInt(e.target.value, 10)
           })}
-          value={task.every} />
+          defaultValue={task.every} />
       </div>
     )
   }
