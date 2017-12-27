@@ -108,6 +108,8 @@ class StateHelper {
       mainMenuExpanded: state.mainMenuExpanded,
       pageId: state.pageId,
       tasks: {},
+      tags: state.tags,
+      editingTag: state.editingTag,
       doneTasks: state.doneTasks,
       editTask: Object.assign({}, state.editTask)
     }
