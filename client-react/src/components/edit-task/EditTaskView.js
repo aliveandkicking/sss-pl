@@ -64,7 +64,7 @@ export const EditTaskView = ({
           }}
           defaultValue={task.name}
           onChange={e => e.target.value ? onChanges({name: e.target.value}) : null}
-          onKeyDown={e => {
+          onKeyUp={e => {
             if (e.keyCode === 13) {
               onClose(true)
             }

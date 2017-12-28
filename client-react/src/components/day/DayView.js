@@ -58,7 +58,7 @@ export class DayView extends React.Component {
             autoFocus
             placeholder='Task Name'
             style={styles.quickAddDialogInput}
-            onKeyDown={e => {
+            onKeyUp={e => {
               if (e.keyCode === 13) {
                 this.setState({quickAddDialogVisible: false})
                 this.props.onAddTask(this.state.quickAddDialogTaskName)
