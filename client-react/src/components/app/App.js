@@ -23,7 +23,7 @@ function middleware ({getState}) {
   }
 }
 
-const DEV = true
+const DEV = false
 
 export class App extends React.Component {
   constructor (props) {
@@ -33,6 +33,12 @@ export class App extends React.Component {
     this.state = {loaded: DEV}
     this.store = null
     this.saveTimeout = null
+    this.activityTimeout = null
+    this.activityTimeoutCallback = () => {
+      if (window.confirm('Activity timeout. Reload ?')) {
+        window.location.reload(true)
+      }
+    }
 
     if (!DEV) {
       this.session = window.localStorage.getItem('session')
@@ -40,6 +46,13 @@ export class App extends React.Component {
         this.tryLoadState()
       }
     }
+
+    this.restartActivityTimeout()
+  }
+
+  restartActivityTimeout () {
+    clearTimeout(this.activityTimeout)
+    this.activityTimeout = setTimeout(this.activityTimeoutCallback, 120 * 60 * 1000)
   }
 
   initStore () {
@@ -56,6 +69,7 @@ export class App extends React.Component {
     this.store.subscribe(() => {
       const state = this.store.getState()
       console.log(state)
+      this.restartActivityTimeout()
 
       if (!this.sandbox && state.needSave) {
         clearTimeout(this.saveTimeout)
