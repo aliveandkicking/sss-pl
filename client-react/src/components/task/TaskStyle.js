@@ -29,10 +29,10 @@ export const taskStyles = {
     height: '100%',
     width: '100%',
     transition: '200ms',
-    backgroundColor: '#99d'
+    backgroundColor: '#555'
   },
   contentHover: {
-    boxShadow: 'inset 0px 0px 1px rgba(255,255,255,1)'
+    boxShadow: 'inset 0px 0px 2px rgba(255,255,255,1)'
   },
   contentSelected: {
     opacity: 0.2
