@@ -18,17 +18,13 @@ export class DayView extends React.Component {
     const result = []
     this.props.tasksGroupedByTag.forEach(tagGroup => {
       result.push(
-        <div
-          key={tagGroup[0].tag}
-          style={styles.taskGroup}>
-          {tagGroup.map(task =>
-            <Task
-              key={task.id}
-              task={task}
-              date={this.props.date}
-            />)
-          }
-        </div>
+        tagGroup.map(task =>
+          <Task
+            key={task.id}
+            task={task}
+            date={this.props.date}
+          />
+        )
       )
     })
     return result
