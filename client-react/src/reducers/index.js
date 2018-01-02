@@ -12,7 +12,8 @@ import {
   SET_STATUS_TEXT,
   SET_NEED_SAVE,
   SET_TAG_DATA,
-  SET_EDITING_TAG
+  SET_EDITING_TAG,
+  SET_WINDOW_SIZE
 } from '../actions'
 
 const initialDate = (state = dateUtils.today(), action) => {
@@ -93,6 +94,13 @@ const editingTag = (state = null, action) => {
   return state
 }
 
+const windowSize = (state = window.innerWidth, action) => {
+  if (action.type === SET_WINDOW_SIZE) {
+    return action.payload.width
+  }
+  return state
+}
+
 export const rootReducer = combineReducers({
   needSave,
   pageId,
@@ -103,5 +111,6 @@ export const rootReducer = combineReducers({
   tags,
   doneTasks,
   editingTag,
-  editTask: editTaskReducer
+  editTask: editTaskReducer,
+  windowSize
 })

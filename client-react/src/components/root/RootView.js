@@ -11,21 +11,36 @@ import { rootStyles as styles } from './RootStyle'
 import { pages } from '../../core'
 import PropTypes from 'prop-types'
 
-export const RootView = ({ pageId }) => {
-  return (
-    <div style={styles.root}>
-      <div style={styles.content}>
-        {
-          (pageId === pages.taskList.id ? <TaskList /> : false) ||
-          <Week />
-        }
+export class RootView extends React.Component {
+  onResizeHandler = () => {
+    this.props.onResize({height: window.innerHeight, width: window.innerWidth})
+  }
+
+  componentWillUnmount() {
+   window.removeEventListener('resize', this.onResizeHandler)
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.onResizeHandler)
+  }
+
+  render () {
+    const {pageId} = this.props
+    return (
+      <div style={styles.root}>
+        <div style={styles.content}>
+          {
+            (pageId === pages.taskList.id ? <TaskList /> : false) ||
+            <Week />
+          }
+        </div>
+        <StatusBar />
+        <EditTask />
+        <MainMenu />
+        <EditTag />
       </div>
-      <StatusBar />
-      <EditTask />
-      <MainMenu />
-      <EditTag />
-    </div>
-  )
+    )
+  }
 }
 
 RootView.propTypes = {

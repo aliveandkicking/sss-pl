@@ -52,3 +52,6 @@ export const setTagData = createAction(SET_TAG_DATA, 'tag', 'data')
 
 export const SET_EDITING_TAG = 'SET_EDITING_TAG'
 export const setEditingTag = createAction(SET_EDITING_TAG, 'tag')
+
+export const SET_WINDOW_SIZE = 'SET_WINDOW_SIZE'
+export const setWindowSize = createAction(SET_WINDOW_SIZE, 'width')
