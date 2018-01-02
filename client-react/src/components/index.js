@@ -1,4 +1,5 @@
 export { CustomSpan } from './custom-span/CustomSpan'
+export { InfiniteScroll } from './infinite-scrollbox/InfiniteScroll'
 export { Login } from './login/Login'
 export { StatusBar } from './status-bar/StatusBar'
 export { WeekNavigationHeader } from './navigation-header/WeekNavigationHeader'
