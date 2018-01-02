@@ -12,17 +12,17 @@ import { pages } from '../../core'
 import PropTypes from 'prop-types'
 
 export class RootView extends React.Component {
-  onResizeHandler = () => {
-    this.props.onResize({height: window.innerHeight, width: window.innerWidth})
-  }
+  // onResizeHandler = () => {
+  //   this.props.onResize({height: window.innerHeight, width: window.innerWidth})
+  // }
 
-  componentWillUnmount() {
-   window.removeEventListener('resize', this.onResizeHandler)
-  }
+  // componentWillUnmount() {
+  //  window.removeEventListener('resize', this.onResizeHandler)
+  // }
 
-  componentDidMount() {
-    window.addEventListener('resize', this.onResizeHandler)
-  }
+  // componentDidMount() {
+  //   window.addEventListener('resize', this.onResizeHandler)
+  // }
 
   render () {
     const {pageId} = this.props
