@@ -55,3 +55,12 @@ export const setEditingTag = createAction(SET_EDITING_TAG, 'tag')
 
 export const SET_WINDOW_SIZE = 'SET_WINDOW_SIZE'
 export const setWindowSize = createAction(SET_WINDOW_SIZE, 'width')
+
+export const ADD_GOAL = 'ADD_GOAL'
+export const addGoal = createAction(ADD_GOAL, 'data')
+
+export const CHANGE_GOAL = 'CHANGE_GOAL'
+export const changeGoal = createAction(CHANGE_GOAL, 'id', 'changes')
+
+export const DELETE_GOAL = 'DELETE_GOAL'
+export const deleteGoal = createAction(DELETE_GOAL, 'id')

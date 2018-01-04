@@ -13,7 +13,10 @@ import {
   SET_NEED_SAVE,
   SET_TAG_DATA,
   SET_EDITING_TAG,
-  SET_WINDOW_SIZE
+  SET_WINDOW_SIZE,
+  ADD_GOAL,
+  CHANGE_GOAL,
+  DELETE_GOAL
 } from '../actions'
 
 const initialDate = (state = dateUtils.today(), action) => {
@@ -101,12 +104,29 @@ const windowSize = (state = window.innerWidth, action) => {
   return state
 }
 
+const goals = (state = [], action) => {
+  if (action.type === ADD_GOAL) {
+    return state.concat(action.data)
+  } else if (action.type === CHANGE_GOAL) {
+    const index = state.findIndex(goal => goal.id === action.id)
+    if (index === 0 || index) {
+      const newState = Array.from(state)
+      newState[index] = Object.assign(state[index], action.changes)
+      return newState
+    }
+  } else if (action.type === DELETE_GOAL) {
+    return state.filter(goal => goal.id === action.id)
+  }
+  return state
+}
+
 export const rootReducer = combineReducers({
   needSave,
   pageId,
   initialDate,
   mainMenuExpanded,
   statusText,
+  goals,
   tasks,
   tags,
   doneTasks,

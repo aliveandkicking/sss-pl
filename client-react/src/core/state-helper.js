@@ -5,7 +5,7 @@ import { serverApi } from './server-api'
 let i = 0
 const defInitialState = {
   initialDate: dateUtils.clearTime(new Date()),
-  pageId: 0,
+  pageId: 2,
   mainMenuExpanded: false,
   tasks: {
     [++i]: new TaskModel({

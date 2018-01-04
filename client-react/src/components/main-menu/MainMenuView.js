@@ -8,7 +8,8 @@ export const MainMenuView = ({
   onChangeExpandedState,
   onNewTask,
   onShowTaskList,
-  onShowWeek
+  onShowWeek,
+  onShowGoalsTree
 }) => {
   const getItem = (iconSymbol, text, action) => {
     return (
@@ -51,6 +52,7 @@ export const MainMenuView = ({
           {getItem('+', 'New Task', onNewTask)}
           {getItem('▤', 'Task List', onShowTaskList)}
           {getItem('Ⓦ', 'Week', onShowWeek)}
+          {getItem('Ⓖ', 'Goals Tree', onShowGoalsTree)}
         </div>
 
       </div>
@@ -63,6 +65,7 @@ MainMenuView.propTypes = {
   onChangeExpandedState: PropTypes.func.isRequired,
   onNewTask: PropTypes.func.isRequired,
   onShowTaskList: PropTypes.func.isRequired,
-  onShowWeek: PropTypes.func.isRequired
+  onShowWeek: PropTypes.func.isRequired,
+  onShowGoalsTree: PropTypes.func.isRequired
 }
 

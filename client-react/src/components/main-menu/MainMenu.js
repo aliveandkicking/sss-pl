@@ -36,6 +36,11 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
       if (pageId !== pages.weekTasks.id) {
         dispatch(setPageId(pages.weekTasks.id))
       }
+    },
+    onShowGoalsTree: () => {
+      if (pageId !== pages.goalsTree.id) {
+        dispatch(setPageId(pages.goalsTree.id))
+      }
     }
   }
 }

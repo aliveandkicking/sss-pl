@@ -3,6 +3,7 @@ import {
   Week,
   EditTask,
   TaskList,
+  GoalsTree,
   MainMenu,
   StatusBar,
   EditTag
@@ -31,7 +32,8 @@ export class RootView extends React.Component {
         <div style={styles.content}>
           {
             (pageId === pages.taskList.id ? <TaskList /> : false) ||
-            <Week />
+            (pageId === pages.weekTasks.id ? <Week /> : false) ||
+            (pageId === pages.goalsTree.id ? <GoalsTree /> : false)
           }
         </div>
         <StatusBar />
