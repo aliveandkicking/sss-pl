@@ -31,7 +31,7 @@ export const dayStyles = {
     cursor: 'default'
   },
   content: {
-    flex: '1',
+    // flex: '1',
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
