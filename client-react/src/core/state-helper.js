@@ -50,6 +50,20 @@ const defInitialState = {
   doneTasks: {
     [dateUtils.toISOString(new Date())]: [[3, 1, 1], [1, 1, 1], [2, 1, 2]]
   },
+  goals: [
+    {
+      id: 1,
+      name: 'conquer the world'
+    },
+    {
+      id: 2,
+      name: 'kill all humans'
+    },
+    {
+      id: 3,
+      name: 'rule what rests'
+    }
+  ],
   editTask: {
     calendarInitialDate: dateUtils.clearTime(new Date()),
     calendarMonthMode: false,

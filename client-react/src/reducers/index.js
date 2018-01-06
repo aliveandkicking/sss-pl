@@ -1,6 +1,9 @@
 import { combineReducers } from 'redux'
 import { editTaskReducer } from './edit-task'
-import { dateUtils, pages } from '../core'
+import {
+  dateUtils,
+  pages
+} from '../core'
 import { doneTasks } from './done-tasks'
 
 import {

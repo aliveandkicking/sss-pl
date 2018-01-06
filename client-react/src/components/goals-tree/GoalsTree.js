@@ -4,7 +4,7 @@ import { setWindowSize } from '../../actions'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    pageId: state.pageId
+    goals: state.goals
   }
 }
 
