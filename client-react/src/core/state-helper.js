@@ -1,5 +1,8 @@
-import { TaskModel } from './task-model'
-import { dateUtils } from './dateutils'
+import {
+  TaskModel,
+  dateUtils,
+  goalHelper
+} from '.'
 import { serverApi } from './server-api'
 
 let i = 0
@@ -51,18 +54,36 @@ const defInitialState = {
     [dateUtils.toISOString(new Date())]: [[3, 1, 1], [1, 1, 1], [2, 1, 2]]
   },
   goals: [
-    {
+    goalHelper.create({
       id: 1,
+      parentId: 0,
       name: 'conquer the world'
-    },
-    {
+    }),
+    goalHelper.create({
       id: 2,
+      parentId: 0,
       name: 'kill all humans'
-    },
-    {
+    }),
+    goalHelper.create({
       id: 3,
+      parentId: 0,
       name: 'rule what rests'
-    }
+    }),
+    goalHelper.create({
+      id: 4,
+      parentId: 1,
+      name: 'do something'
+    }),
+    goalHelper.create({
+      id: 5,
+      parentId: 1,
+      name: 'do something else'
+    }),
+    goalHelper.create({
+      id: 6,
+      parentId: 1,
+      name: 'do one more thing'
+    })
   ],
   editTask: {
     calendarInitialDate: dateUtils.clearTime(new Date()),
