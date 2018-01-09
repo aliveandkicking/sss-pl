@@ -16,6 +16,7 @@ class TaskModel {
     this.neverEnd = true
     this.timesPerDay = 1
     this.tag = ''
+    this.goalId = null
     this.assign(Object.values(arguments))
   }
 
@@ -36,6 +37,7 @@ class TaskModel {
           this.neverEnd = source.neverEnd
           this.timesPerDay = source.timesPerDay
           this.tag = source.tag
+          this.goalId = source.goalId
         } else {
           Object.assign(this, source)
         }

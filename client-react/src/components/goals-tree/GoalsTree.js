@@ -5,12 +5,19 @@ import { goalHelper } from '../../core'
 const mapStateToProps = (state, ownProps) => {
 
   const processGoal = (goal) => {
-    const result = {goal, children: []}
+    const result = {goal, subGoals: [], tasks: []}
     state.goals.forEach((currGoal) => {
       if (currGoal.parentId === goal.id) {
-        result.children.push(processGoal(currGoal))
+        result.subGoals.push(processGoal(currGoal))
       }
     })
+
+    Object.values(state.tasks).forEach(task => {
+      if (task.goalId === goal.id) {
+        result.tasks.push(task)
+      }
+    })
+
     return result
   }
 
