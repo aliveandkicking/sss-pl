@@ -8,17 +8,6 @@ import {
 } from '../../actions'
 import { dateUtils, TaskModel } from '../../core'
 
-const getTaskNameAbbreviation = name => {
-  let words = name.split(' ')
-  if (words.length === 1) {
-    words = name.split('.')
-  }
-  if (words.length > 1) {
-    return words.slice(0, 3).map(word => word.charAt(0)).join('.').toUpperCase()
-  }
-  return name.charAt(0).toUpperCase() + ((name.length > 1) ? name.charAt(1) : '')
-}
-
 const mapStateToProps = (state, ownProps) => {
   const dateStr = dateUtils.toISOString(ownProps.date)
   const doneInfo = state.doneTasks[dateStr] && state.doneTasks[dateStr]
@@ -36,7 +25,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
   return {
     task,
-    taskNameAbbreviation: getTaskNameAbbreviation(task.name),
     doneInfo,
     tagInfo,
     date,

@@ -85,7 +85,7 @@ export class TaskView extends React.Component {
           </div>
           <div
             style={this.getStyle(this.state.infoHover, styles.taskAbbr, styles.taskAbbrHover)}>
-            {this.props.taskNameAbbreviation}
+            {this.props.task.getNameAbbreviation()}
           </div>
 
           <CustomSpan
@@ -127,7 +127,6 @@ TaskView.propTypes = {
   date: PropTypes.object,
   task: PropTypes.object,
   tagInfo: PropTypes.object,
-  taskNameAbbreviation: PropTypes.string,
   doneInfo: PropTypes.array,
   onClick: PropTypes.func,
   onRemoveDoneTask: PropTypes.func,

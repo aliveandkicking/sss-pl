@@ -162,6 +162,17 @@ class TaskModel {
       return false
     }
   }
+
+  getNameAbbreviation () {
+    let words = this.name.split(' ')
+    if (words.length === 1) {
+      words = this.name.split('.')
+    }
+    if (words.length > 1) {
+      return words.slice(0, 3).map(word => word.charAt(0)).join('.').toUpperCase()
+    }
+    return this.name.charAt(0).toUpperCase() + ((this.name.length > 1) ? this.name.charAt(1) : '')
+  }
 }
 
 module.exports.TaskModel = TaskModel
