@@ -83,6 +83,26 @@ const defInitialState = {
       id: 6,
       parentId: 1,
       name: 'do one more thing'
+    }),
+    goalHelper.create({
+      id: 7,
+      parentId: 1,
+      name: 'do one last thing'
+    }),
+    goalHelper.create({
+      id: 8,
+      parentId: 7,
+      name: 'find fox'
+    }),
+    goalHelper.create({
+      id: 9,
+      parentId: 7,
+      name: 'find cat'
+    }),
+    goalHelper.create({
+      id: 10,
+      parentId: 9,
+      name: 'feed cat'
     })
   ],
   editTask: {

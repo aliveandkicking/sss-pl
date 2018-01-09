@@ -4,11 +4,18 @@ export const goalsTreeStyles = {
   root: {
     fontFamily: theme.fontFamily,
     color: theme.colorText,
-    display: 'flex',
-    flexDirection: 'column'
+    height: 'calc(100% - 2px)',
+    flexWrap: 'nowrap',
+    marginBottom: '2px'
   },
   content: {
-    flex: 1,
-    overflowY: 'auto'
+    // backgroundColor: 'rgba(255,255,255,0.2)',
+    display: 'flex',
+    alignItems: 'center',
+    position: 'absolute',
+    top: '0px',
+    left: '0px',
+    minWidth: '100%',
+    minHeight: '100%'
   }
 }

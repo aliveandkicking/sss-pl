@@ -1,28 +1,30 @@
 import { connect } from 'react-redux'
 import { GoalsTreeView } from './GoalsTreeView'
-import { setWindowSize } from '../../actions'
+import { goalHelper } from '../../core'
 
 const mapStateToProps = (state, ownProps) => {
 
-  // const goalTree = {id: 0, name: 'root', children: null}
+  const processGoal = (goal) => {
+    const result = {goal, children: []}
+    state.goals.forEach((currGoal) => {
+      if (currGoal.parentId === goal.id) {
+        result.children.push(processGoal(currGoal))
+      }
+    })
+    return result
+  }
 
-  state.goals.reduce((accum, goal) => {
-    console.log(accum)
-    if (goal.parentId === 0) {
-      accum.push(goal)
-    }
-    return accum
-  }, [])
+  const goalsTree = processGoal(goalHelper.create({id: 0, name: 'root'}))
+
+  console.log(goalsTree)
 
   return {
-    goals: state.goals
+    goalsTree
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    onResize: width => dispatch(setWindowSize(width))
-  }
+  return { }
 }
 
 export const GoalsTree = connect(
