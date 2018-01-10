@@ -3,7 +3,6 @@ import { GoalsTreeView } from './GoalsTreeView'
 import { goalHelper } from '../../core'
 
 const mapStateToProps = (state, ownProps) => {
-
   const processGoal = (goal) => {
     const result = {goal, subGoals: [], tasks: []}
     state.goals.forEach((currGoal) => {

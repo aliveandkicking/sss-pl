@@ -3,39 +3,52 @@ import { goalsTreeStyles as styles } from './GoalsTreeStyle'
 import PropTypes from 'prop-types'
 import Scrollbars from 'react-custom-scrollbars'
 
-const renderNode = (first, last, nodeContent, children, key, isRoot = false) => {
-  return (
-    <div key={key} style={styles.node}>
-      {
-        !isRoot &&
-        <div style={styles.connectionsContainer}>
-          <div style={{
-            ...styles.connectionTop,
-            ...(first ? {borderLeft: null} : null)
-          }} />
-          <div style={{
-            ...styles.connectionBottom,
-            ...(last ? {borderLeft: null} : null)
-          }} />
-        </div>
-      }
-      <div style={styles.nodeContentContainer}>
-        {nodeContent}
-      </div>
-      {
-        children && <div style={styles.connectionAfter} />
-      }
-      {
-        children &&
-        <div style={styles.childrenContainer}>
-          {children}
-        </div>
-      }
-    </div>
-  )
-}
-
 export class GoalsTreeView extends React.Component {
+  state = {
+    collapsedNodes: {}
+  }
+
+  renderNode (first, last, nodeContent, children, key,
+    isRoot = false, collapsed = false, onCollapseExpand = null
+  ) {
+    return (
+      <div key={key} style={styles.node}>
+        {
+          !isRoot &&
+          <div style={styles.connectionsContainer}>
+            <div style={{
+              ...styles.connectionTop,
+              ...(first ? {borderLeft: null} : null)
+            }} />
+            <div style={{
+              ...styles.connectionBottom,
+              ...(last ? {borderLeft: null} : null)
+            }} />
+          </div>
+        }
+        <div style={styles.nodeContentContainer}>
+          {nodeContent}
+        </div>
+        {
+          children &&
+          <div style={styles.connectionAfter}>
+            <div
+              style={styles.collapseExpandButton}
+              onClick={onCollapseExpand}
+            >
+              {collapsed ? '+' : '-'}
+            </div>
+          </div>
+        }
+        {
+          children && !collapsed &&
+          <div style={styles.childrenContainer}>
+            {children}
+          </div>
+        }
+      </div>
+    )
+  }
 
   renderTasks (tasks) {
     const numOfRows = tasks.length < 4
@@ -90,7 +103,7 @@ export class GoalsTreeView extends React.Component {
     }
     if (renderTasks) {
       result.push(
-        renderNode(
+        this.renderNode(
           !renderSubGoals,
           true,
           this.renderTasks(goalNode.tasks),
@@ -103,14 +116,20 @@ export class GoalsTreeView extends React.Component {
   }
 
   renderGoalBranch (goalNode, first, last, isRoot = false) {
-    return renderNode(
-      first, last,
+    return this.renderNode(
+      first,
+      last,
       <div style={styles.goal}>
         {goalNode.goal.name}
       </div>,
       this.renderChildren(goalNode),
       goalNode.goal.id,
-      isRoot
+      isRoot,
+      this.state.collapsedNodes[goalNode.goal.id],
+      () => this.setState({collapsedNodes: {
+        ...this.state.collapsedNodes,
+        [goalNode.goal.id]: !this.state.collapsedNodes[goalNode.goal.id]
+      }})
     )
   }
 

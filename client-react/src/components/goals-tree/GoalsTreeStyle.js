@@ -26,8 +26,7 @@ export const goalsTreeStyles = {
     minHeight: '100%'
   },
   node: {
-    display: 'flex',
-    minHeight: '70px'
+    display: 'flex'
   },
   connectionsContainer: {
     display: 'flex',
@@ -47,18 +46,34 @@ export const goalsTreeStyles = {
   connectionAfter: {
     borderBottom: connectionLine,
     width: connectionWidth,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    position: 'relative'
+  },
+  collapseExpandButton: {
+    position: 'absolute',
+    width: '18px',
+    height: '18px',
+    borderRadius: '9px',
+    backgroundColor: connectionColor,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    right: '-9px',
+    top: '-8px',
+    cursor: 'pointer',
+    fontSize: '9px'
   },
   nodeContentContainer: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    margin: '5px 0px'
   },
   goal: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'rgba(50,50,75,0.7)',
-    width: '170px',
+    width: '182px',
     height: '60px',
     border: connectionLine
   },
