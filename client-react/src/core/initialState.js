@@ -29,6 +29,78 @@ export const defInitialState = {
     }),
     [++i]: new TaskModel({
       id: i,
+      goalId: 7,
+      name: 'charm',
+      startDate: dateUtils.incDay(dateUtils.today()),
+      repeatModeId: 1,
+      tag: 'Home'
+    }),
+    [++i]: new TaskModel({
+      id: i,
+      goalId: 7,
+      name: 'katana',
+      startDate: dateUtils.incDay(dateUtils.today()),
+      repeatModeId: 1,
+      tag: 'Home'
+    }),
+    [++i]: new TaskModel({
+      id: i,
+      goalId: 7,
+      name: 'rouge',
+      startDate: dateUtils.incDay(dateUtils.today()),
+      repeatModeId: 1,
+      tag: 'Home'
+    }),
+    [++i]: new TaskModel({
+      id: i,
+      goalId: 7,
+      name: 'rouge',
+      startDate: dateUtils.incDay(dateUtils.today()),
+      repeatModeId: 1,
+      tag: 'Home'
+    }),
+    [++i]: new TaskModel({
+      id: i,
+      goalId: 7,
+      name: 'rouge',
+      startDate: dateUtils.incDay(dateUtils.today()),
+      repeatModeId: 1,
+      tag: 'Home'
+    }),
+    [++i]: new TaskModel({
+      id: i,
+      goalId: 7,
+      name: 'rouge',
+      startDate: dateUtils.incDay(dateUtils.today()),
+      repeatModeId: 1,
+      tag: 'Home'
+    }),
+    [++i]: new TaskModel({
+      id: i,
+      goalId: 7,
+      name: 'rouge',
+      startDate: dateUtils.incDay(dateUtils.today()),
+      repeatModeId: 1,
+      tag: 'Home'
+    }),
+    [++i]: new TaskModel({
+      id: i,
+      goalId: 7,
+      name: 'rouge',
+      startDate: dateUtils.incDay(dateUtils.today()),
+      repeatModeId: 1,
+      tag: 'Home'
+    }),
+    [++i]: new TaskModel({
+      id: i,
+      goalId: 7,
+      name: 'rouge',
+      startDate: dateUtils.incDay(dateUtils.today()),
+      repeatModeId: 1,
+      tag: 'Home'
+    }),
+    [++i]: new TaskModel({
+      id: i,
       goalId: 12,
       name: 'repeat every 2',
       startDate: new Date(2017, 7),
@@ -52,7 +124,55 @@ export const defInitialState = {
       startDate: new Date(2017, 8),
       repeatModeId: 1,
       every: 2
-    })
+    }),
+    [++i]: new TaskModel({
+      id: i,
+      goalId: 12,
+      name: 'winger',
+      startDate: new Date(2017, 8),
+      repeatModeId: 1,
+      every: 2
+    }),
+    [++i]: new TaskModel({
+      id: i,
+      goalId: 12,
+      name: 'clinger',
+      startDate: new Date(2017, 8),
+      repeatModeId: 1,
+      every: 2
+    }),
+    [++i]: new TaskModel({
+      id: i,
+      goalId: 12,
+      name: 'sssds',
+      startDate: new Date(),
+      repeatModeId: 1,
+      every: 2
+    }),
+    [++i]: new TaskModel({
+      id: i,
+      goalId: 12,
+      name: 'red',
+      startDate: new Date(),
+      repeatModeId: 1,
+      every: 2
+    }),
+    [++i]: new TaskModel({
+      id: i,
+      goalId: 12,
+      name: 'blue th',
+      startDate: new Date(),
+      repeatModeId: 1,
+      every: 2
+    }),
+    [++i]: new TaskModel({
+      id: i,
+      goalId: 12,
+      name: 'waltari',
+      startDate: new Date(),
+      repeatModeId: 1,
+      every: 2
+    }),
   },
   doneTasks: {
     [dateUtils.toISOString(new Date())]: [[3, 1, 1], [1, 1, 1], [2, 1, 2]]

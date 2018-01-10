@@ -2,24 +2,23 @@ import React from 'react'
 import { goalsTreeStyles as styles } from './GoalsTreeStyle'
 import PropTypes from 'prop-types'
 import Scrollbars from 'react-custom-scrollbars'
-import { renderGoal } from './goal'
-import { renderTask } from './task'
 
-const renderNode = (first, last, nodeContent, children, key) => {
+const renderNode = (first, last, nodeContent, children, key, isRoot = false) => {
   return (
     <div key={key} style={styles.node}>
-
-      <div style={styles.connectionsContainer}>
-        <div style={{
-          ...styles.connectionTop,
-          ...(first ? {borderLeft: null} : null)
-        }} />
-        <div style={{
-          ...styles.connectionBottom,
-          ...(last ? {borderLeft: null} : null)
-        }} />
-      </div>
-
+      {
+        !isRoot &&
+        <div style={styles.connectionsContainer}>
+          <div style={{
+            ...styles.connectionTop,
+            ...(first ? {borderLeft: null} : null)
+          }} />
+          <div style={{
+            ...styles.connectionBottom,
+            ...(last ? {borderLeft: null} : null)
+          }} />
+        </div>
+      }
       <div style={styles.nodeContentContainer}>
         {nodeContent}
       </div>
@@ -37,6 +36,40 @@ const renderNode = (first, last, nodeContent, children, key) => {
 }
 
 export class GoalsTreeView extends React.Component {
+
+  renderTasks (tasks) {
+    const numOfRows = tasks.length < 4
+     ? 1
+     : tasks.length < 7
+      ? 2
+      : tasks.length < 20 ? 3 : 5
+
+    let column = []
+    let columns = []
+
+    tasks.forEach(task => {
+      column.push(
+        <div style={styles.taskContainer} key={task.id}>
+          <div style={styles.task}>
+            {task.getNameAbbreviation()}
+          </div>
+        </div>
+      )
+      if (column.length === numOfRows) {
+        columns.push(
+          <div key={'col' + columns.length}>
+            {column}
+          </div>
+        )
+        column = []
+      }
+    })
+    return (
+      <div style={styles.tasksContainer}>
+        {columns}
+      </div>
+    )
+  }
 
   renderChildren (goalNode) {
     const renderSubGoals = goalNode.subGoals && goalNode.subGoals.length > 0
@@ -60,16 +93,7 @@ export class GoalsTreeView extends React.Component {
         renderNode(
           !renderSubGoals,
           true,
-          goalNode.tasks.map(task => (
-            <div
-              key={task.id}
-              style={{
-                backgroundColor: 'rgba(200,200,200,0.2)',
-              }}
-            >
-              {renderTask(task)}
-            </div>
-          )),
+          this.renderTasks(goalNode.tasks),
           null,
           goalNode.goal.id + 'tasks'
         )
@@ -78,12 +102,15 @@ export class GoalsTreeView extends React.Component {
     return result
   }
 
-  renderGoalBranch (goalNode, first, last) {
+  renderGoalBranch (goalNode, first, last, isRoot = false) {
     return renderNode(
       first, last,
-      renderGoal(goalNode.goal),
+      <div style={styles.goal}>
+        {goalNode.goal.name}
+      </div>,
       this.renderChildren(goalNode),
-      goalNode.goal.id
+      goalNode.goal.id,
+      isRoot
     )
   }
 
@@ -93,7 +120,7 @@ export class GoalsTreeView extends React.Component {
       <div style={styles.root}>
         <Scrollbars>
           <span style={styles.content}>
-            {this.renderGoalBranch(goalsTree)}
+            {this.renderGoalBranch(goalsTree, false, false, true)}
           </span>
         </Scrollbars>
       </div>

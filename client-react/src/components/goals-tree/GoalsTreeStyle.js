@@ -1,15 +1,17 @@
 import { theme } from '../styles'
 
-const connectionLine = '1px solid #ddd'
+const connectionColor = '#779'
+const connectionLine = '2px solid ' + connectionColor
 const connectionWidth = '20px'
+export const taskHeight = 40
 
 export const goalsTreeStyles = {
   root: {
     fontFamily: theme.fontFamily,
     color: theme.colorText,
-    height: 'calc(100% - 2px)',
+    height: 'calc(100% - 7px)',
     flexWrap: 'nowrap',
-    marginBottom: '2px',
+    margin: '5px 10px 2px',
     cursor: 'default',
     userSelect: 'none'
   },
@@ -29,18 +31,18 @@ export const goalsTreeStyles = {
   },
   connectionsContainer: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    width: connectionWidth
   },
   connectionTop: {
     flex: 1,
-    borderLeft: connectionLine,
-    width: connectionWidth
+    borderLeft: connectionLine
   },
   connectionBottom: {
     flex: 1,
     borderTop: connectionLine,
-    borderLeft: connectionLine,
-    width: connectionWidth
+    borderLeft: connectionLine
   },
   connectionAfter: {
     borderBottom: connectionLine,
@@ -58,19 +60,29 @@ export const goalsTreeStyles = {
     backgroundColor: 'rgba(50,50,75,0.7)',
     width: '170px',
     height: '60px',
-    border: '1px solid #aaa'
+    border: connectionLine
   },
   childrenContainer: {
     display: 'flex',
     flexDirection: 'column'
   },
+  tasksContainer: {
+    display: 'flex',
+    border: connectionLine,
+    padding: '1px'
+  },
+  taskContainer: {
+    width: '60px',
+    height: taskHeight + 'px',
+    display: 'flex',
+    alignItems: 'stretch'
+  },
   task: {
+    flex: 1,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(50,50,50,0.7)',
-    width: '60px',
-    height: '40px',
-    border: '1px solid #aaa'
+    backgroundColor: theme.colorC,
+    margin: '1px'
   }
 }
