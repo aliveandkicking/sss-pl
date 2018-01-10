@@ -5,6 +5,18 @@ const connectionLine = '2px solid ' + connectionColor
 const connectionWidth = '20px'
 export const taskHeight = 40
 
+const goalButton = {
+  position: 'absolute',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '16px',
+  height: '16px',
+  borderRadius: '2px',
+  opacity: 0.5,
+  transition: '400ms'
+}
+
 export const goalsTreeStyles = {
   root: {
     fontFamily: theme.fontFamily,
@@ -70,12 +82,37 @@ export const goalsTreeStyles = {
   },
   goal: {
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'stretch',
     backgroundColor: 'rgba(50,50,75,0.7)',
     width: '182px',
     height: '60px',
-    border: connectionLine
+    border: connectionLine,
+    cursor: 'pointer',
+    transition: '200ms',
+    position: 'relative'
+  },
+  editGoalButton: {
+    ...goalButton,
+    bottom: '2px',
+    left: '2px'
+  },
+  checkBoxGoalButton: {
+    ...goalButton,
+    bottom: '2px',
+    right: '2px'
+  },
+  goalButtonHover: {
+    opacity: 1
+  },
+  goalName: {
+    flex: 'auto',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  goalHover: {
+    border: '2px solid #aaa'
   },
   childrenContainer: {
     display: 'flex',
