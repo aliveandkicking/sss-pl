@@ -3,6 +3,7 @@ import { goalsTreeStyles as styles } from './GoalsTreeStyle'
 import PropTypes from 'prop-types'
 import Scrollbars from 'react-custom-scrollbars'
 import { CustomSpan } from '..'
+import { Goal } from './goal/Goal'
 
 export class GoalsTreeView extends React.Component {
   state = {
@@ -120,29 +121,7 @@ export class GoalsTreeView extends React.Component {
     return this.renderNode(
       first,
       last,
-      <CustomSpan
-        style={styles.goal}
-        styleHover={styles.goalHover}
-      >
-        <CustomSpan
-          style={styles.editGoalButton}
-          styleHover={styles.goalButtonHover}
-        >
-          &#9881;
-        </CustomSpan>
-
-        <CustomSpan
-          style={styles.checkBoxGoalButton}
-          styleHover={styles.goalButtonHover}
-        >
-          &#10003;
-        </CustomSpan>
-
-        <div style={styles.goalName}>
-          {goalNode.goal.name}
-        </div>
-      </CustomSpan>,
-      
+      <Goal goal={goalNode.goal}/>,
       this.renderChildren(goalNode),
       goalNode.goal.id,
       isRoot,

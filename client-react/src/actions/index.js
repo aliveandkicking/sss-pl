@@ -64,3 +64,4 @@ export const changeGoal = createAction(CHANGE_GOAL, 'id', 'changes')
 
 export const DELETE_GOAL = 'DELETE_GOAL'
 export const deleteGoal = createAction(DELETE_GOAL, 'id')
+
