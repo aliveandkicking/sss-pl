@@ -1,24 +1,39 @@
 import { connect } from 'react-redux'
 import { GoalView } from './GoalView'
-import { changeGoal } from '../../../actions'
-// import { goalHelper } from '../../core'
+import {
+  changeGoal,
+  addGoal,
+  deleteGoal
+} from '../../../actions'
+import { goalHelper } from '../../../core'
 
 const mapStateToProps = (state, ownProps) => {
-  const {goal} = ownProps
-
   return {
-    goal
+    goals: state.goals
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const { dispatch } = dispatchProps
+  const { goal } = ownProps
+  const { goals } = stateProps
+
   return {
-    onChange: (changes) => dispatch(changeGoal(ownProps.goal.id, changes))
+    goal,
+    onChange: (changes) => dispatch(changeGoal(goal.id, changes)),
+    onAddSub: () => {
+      dispatch(addGoal(goalHelper.create({
+        id: goals.reduce((maxId, currGoal) => Math.max(maxId, currGoal.id), 1) + 1,
+        parentId: goal.id
+      })))
+    },
+    onDelete: () => dispatch(deleteGoal(goal.id))
   }
 }
 
 export const Goal = connect(
   mapStateToProps,
-  mapDispatchToProps
+  null,
+  mergeProps
 )(GoalView)
 

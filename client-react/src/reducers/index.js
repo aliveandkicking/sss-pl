@@ -19,7 +19,8 @@ import {
   SET_WINDOW_SIZE,
   ADD_GOAL,
   CHANGE_GOAL,
-  DELETE_GOAL
+  DELETE_GOAL,
+  deleteGoal
 } from '../actions'
 
 const initialDate = (state = dateUtils.today(), action) => {
@@ -109,16 +110,31 @@ const windowSize = (state = window.innerWidth, action) => {
 
 const goals = (state = [], action) => {
   if (action.type === ADD_GOAL) {
-    return state.concat(action.data)
+    return state.concat(action.payload.data)
   } else if (action.type === CHANGE_GOAL) {
-    const index = state.findIndex(goal => goal.id === action.id)
-    if (index === 0 || index) {
+    const index = state.findIndex(goal => goal.id === action.payload.id)
+    if (~index) {
       const newState = Array.from(state)
-      newState[index] = Object.assign(state[index], action.changes)
+      newState[index] = Object.assign(state[index], action.payload.changes)
       return newState
     }
   } else if (action.type === DELETE_GOAL) {
-    return state.filter(goal => goal.id === action.id)
+    const deletingGoal = state.find(goalIrer => goalIrer.id === action.payload.id)
+    if (deletingGoal) {
+      return state.reduce((result, goal) => {
+        if (goal.id !== deletingGoal.id) {
+          if (goal.parentId === deletingGoal.id) {
+            result.push({
+              ...goal,
+              parentId: deletingGoal.parentId
+            })
+          } else {
+            result.push(goal)
+          }
+        }
+        return result
+      }, [])
+    }
   }
   return state
 }

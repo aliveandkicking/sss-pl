@@ -2,7 +2,6 @@ import React from 'react'
 import { goalsTreeStyles as styles } from './GoalsTreeStyle'
 import PropTypes from 'prop-types'
 import Scrollbars from 'react-custom-scrollbars'
-import { CustomSpan } from '..'
 import { Goal } from './goal/Goal'
 
 export class GoalsTreeView extends React.Component {
@@ -28,9 +27,12 @@ export class GoalsTreeView extends React.Component {
             }} />
           </div>
         }
-        <div style={styles.nodeContentContainer}>
-          {nodeContent}
-        </div>
+        {
+          // !isRoot &&
+          <div style={styles.nodeContentContainer}>
+            {nodeContent}
+          </div>
+        }
         {
           children &&
           <div style={styles.connectionAfter}>

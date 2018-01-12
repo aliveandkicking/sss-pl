@@ -21,6 +21,7 @@ export const goalsTreeStyles = {
     position: 'absolute',
     top: '0px',
     left: '0px',
+    padding: '0px 30px 100px 0px',
     minWidth: '100%',
     minHeight: '100%'
   },
