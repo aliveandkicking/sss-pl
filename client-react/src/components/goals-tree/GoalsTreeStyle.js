@@ -53,15 +53,20 @@ export const goalsTreeStyles = {
     position: 'absolute',
     width: '18px',
     height: '18px',
-    borderRadius: '9px',
-    backgroundColor: connectionColor,
+    borderRadius: '10px',
+    backgroundColor: '#274269',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    right: '-9px',
-    top: '-8px',
+    right: '-10px',
+    top: '-10px',
     cursor: 'pointer',
-    fontSize: '9px'
+    fontSize: '10px',
+    border: connectionLine,
+    transition: '200ms'
+  },
+  collapseExpandButtonHover: {
+    backgroundColor: '#40608F'
   },
   nodeContentContainer: {
     display: 'flex',

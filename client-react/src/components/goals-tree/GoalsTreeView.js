@@ -3,6 +3,7 @@ import { goalsTreeStyles as styles } from './GoalsTreeStyle'
 import PropTypes from 'prop-types'
 import Scrollbars from 'react-custom-scrollbars'
 import { Goal } from './goal/Goal'
+import { CustomSpan } from '../custom-span/CustomSpan';
 
 export class GoalsTreeView extends React.Component {
   state = {
@@ -36,12 +37,13 @@ export class GoalsTreeView extends React.Component {
         {
           children &&
           <div style={styles.connectionAfter}>
-            <div
+            <CustomSpan
               style={styles.collapseExpandButton}
+              styleHover={styles.collapseExpandButtonHover}
               onClick={onCollapseExpand}
             >
               {collapsed ? '+' : '-'}
-            </div>
+            </CustomSpan>
           </div>
         }
         {
