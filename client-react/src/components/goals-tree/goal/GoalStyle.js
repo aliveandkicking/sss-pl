@@ -1,8 +1,8 @@
 import { theme } from '../../styles'
 
 export const dimensions = {
-  width: 182,
-  height: 60,
+  width: 150,
+  height: 55,
   outerControlsWidth: 100,
   outerControlsHeight: 100
 }
@@ -43,7 +43,8 @@ export const goalsStyles = {
     border: '2px solid #779',
     cursor: 'pointer',
     transition: '200ms',
-    position: 'relative'
+    position: 'relative',
+    fontSize: '14px'
   },
   contentHover: {
     border: '2px solid #aaa',
@@ -60,8 +61,8 @@ export const goalsStyles = {
   },
   editButton: {
     ...innerButton,
-    bottom: '2px',
-    left: '2px'
+    bottom: '0px',
+    left: '0px'
   },
   checkMark: {
     ...innerButton,
