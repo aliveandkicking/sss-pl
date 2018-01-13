@@ -19,8 +19,7 @@ import {
   SET_WINDOW_SIZE,
   ADD_GOAL,
   CHANGE_GOAL,
-  DELETE_GOAL,
-  deleteGoal
+  DELETE_GOAL
 } from '../actions'
 
 const initialDate = (state = dateUtils.today(), action) => {

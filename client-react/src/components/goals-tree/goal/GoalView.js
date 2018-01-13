@@ -21,7 +21,7 @@ export class GoalView extends React.Component {
 	    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop
       position.top = rect.top + scrollTop + dimensions.height +
-        dimensions.outerControlsHeight > window.innerHeight,
+        dimensions.outerControlsHeight > window.innerHeight
       position.left = rect.left + scrollLeft + dimensions.width +
         dimensions.outerControlsWidth > window.innerWidth
     }
