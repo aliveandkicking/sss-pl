@@ -73,7 +73,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         parentId: goal.id
       })))
     },
-    onDelete: () => dispatch(deleteGoal(goal.id))
+    onDelete: () => goal.id && dispatch(deleteGoal(goal.id))
   }
 }
 

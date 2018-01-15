@@ -21,7 +21,8 @@ const mapStateToProps = (state, ownProps) => {
     return result
   }
 
-  const goalsTree = processGoal(goalHelper.create({id: 0, name: 'root'}))
+  const root = state.goals.find(goal => !goal.id)
+  const goalsTree = processGoal(goalHelper.create(root))
 
   return {
     goalsTree,

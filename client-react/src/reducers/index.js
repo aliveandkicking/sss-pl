@@ -22,6 +22,7 @@ import {
   DELETE_GOAL,
   CHANGE_GOAL_TREE
 } from '../actions'
+import { goalHelper } from '../core/goal-helper';
 
 const initialDate = (state = dateUtils.today(), action) => {
   if (action.type === SET_INITIAL_DATE) {
@@ -108,7 +109,12 @@ const windowSize = (state = window.innerWidth, action) => {
   return state
 }
 
-const goals = (state = [], action) => {
+const goals = (state = [goalHelper.create({
+  id: 0,
+  name: 'root',
+  inProgress: true,
+  passive: true
+})], action) => {
   if (action.type === ADD_GOAL) {
     return state.concat(action.payload.data)
   } else if (action.type === CHANGE_GOAL) {

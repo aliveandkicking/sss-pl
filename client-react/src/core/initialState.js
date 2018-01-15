@@ -179,6 +179,12 @@ export const defInitialState = {
   },
   goals: [
     goalHelper.create({
+      id: 0,
+      name: 'root',
+      inProgress: true,
+      passive: true
+    }),
+    goalHelper.create({
       id: 1,
       parentId: 0,
       inProgress: true,
