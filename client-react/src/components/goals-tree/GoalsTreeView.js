@@ -66,7 +66,10 @@ export class GoalsTreeView extends React.Component {
     tasks.forEach(task => {
       column.push(
         <div style={styles.taskContainer} key={task.id}>
-          <div style={styles.task}>
+          <div
+            style={styles.task}
+            title={task.name}
+          >
             {task.getNameAbbreviation()}
           </div>
         </div>
