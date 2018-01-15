@@ -19,7 +19,8 @@ import {
   SET_WINDOW_SIZE,
   ADD_GOAL,
   CHANGE_GOAL,
-  DELETE_GOAL
+  DELETE_GOAL,
+  CHANGE_GOAL_TREE
 } from '../actions'
 
 const initialDate = (state = dateUtils.today(), action) => {
@@ -138,6 +139,16 @@ const goals = (state = [], action) => {
   return state
 }
 
+const goalsTree = (state = {collapsedNodes:{}}, action) => {
+  if (action.type === CHANGE_GOAL_TREE) {
+    return {
+      ...state,
+      ...action.payload.changes
+    }
+  }
+  return state
+}
+
 export const rootReducer = combineReducers({
   needSave,
   pageId,
@@ -148,6 +159,7 @@ export const rootReducer = combineReducers({
   tasks,
   tags,
   doneTasks,
+  goalsTree,
   editingTag,
   editTask: editTaskReducer,
   windowSize

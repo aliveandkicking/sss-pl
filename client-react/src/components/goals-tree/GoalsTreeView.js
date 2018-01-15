@@ -6,9 +6,6 @@ import { Goal } from './goal/Goal'
 import { CustomSpan } from '../custom-span/CustomSpan';
 
 export class GoalsTreeView extends React.Component {
-  state = {
-    collapsedNodes: {}
-  }
 
   renderNode (first, last, nodeContent, children, key,
     isRoot = false, collapsed = false, onCollapseExpand = null
@@ -90,21 +87,42 @@ export class GoalsTreeView extends React.Component {
     )
   }
 
+  hideTasksForGoal (id) {
+    if (this.props.goalTreeSettings.withHiddenTasks) {
+      return this.props.goalTreeSettings.withHiddenTasks.includes(id)
+    }
+    return false
+  }
+
+  hideCompleteSubgoalsForGoal (id) {
+    if (this.props.goalTreeSettings.withHiddenComplete) {
+      return this.props.goalTreeSettings.withHiddenComplete.includes(id)
+    }
+    return false
+  }
+
   renderChildren (goalNode) {
     const renderSubGoals = goalNode.subGoals && goalNode.subGoals.length > 0
-    const renderTasks = goalNode.tasks && goalNode.tasks.length > 0
+    const renderTasks = goalNode.tasks &&
+      goalNode.tasks.length > 0 && !this.hideTasksForGoal(goalNode.goal.id)
     if (!renderSubGoals && !renderTasks) {
       return null
     }
     const result = []
     if (renderSubGoals) {
+      goalNode.subGoals.reduce((visibleGoals, currNode) => {
+
+      })
+
       goalNode.subGoals.forEach((currGoalNode, index) => {
-        result.push(this.renderGoalBranch(
-          currGoalNode,
-          index === 0,
-          (index === (goalNode.subGoals.length - 1)) &&
-            (goalNode.tasks.length < 1)
-        ))
+        if (currGoalNode.goal.inProgress) {
+          result.push(this.renderGoalBranch(
+            currGoalNode,
+            countOfVisible === 0,
+            (index === (goalNode.subGoals.length - 1)) &&
+              ((goalNode.tasks.length < 1) || this.hideTasksForGoal(goalNode.goal.id))
+          ))
+        }
       })
     }
     if (renderTasks) {
@@ -122,17 +140,18 @@ export class GoalsTreeView extends React.Component {
   }
 
   renderGoalBranch (goalNode, first, last, isRoot = false) {
+    const {goalTreeSettings: {collapsedNodes}} = this.props
     return this.renderNode(
       first,
       last,
-      <Goal goal={goalNode.goal}/>,
-      this.renderChildren(goalNode),
+      <Goal goal={goalNode.goal} />,
+       this.renderChildren(goalNode),
       goalNode.goal.id,
       isRoot,
-      this.state.collapsedNodes[goalNode.goal.id],
-      () => this.setState({collapsedNodes: {
-        ...this.state.collapsedNodes,
-        [goalNode.goal.id]: !this.state.collapsedNodes[goalNode.goal.id]
+      collapsedNodes[goalNode.goal.id],
+      () => this.props.onChanges({collapsedNodes: {
+        ...collapsedNodes,
+        [goalNode.goal.id]: !collapsedNodes[goalNode.goal.id]
       }})
     )
   }
@@ -142,9 +161,9 @@ export class GoalsTreeView extends React.Component {
     return (
       <div style={styles.root}>
         <Scrollbars>
-          <span style={styles.content}>
+          <div style={styles.content}>
             {this.renderGoalBranch(goalsTree, false, false, true)}
-          </span>
+          </div>
         </Scrollbars>
       </div>
     )
@@ -152,6 +171,8 @@ export class GoalsTreeView extends React.Component {
 }
 
 GoalsTreeView.propTypes = {
-  goalsTree: PropTypes.object
+  goalsTree: PropTypes.object,
+  goalTreeSettings: PropTypes.object,
+  onChanges: PropTypes.func
 }
 

@@ -66,6 +66,18 @@ export class GoalView extends React.Component {
             caption: !this.props.goal.inProgress ? 'In Progress' : 'Pending',
             action: () => this.props.onChange({inProgress: !this.props.goal.inProgress})
           },
+          {
+            caption: this.props.tasksHidden ? 'Show Tasks' : 'Hide Tasks',
+            action: () => this.props.onChangeTasksVisibility()
+          },
+          {
+            caption: this.props.pendingSubgoalsHidden ? 'Show Pending Subgoals' : 'Hide Pending Subgoals',
+            action: () => this.props.onChangePendingSubgoalsVisibility()
+          },
+          {
+            caption: this.props.completeSubgoalsHidden ? 'Show Complete Subgoals' : 'Hide Complete Subgoals',
+            action: () => this.props.onChangeCompleteSubgoalsVisibility()
+          },
         ].map(el => <CustomSpan
             key={el.caption}
             style={styles.outerButton}

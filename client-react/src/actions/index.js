@@ -65,3 +65,5 @@ export const changeGoal = createAction(CHANGE_GOAL, 'id', 'changes')
 export const DELETE_GOAL = 'DELETE_GOAL'
 export const deleteGoal = createAction(DELETE_GOAL, 'id')
 
+export const CHANGE_GOAL_TREE = 'CHANGE_GOAL_TREE'
+export const changeGoalTree = createAction(CHANGE_GOAL_TREE, 'changes')

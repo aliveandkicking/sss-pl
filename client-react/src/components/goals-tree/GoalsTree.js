@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { GoalsTreeView } from './GoalsTreeView'
 import { goalHelper } from '../../core'
+import { changeGoalTree } from '../../actions'
 
 const mapStateToProps = (state, ownProps) => {
   const processGoal = (goal) => {
@@ -23,12 +24,15 @@ const mapStateToProps = (state, ownProps) => {
   const goalsTree = processGoal(goalHelper.create({id: 0, name: 'root'}))
 
   return {
-    goalsTree
+    goalsTree,
+    goalTreeSettings: state.goalsTree
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return { }
+  return {
+    onChanges: changes => dispatch(changeGoalTree(changes))
+  }
 }
 
 export const GoalsTree = connect(

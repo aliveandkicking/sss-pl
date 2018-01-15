@@ -10,8 +10,6 @@ export const goalsTreeStyles = {
     fontFamily: theme.fontFamily,
     color: theme.colorText,
     height: 'calc(100% - 7px)',
-    flexWrap: 'nowrap',
-    margin: '5px 10px 2px',
     cursor: 'default',
     userSelect: 'none'
   },
@@ -21,9 +19,9 @@ export const goalsTreeStyles = {
     position: 'absolute',
     top: '0px',
     left: '0px',
-    padding: '0px 30px 100px 0px',
-    minWidth: '100%',
-    minHeight: '100%'
+    padding: '10px 20px',
+    minWidth: 'calc(100% - 40px)',
+    minHeight: 'calc(100% - 20px)'
   },
   node: {
     display: 'flex',

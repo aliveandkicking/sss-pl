@@ -3,8 +3,8 @@ import { theme } from '../../styles'
 export const dimensions = {
   width: 150,
   height: 55,
-  outerControlsWidth: 100,
-  outerControlsHeight: 100
+  outerControlsWidth: 145,
+  outerControlsHeight: 200
 }
 
 const innerButton = {
@@ -49,10 +49,10 @@ export const goalsStyles = {
   },
   contentHover: {
     border: '2px solid #ccc'
-    // backgroundColor: '#30507F'
   },
   contentComplete: {
-    opacity: '0.3'
+    opacity: '0.35',
+    backgroundColor: '#8C6C12'
   },
   contentPending: {
     backgroundColor: theme.colorB,
@@ -142,7 +142,7 @@ export const goalsStyles = {
     flexDirection: 'column',
     position: 'absolute',
     width: dimensions.outerControlsWidth + 'px',
-    height: '100px',
+    height: dimensions.outerControlsHeight + 'px',
     fontSize: '80%',
   },
   outerButton: {
