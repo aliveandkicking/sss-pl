@@ -181,6 +181,7 @@ export const defInitialState = {
     goalHelper.create({
       id: 1,
       parentId: 0,
+      inProgress: true,
       name: 'conquer the world'
     }),
     goalHelper.create({
@@ -216,26 +217,31 @@ export const defInitialState = {
     goalHelper.create({
       id: 8,
       parentId: 7,
+      inProgress: true,
       name: 'find fox'
     }),
     goalHelper.create({
       id: 9,
       parentId: 7,
+      complete: true,
       name: 'find cat'
     }),
     goalHelper.create({
       id: 10,
       parentId: 9,
+      complete: true,
       name: 'feed cat'
     }),
     goalHelper.create({
       id: 11,
       parentId: 10,
+      complete: true,
       name: 'take care of cat'
     }),
     goalHelper.create({
       id: 12,
       parentId: 10,
+      inProgress: true,
       name: 'play with cat'
     })
   ],

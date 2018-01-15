@@ -26,7 +26,8 @@ export const goalsTreeStyles = {
     minHeight: '100%'
   },
   node: {
-    display: 'flex'
+    display: 'flex',
+    flex: 'auto'
   },
   connectionsContainer: {
     display: 'flex',

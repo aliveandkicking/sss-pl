@@ -5,6 +5,9 @@ class GoalHelper {
       id: null,
       parentId: null,
       name: 'achieve something',
+      complete: false,
+      inProgress: false,
+      passive: false,
       ...data
     }
   }

@@ -37,18 +37,26 @@ export const goalsStyles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'stretch',
-    backgroundColor: '#274269',
+    backgroundColor: '#A88116',
     width: dimensions.width + 'px',
     height: dimensions.height + 'px',
     border: '2px solid #779',
     cursor: 'pointer',
     transition: '200ms',
     position: 'relative',
-    fontSize: '14px'
+    fontSize: '14px',
+    color: '#fff'
   },
   contentHover: {
-    border: '2px solid #aaa',
-    backgroundColor: '#30507F'
+    border: '2px solid #ccc'
+    // backgroundColor: '#30507F'
+  },
+  contentComplete: {
+    opacity: '0.3'
+  },
+  contentPending: {
+    backgroundColor: theme.colorB,
+    color: '#888'
   },
   backgroundInEditMode: {
     position: 'fixed',
@@ -64,10 +72,37 @@ export const goalsStyles = {
     bottom: '0px',
     left: '0px'
   },
+  labelRow: {
+    position: 'absolute',
+    left: '3px',
+    top: '3px',
+    fontSize: '9px',
+    transition: '500ms',
+    display: 'flex',
+    alignItems: 'stretch',
+    color: '#ccc'
+  },
+  label: {
+    backgroundColor: '#8C600C',
+    padding: '1px 3px 2px',
+    borderRadius: '2px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#ccc',
+    marginRight: '2px'
+  },
   checkMark: {
-    ...innerButton,
-    bottom: '2px',
-    right: '2px'
+    position: 'absolute',
+    bottom: '0px',
+    left: dimensions.width - 15 + 'px',
+    fontSize: '20px',
+    width: '0px',
+    overflow: 'hidden',
+    transition: '500ms'
+  },
+  checkMarkVisible: {
+    width: '15px'
   },
   innerButtonHover: {
     opacity: 1
@@ -76,7 +111,8 @@ export const goalsStyles = {
     flex: 'auto',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    textAlign: 'center'
   },
   nameInput: {
     flex: 'auto',
@@ -85,7 +121,6 @@ export const goalsStyles = {
     justifyContent: 'center',
     backgroundColor: 'transparent',
     textAlign: 'center',
-    color: '#fff',
     borderWidth: '0px',
     fontFamily: theme.fontFamily
   },

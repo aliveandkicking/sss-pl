@@ -11,6 +11,7 @@ export class GoalView extends React.Component {
     editing: false
   }
 
+  clicked = false
   root = null
   editinName = ''
 
@@ -53,28 +54,30 @@ export class GoalView extends React.Component {
           ...(position.top ? {justifyContent: 'flex-end'} : null)
         }}
       >
-        <CustomSpan
-          key={'addsubgoal-button'}
-          style={styles.outerButton}
-          styleHover={styles.outerButtonHover}
-          onClick={() => {
-            this.props.onAddSub()
-            this.setState({editing: false})
-          }}
-        >
-          Add Subgoal
-        </CustomSpan>
-        <CustomSpan
-          key={'deletegoal-button'}
-          style={styles.outerButton}
-          styleHover={styles.outerButtonHover}
-          onClick={() => {
-            this.props.onDelete()
-            this.setState({editing: false})
-          }}
-        >
-          Delete
-        </CustomSpan>
+      {
+        [
+          {caption: 'Add Subgoal', action: this.props.onAddSub},
+          {caption: 'Delete', action: this.props.onDelete},
+          {
+            caption: !this.props.goal.passive ? 'Passive' : 'Active',
+            action: () => this.props.onChange({passive: !this.props.goal.passive})
+          },
+          {
+            caption: !this.props.goal.inProgress ? 'In Progress' : 'Pending',
+            action: () => this.props.onChange({inProgress: !this.props.goal.inProgress})
+          },
+        ].map(el => <CustomSpan
+            key={el.caption}
+            style={styles.outerButton}
+            styleHover={styles.outerButtonHover}
+            onClick={() => {
+              el.action()
+              this.setState({editing: false})
+            }}
+          >
+            {el.caption}
+          </CustomSpan>)
+      }
       </div>
     ]
   }
@@ -98,13 +101,47 @@ export class GoalView extends React.Component {
           ]
         }
 
+        {
+          <div style={{
+            ...styles.checkMark,
+            ...(goal.complete ? styles.checkMarkVisible : null)
+            }}
+          >
+            &#x2713;
+          </div>
+        }
+
         <CustomSpan
           style={{
             ...styles.content,
+            ...(
+                goal.complete && !this.state.editing
+                  ?  styles.contentComplete
+                  : null
+               ),
+            ...(
+                !goal.inProgress && !this.state.editing
+                  ?  styles.contentPending
+                  : null
+               ),
             ...(this.state.editing ? {zIndex: 3}: null)
           }}
           styleHover={styles.contentHover}
         >
+          <div style={styles.labelRow}>
+            {
+              !goal.inProgress && !goal.complete &&
+              <div style={styles.label}>
+                pending
+              </div>
+            }
+            {
+              goal.passive &&
+              <div style={styles.label}>
+                passive
+              </div>
+            }
+          </div>
 
           <CustomSpan
             style={styles.editButton}
@@ -114,15 +151,15 @@ export class GoalView extends React.Component {
             &#9881;
           </CustomSpan>
 
-          {/* <div style={styles.checkMark}>
-            &#10003;
-          </div> */}
-
           {
             !this.state.editing
               ? <div
                 style={styles.name}
-                onDoubleClick={() => this.setState({editing: true})}
+                onClick={() => this.props.onChange({
+                    complete: !goal.complete,
+                    inProgress: !goal.complete || goal.inProgress
+                  })
+                }
               >
                 {goal.name}
               </div>
