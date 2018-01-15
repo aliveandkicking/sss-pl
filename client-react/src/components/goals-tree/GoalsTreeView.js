@@ -101,8 +101,15 @@ export class GoalsTreeView extends React.Component {
     return false
   }
 
+  hidePendingSubgoalsForGoal (id) {
+    if (this.props.goalTreeSettings.withHiddenPending) {
+      return this.props.goalTreeSettings.withHiddenPending.includes(id)
+    }
+    return false
+  }
+
   renderChildren (goalNode) {
-    const renderSubGoals = goalNode.subGoals && goalNode.subGoals.length > 0
+    let renderSubGoals = goalNode.subGoals && goalNode.subGoals.length > 0
     const renderTasks = goalNode.tasks &&
       goalNode.tasks.length > 0 && !this.hideTasksForGoal(goalNode.goal.id)
     if (!renderSubGoals && !renderTasks) {
@@ -110,19 +117,23 @@ export class GoalsTreeView extends React.Component {
     }
     const result = []
     if (renderSubGoals) {
-      goalNode.subGoals.reduce((visibleGoals, currNode) => {
-
-      })
-
-      goalNode.subGoals.forEach((currGoalNode, index) => {
-        if (currGoalNode.goal.inProgress) {
-          result.push(this.renderGoalBranch(
-            currGoalNode,
-            countOfVisible === 0,
-            (index === (goalNode.subGoals.length - 1)) &&
-              ((goalNode.tasks.length < 1) || this.hideTasksForGoal(goalNode.goal.id))
-          ))
+      const hidePendingSubgoals = this.hidePendingSubgoalsForGoal(goalNode.goal.id)
+      const hideCompleteSubgoals = this.hideCompleteSubgoalsForGoal(goalNode.goal.id)
+      const visibleGoals = goalNode.subGoals.reduce((visibleGoals, currNode) => {
+        if (!((hideCompleteSubgoals && currNode.goal.complete) ||
+          (hidePendingSubgoals && !currNode.goal.inProgress))) {
+          visibleGoals.push(currNode)
         }
+        return visibleGoals
+      }, [])
+      renderSubGoals = visibleGoals.length > 0
+      visibleGoals.forEach((currGoalNode, index, array) => {
+        result.push(this.renderGoalBranch(
+          currGoalNode,
+          index === 0,
+          (index === (array.length - 1)) &&
+            ((goalNode.tasks.length < 1) || this.hideTasksForGoal(goalNode.goal.id))
+        ))
       })
     }
     if (renderTasks) {

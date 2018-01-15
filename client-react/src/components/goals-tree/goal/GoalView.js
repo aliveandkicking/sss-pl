@@ -77,7 +77,7 @@ export class GoalView extends React.Component {
           {
             caption: this.props.completeSubgoalsHidden ? 'Show Complete Subgoals' : 'Hide Complete Subgoals',
             action: () => this.props.onChangeCompleteSubgoalsVisibility()
-          },
+          }
         ].map(el => <CustomSpan
             key={el.caption}
             style={styles.outerButton}
@@ -151,6 +151,14 @@ export class GoalView extends React.Component {
               goal.passive &&
               <div style={styles.label}>
                 passive
+              </div>
+            }
+            {
+              (this.props.tasksHidden ||
+                this.props.completeSubgoalsHidden ||
+                this.props.pendingSubgoalsHidden) &&
+              <div style={styles.filterLabel}>
+                F
               </div>
             }
           </div>

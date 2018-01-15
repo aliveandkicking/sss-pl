@@ -9,7 +9,6 @@ import {
 import { goalHelper } from '../../../core'
 
 const mapStateToProps = (state, ownProps) => {
-  const { goal } = ownProps
   return {
     goals: state.goals,
     goalsTree: state.goalsTree
@@ -43,6 +42,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
           if (!result.includes(currId)) {
             result.push(currId)
           }
+          return result
         }, ids)
       }))
     }

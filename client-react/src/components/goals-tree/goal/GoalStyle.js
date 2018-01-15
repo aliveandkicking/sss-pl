@@ -75,6 +75,7 @@ export const goalsStyles = {
   labelRow: {
     position: 'absolute',
     left: '3px',
+    right: '3px',
     top: '3px',
     fontSize: '9px',
     transition: '500ms',
@@ -91,6 +92,16 @@ export const goalsStyles = {
     justifyContent: 'center',
     color: '#ccc',
     marginRight: '2px'
+  },
+  filterLabel: {
+    backgroundColor: '#8C600C',
+    padding: '1px 4px 1px',
+    borderRadius: '2px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 'auto',
+    color: '#ccc'
   },
   checkMark: {
     position: 'absolute',
