@@ -10,7 +10,6 @@ import {
 } from '../../actions'
 
 const mapStateToProps = (state, ownProps) => {
-
   const rootTasks = []
 
   const processGoal = (goal) => {
@@ -35,7 +34,6 @@ const mapStateToProps = (state, ownProps) => {
 
   const root = state.goals.find(goal => !goal.id)
   const goalsTree = processGoal(goalHelper.create(root))
-  console.log(rootTasks)
   goalsTree.tasks.push(...rootTasks)
 
   return {

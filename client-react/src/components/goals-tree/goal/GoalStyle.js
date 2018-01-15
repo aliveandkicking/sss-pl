@@ -16,7 +16,8 @@ const innerButton = {
   height: '16px',
   borderRadius: '2px',
   opacity: 0.4,
-  transition: '400ms'
+  transition: '400ms',
+  color: '#fff'
 }
 
 const outerButton = {
