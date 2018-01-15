@@ -4,9 +4,13 @@ import {
   changeGoal,
   addGoal,
   deleteGoal,
-  changeGoalTree
+  changeGoalTree,
+  setEditingTask
 } from '../../../actions'
-import { goalHelper } from '../../../core'
+import {
+  goalHelper,
+  TaskModel
+} from '../../../core'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -73,7 +77,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         parentId: goal.id
       })))
     },
-    onDelete: () => goal.id && dispatch(deleteGoal(goal.id))
+    onDelete: () => goal.id && dispatch(deleteGoal(goal.id)),
+    onAddNewTask: () => dispatch(setEditingTask(new TaskModel({goalId: goal.id})))
   }
 }
 

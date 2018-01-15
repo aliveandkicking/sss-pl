@@ -57,6 +57,7 @@ export class GoalView extends React.Component {
       {
         [
           {caption: 'Add Subgoal', action: this.props.onAddSub},
+          {caption: 'Add Task', action: this.props.onAddNewTask},
           {caption: 'Delete', action: this.props.onDelete},
           {
             caption: !this.props.goal.passive ? 'Passive' : 'Active',
@@ -207,5 +208,6 @@ export class GoalView extends React.Component {
 }
 
 GoalView.propTypes = {
-  goal: PropTypes.object
+  goal: PropTypes.object,
+  onAddNewTask: PropTypes.func
 }

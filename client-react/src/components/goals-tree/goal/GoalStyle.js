@@ -37,7 +37,7 @@ export const goalsStyles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'stretch',
-    backgroundColor: '#A88116',
+    backgroundColor: '#958237',
     width: dimensions.width + 'px',
     height: dimensions.height + 'px',
     border: '2px solid #779',
@@ -55,8 +55,8 @@ export const goalsStyles = {
     backgroundColor: '#8C6C12'
   },
   contentPending: {
-    backgroundColor: theme.colorB,
-    color: '#888'
+    backgroundColor: '#243d5b',
+    color: '#aaa'
   },
   backgroundInEditMode: {
     position: 'fixed',

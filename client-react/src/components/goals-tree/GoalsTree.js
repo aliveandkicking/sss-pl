@@ -1,9 +1,18 @@
 import { connect } from 'react-redux'
 import { GoalsTreeView } from './GoalsTreeView'
-import { goalHelper } from '../../core'
-import { changeGoalTree } from '../../actions'
+import {
+  goalHelper,
+  TaskModel
+} from '../../core'
+import {
+  changeGoalTree,
+  setEditingTask
+} from '../../actions'
 
 const mapStateToProps = (state, ownProps) => {
+
+  const rootTasks = []
+
   const processGoal = (goal) => {
     const result = {goal, subGoals: [], tasks: []}
     state.goals.forEach((currGoal) => {
@@ -13,16 +22,21 @@ const mapStateToProps = (state, ownProps) => {
     })
 
     Object.values(state.tasks).forEach(task => {
-      if (task.goalId === goal.id) {
+      if (!task.goalId) {
+        if (!rootTasks.find(taskIter => taskIter.id === task.id)) {
+          rootTasks.push(task)
+        }
+      } else if (task.goalId === goal.id) {
         result.tasks.push(task)
       }
     })
-
     return result
   }
 
   const root = state.goals.find(goal => !goal.id)
   const goalsTree = processGoal(goalHelper.create(root))
+  console.log(rootTasks)
+  goalsTree.tasks.push(...rootTasks)
 
   return {
     goalsTree,
@@ -32,7 +46,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onChanges: changes => dispatch(changeGoalTree(changes))
+    onChanges: changes => dispatch(changeGoalTree(changes)),
+    onAddNewTask: (goalId) => dispatch(setEditingTask(new TaskModel({goalId}))),
+    onEditTask: (task) => dispatch(setEditingTask(new TaskModel(task)))
   }
 }
 

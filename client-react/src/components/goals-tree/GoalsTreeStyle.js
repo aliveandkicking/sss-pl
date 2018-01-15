@@ -93,6 +93,19 @@ export const goalsTreeStyles = {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: theme.colorC,
+    margin: '1px',
+    cursor: 'pointer'
+  },
+  taskHover: {
+    backgroundColor: theme.colorD
+  },
+  addTask: {
+    cursor: 'pointer',
+    flex: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(120,120,120,0.2)',
     margin: '1px'
   }
 }

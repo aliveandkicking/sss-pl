@@ -6,7 +6,6 @@ import { Goal } from './goal/Goal'
 import { CustomSpan } from '../custom-span/CustomSpan';
 
 export class GoalsTreeView extends React.Component {
-
   renderNode (first, last, nodeContent, children, key,
     isRoot = false, collapsed = false, onCollapseExpand = null
   ) {
@@ -53,7 +52,7 @@ export class GoalsTreeView extends React.Component {
     )
   }
 
-  renderTasks (tasks) {
+  renderTasks (tasks, goalId) {
     const numOfRows = tasks.length < 4
      ? 1
      : tasks.length < 7
@@ -65,13 +64,15 @@ export class GoalsTreeView extends React.Component {
 
     tasks.forEach(task => {
       column.push(
-        <div style={styles.taskContainer} key={task.id}>
-          <div
+        <div style={styles.taskContainer} key={'task-' + task.id}>
+          <CustomSpan
             style={styles.task}
+            styleHover={styles.taskHover}
             title={task.name}
+            onClick={() => this.props.onEditTask(task)}
           >
             {task.getNameAbbreviation()}
-          </div>
+          </CustomSpan>
         </div>
       )
       if (column.length === numOfRows) {
@@ -83,6 +84,27 @@ export class GoalsTreeView extends React.Component {
         column = []
       }
     })
+
+    column.push(
+      <div style={styles.taskContainer} key={'add-task'}>
+        <CustomSpan
+          style={styles.addTask}
+          styleHover={styles.taskHover}
+          title={'Add new task'}
+          onClick={() => this.props.onAddNewTask(goalId)}
+        >
+          +
+        </CustomSpan>
+      </div>
+    )
+
+    if (column.length > 0) {
+      columns.push(
+        <div key={'last-col'}>
+          {column}
+        </div>
+      )
+    }
     return (
       <div style={styles.tasksContainer}>
         {columns}
@@ -144,7 +166,7 @@ export class GoalsTreeView extends React.Component {
         this.renderNode(
           !renderSubGoals,
           true,
-          this.renderTasks(goalNode.tasks),
+          this.renderTasks(goalNode.tasks, goalNode.goal.id),
           null,
           goalNode.goal.id + 'tasks'
         )
@@ -187,6 +209,8 @@ export class GoalsTreeView extends React.Component {
 GoalsTreeView.propTypes = {
   goalsTree: PropTypes.object,
   goalTreeSettings: PropTypes.object,
-  onChanges: PropTypes.func
+  onChanges: PropTypes.func,
+  onEditTask: PropTypes.func,
+  onAddNewTask: PropTypes.func
 }
 

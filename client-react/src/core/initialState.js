@@ -12,7 +12,6 @@ export const defInitialState = {
   tasks: {
     [++i]: new TaskModel({
       id: i,
-      goalId: 7,
       name: 'do exercise',
       startDate: new Date(2017, 7),
       repeatModeId: 1,
@@ -53,8 +52,7 @@ export const defInitialState = {
     }),
     [++i]: new TaskModel({
       id: i,
-      goalId: 7,
-      name: 'rouge',
+      name: 'rouge 2',
       startDate: dateUtils.incDay(dateUtils.today()),
       repeatModeId: 1,
       tag: 'Home'
@@ -62,7 +60,7 @@ export const defInitialState = {
     [++i]: new TaskModel({
       id: i,
       goalId: 7,
-      name: 'rouge',
+      name: 'rouge 3',
       startDate: dateUtils.incDay(dateUtils.today()),
       repeatModeId: 1,
       tag: 'Home'
@@ -70,7 +68,7 @@ export const defInitialState = {
     [++i]: new TaskModel({
       id: i,
       goalId: 7,
-      name: 'rouge',
+      name: '1 rouge',
       startDate: dateUtils.incDay(dateUtils.today()),
       repeatModeId: 1,
       tag: 'Home'
@@ -78,7 +76,7 @@ export const defInitialState = {
     [++i]: new TaskModel({
       id: i,
       goalId: 7,
-      name: 'rouge',
+      name: '2 rouge',
       startDate: dateUtils.incDay(dateUtils.today()),
       repeatModeId: 1,
       tag: 'Home'
@@ -86,7 +84,7 @@ export const defInitialState = {
     [++i]: new TaskModel({
       id: i,
       goalId: 7,
-      name: 'rouge',
+      name: '3 rouge',
       startDate: dateUtils.incDay(dateUtils.today()),
       repeatModeId: 1,
       tag: 'Home'
@@ -94,7 +92,7 @@ export const defInitialState = {
     [++i]: new TaskModel({
       id: i,
       goalId: 7,
-      name: 'rouge',
+      name: '4 rouge',
       startDate: dateUtils.incDay(dateUtils.today()),
       repeatModeId: 1,
       tag: 'Home'
@@ -172,7 +170,7 @@ export const defInitialState = {
       startDate: new Date(),
       repeatModeId: 1,
       every: 2
-    }),
+    })
   },
   doneTasks: {
     [dateUtils.toISOString(new Date())]: [[3, 1, 1], [1, 1, 1], [2, 1, 2]]
