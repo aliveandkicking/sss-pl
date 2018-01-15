@@ -23,13 +23,14 @@ const mapStateToProps = (state, ownProps) => {
   return {
     editingTask: state.editTask.task,
     tasks: state.tasks,
-    showingCustomDates: state.editTask.showingCustomDates
+    showingCustomDates: state.editTask.showingCustomDates,
+    goals: state.goals
   }
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch } = dispatchProps
-  const { editingTask, tasks, showingCustomDates } = stateProps
+  const { editingTask, tasks, showingCustomDates, goals } = stateProps
 
   const changeEditingTask = changes =>
     dispatch(setEditingTask(new TaskModel(editingTask, changes)))
@@ -115,9 +116,15 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
   return {
     task: editingTask,
-    predefinedNames: Object.keys(tasks).map(key => tasks[key].name),
+    predefinedNames: Object.keys(tasks).reduce((result, key) => {
+      if (!result.includes(tasks[key].name)) {
+        result.push(tasks[key].name)
+      }
+      return result
+    }, []),
     predefinedTags: getPredefinedTags(),
     showingCustomDates,
+    goals,
     onChanges: changeEditingTask,
     onClose: close,
     onDelete: () => {

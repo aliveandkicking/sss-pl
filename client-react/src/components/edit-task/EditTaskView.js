@@ -15,6 +15,7 @@ export const EditTaskView = ({
   predefinedNames,
   predefinedTags,
   showingCustomDates,
+  goals,
   onClose,
   onChanges,
   onDelete,
@@ -167,8 +168,29 @@ export const EditTaskView = ({
           defaultValue={task.tag}
           onChange={e => onChanges({tag: e.target.value.trim()})}
         />
-        <div>
-          goal
+        <div style={styles.goalContainer}>
+          Goal:
+          <select
+            style={styles.goalSelect}
+            value={task.goalId || 0}
+            onChange={e => onChanges({
+              goalId: parseInt(e.target.value.trim(), 10)
+            })}
+          >
+            <option value={0}>
+              none
+            </option>>
+            {
+              goals.map(goal =>
+                <option
+                  key={goal.id}
+                  value={goal.id}
+                >
+                  {goal.name}
+                </option>
+              )
+            }
+          </select>
         </div>
         {task.id &&
           <CustomSpan
@@ -217,5 +239,6 @@ EditTaskView.propTypes = {
   onShowingCustomDatesChange: PropTypes.func,
   showingCustomDates: PropTypes.bool,
   predefinedNames: PropTypes.array,
-  predefinedTags: PropTypes.array
+  predefinedTags: PropTypes.array,
+  goals: PropTypes.array
 }

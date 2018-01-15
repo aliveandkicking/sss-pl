@@ -181,6 +181,17 @@ export const editTaskStyles = {
     width: '120px',
     marginRight: '5px'
   },
+  goalContainer: {
+    display: 'flex',
+    alignItems: 'stretch',
+    paddingLeft: '10px',
+    maxWidth: '100px'
+  },
+  goalSelect: {
+    alignSelf: 'stretch',
+    maxWidth: '150px',
+    // minWidth: '200px'
+  },
   deleteButton: {
     display: 'flex',
     width: '75px',
