@@ -57,7 +57,7 @@ export const goalsStyles = {
   },
   contentPending: {
     backgroundColor: '#243d5b',
-    color: '#aaa'
+    color: '#ccc'
   },
   backgroundInEditMode: {
     position: 'fixed',
