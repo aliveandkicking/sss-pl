@@ -107,9 +107,9 @@ export const goalsStyles = {
   date: {
     position: 'absolute',
     bottom: '1px',
-    left: Math.floor(dimensions.width / 2 - 40) + 'px',
+    left: Math.floor(dimensions.width / 2 - 44) + 'px',
     fontSize: '9px',
-    width: '80px',
+    width: '88px',
     color: '#D1CD9F',
     textAlign: 'center'
   },

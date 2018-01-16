@@ -107,22 +107,22 @@ export class GoalView extends React.Component {
             },
             {
               caption: tasksHidden ? 'Show Tasks' : 'Hide Tasks',
-              action: () => onChangeTasksVisibility()
+              action: (ctrlPressed) => onChangeTasksVisibility(!ctrlPressed)
             },
             {
               caption: pendingSubgoalsHidden ? 'Show Pending Subgoals' : 'Hide Pending Subgoals',
-              action: () => onChangePendingSubgoalsVisibility()
+              action: (ctrlPressed) => onChangePendingSubgoalsVisibility(!ctrlPressed)
             },
             {
               caption: completeSubgoalsHidden ? 'Show Complete Subgoals' : 'Hide Complete Subgoals',
-              action: () => onChangeCompleteSubgoalsVisibility()
+              action: (ctrlPressed) => onChangeCompleteSubgoalsVisibility(!ctrlPressed)
             }
           ].map(el => <CustomSpan
               key={el.caption}
               style={styles.outerButton}
               styleHover={styles.outerButtonHover}
-              onClick={() => {
-                el.action()
+              onClick={event => {
+                el.action(event.ctrlKey)
                 this.setState({editing: false})
               }}
             >

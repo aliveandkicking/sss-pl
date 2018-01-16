@@ -35,9 +35,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { goals, goalsTree } = stateProps
 
   const getChangeVisibilityCallback = (idListName, currentValue) => {
-    return () => {
+    return (rootOnly = false) => {
       const newValue = goalsTree[idListName] || []
-      const ids = [goal.id, ...getChildrenIds(goals, goal.id)]
+      const ids = [goal.id, ...(rootOnly ? [] : getChildrenIds(goals, goal.id))]
       dispatch(changeGoalTree({[idListName]: currentValue
         ? newValue.filter(id => {
           return !ids.includes(id)
