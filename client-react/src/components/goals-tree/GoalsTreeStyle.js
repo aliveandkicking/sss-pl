@@ -94,7 +94,8 @@ export const goalsTreeStyles = {
     justifyContent: 'center',
     backgroundColor: theme.colorC,
     margin: '1px',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    transition: '200ms'
   },
   taskHover: {
     backgroundColor: theme.colorD

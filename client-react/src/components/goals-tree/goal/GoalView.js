@@ -5,6 +5,7 @@ import {
 } from './GoalStyle'
 import PropTypes from 'prop-types'
 import { CustomSpan } from '../..'
+import { dateUtils } from '../../../core'
 
 export class GoalView extends React.Component {
   state = {
@@ -13,7 +14,27 @@ export class GoalView extends React.Component {
 
   clicked = false
   root = null
-  editinName = ''
+  editingName = ''
+  editingDate = null
+
+  getDateText (date) {
+    return dateUtils.MONTH_NAMES_SHORT[date.getMonth()] + ' ' +
+      date.getDate() + '/' +
+      date.getFullYear().toString().substr(2) + ' (' +
+      dateUtils.DAY_NAMES[date.getDay()] + ')'
+  }
+
+  postChangesIfNeeded = () => {
+    let needPostChanges = false
+    const changes = {
+      ...(this.editingName ? (needPostChanges = true, {name: this.editingName}) : null),
+      ...(this.editingDate ? (needPostChanges = true, {date: dateUtils.fromISOString(this.editingDate)}) : null)
+    }
+    if (needPostChanges) {
+      this.props.onChange(changes)
+    }
+    this.setState({editing: false})
+  }
 
   renderOuterControls() {
     const position = {}
@@ -27,6 +48,10 @@ export class GoalView extends React.Component {
         dimensions.outerControlsWidth > window.innerWidth
     }
 
+    const {goal, onChange, onAddSub, onAddNewTask, onDelete, onChangeTasksVisibility,
+       onChangePendingSubgoalsVisibility, onChangeCompleteSubgoalsVisibility,
+       tasksHidden, pendingSubgoalsHidden, completeSubgoalsHidden} = this.props
+
     return [
       <CustomSpan
         key={'save-button'}
@@ -35,10 +60,7 @@ export class GoalView extends React.Component {
           ...(position.top ? {top: '-36px'} : {bottom: '-36px'})
         }}
         styleHover={styles.outerButtonHover}
-        onClick={() => {
-          this.props.onChange({name: this.editinName})
-          this.setState({editing: false})
-        }}
+        onClick={this.postChangesIfNeeded}
       >
         Save
       </CustomSpan>,
@@ -54,43 +76,59 @@ export class GoalView extends React.Component {
           ...(position.top ? {justifyContent: 'flex-end'} : null)
         }}
       >
-      {
-        [
-          {caption: 'Add Subgoal', action: this.props.onAddSub},
-          {caption: 'Add Task', action: this.props.onAddNewTask},
-          {caption: 'Delete', action: this.props.onDelete},
-          {
-            caption: !this.props.goal.passive ? 'Passive' : 'Active',
-            action: () => this.props.onChange({passive: !this.props.goal.passive})
-          },
-          {
-            caption: !this.props.goal.inProgress ? 'In Progress' : 'Pending',
-            action: () => this.props.onChange({inProgress: !this.props.goal.inProgress})
-          },
-          {
-            caption: this.props.tasksHidden ? 'Show Tasks' : 'Hide Tasks',
-            action: () => this.props.onChangeTasksVisibility()
-          },
-          {
-            caption: this.props.pendingSubgoalsHidden ? 'Show Pending Subgoals' : 'Hide Pending Subgoals',
-            action: () => this.props.onChangePendingSubgoalsVisibility()
-          },
-          {
-            caption: this.props.completeSubgoalsHidden ? 'Show Complete Subgoals' : 'Hide Complete Subgoals',
-            action: () => this.props.onChangeCompleteSubgoalsVisibility()
-          }
-        ].map(el => <CustomSpan
-            key={el.caption}
-            style={styles.outerButton}
-            styleHover={styles.outerButtonHover}
-            onClick={() => {
-              el.action()
-              this.setState({editing: false})
-            }}
-          >
-            {el.caption}
-          </CustomSpan>)
-      }
+        {
+          <div style={styles.dateContainer}>
+            <input
+              type="date"
+              defaultValue={goal.date
+                ? dateUtils.toISOString(goal.date)
+                : dateUtils.toISOString(new Date())
+              }
+              onChange={event => {
+                if (event.currentTarget.value) {
+                  this.editingDate = event.currentTarget.value
+                }
+              }}
+            />
+          </div>
+        }
+        {
+          [
+            {caption: 'Add Subgoal', action: onAddSub},
+            {caption: 'Add Task', action: onAddNewTask},
+            {caption: 'Delete', action: onDelete},
+            {
+              caption: !goal.passive ? 'Passive' : 'Active',
+              action: () => onChange({passive: !goal.passive})
+            },
+            {
+              caption: !goal.inProgress ? 'In Progress' : 'Pending',
+              action: () => onChange({inProgress: !goal.inProgress})
+            },
+            {
+              caption: tasksHidden ? 'Show Tasks' : 'Hide Tasks',
+              action: () => onChangeTasksVisibility()
+            },
+            {
+              caption: pendingSubgoalsHidden ? 'Show Pending Subgoals' : 'Hide Pending Subgoals',
+              action: () => onChangePendingSubgoalsVisibility()
+            },
+            {
+              caption: completeSubgoalsHidden ? 'Show Complete Subgoals' : 'Hide Complete Subgoals',
+              action: () => onChangeCompleteSubgoalsVisibility()
+            }
+          ].map(el => <CustomSpan
+              key={el.caption}
+              style={styles.outerButton}
+              styleHover={styles.outerButtonHover}
+              onClick={() => {
+                el.action()
+                this.setState({editing: false})
+              }}
+            >
+              {el.caption}
+            </CustomSpan>)
+        }
       </div>
     ]
   }
@@ -113,7 +151,6 @@ export class GoalView extends React.Component {
             ...this.renderOuterControls()
           ]
         }
-
         {
           <div style={{
             ...styles.checkMark,
@@ -164,6 +201,13 @@ export class GoalView extends React.Component {
             }
           </div>
 
+          {
+            goal.date &&
+            <div style={styles.date}>
+              {this.getDateText(goal.date)}
+            </div>
+          }
+
           <CustomSpan
             style={styles.editButton}
             styleHover={styles.innerButtonHover}
@@ -190,10 +234,10 @@ export class GoalView extends React.Component {
                 autoFocus
                 onFocus={e => e.target.select()}
                 defaultValue={goal.name}
-                onChange={event => this.editinName = event.currentTarget.value}
+                onChange={event => this.editingName = event.currentTarget.value}
                 onKeyUp={e => {
                   if (e.keyCode === 13) {
-                    this.props.onChange({name: this.editinName})
+                    this.postChangesIfNeeded()
                     this.setState({editing: false})
                   }
                 }}

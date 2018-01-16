@@ -4,7 +4,7 @@ export const dimensions = {
   width: 150,
   height: 55,
   outerControlsWidth: 145,
-  outerControlsHeight: 200
+  outerControlsHeight: 230
 }
 
 const innerButton = {
@@ -104,6 +104,15 @@ export const goalsStyles = {
     marginLeft: 'auto',
     color: '#ccc'
   },
+  date: {
+    position: 'absolute',
+    bottom: '1px',
+    left: Math.floor(dimensions.width / 2 - 40) + 'px',
+    fontSize: '9px',
+    width: '80px',
+    color: '#D1CD9F',
+    textAlign: 'center'
+  },
   checkMark: {
     position: 'absolute',
     bottom: '0px',
@@ -164,5 +173,14 @@ export const goalsStyles = {
     fontSize: '80%',
     backgroundColor: theme.colorD,
     margin: '2px'
+  },
+  dateContainer: {
+    ...outerButton,
+    width: dimensions.outerControlsWidth - 6 + 'px',
+    height: '40px',
+    fontSize: '80%',
+    backgroundColor: theme.colorD,
+    margin: '2px',
+    padding: '0px 3px'
   }
 }
