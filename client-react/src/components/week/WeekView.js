@@ -1,10 +1,10 @@
 import React from 'react'
-import { weekStyles } from './WeekStyle'
+import { weekStyles as styles } from './WeekStyle'
 import { Day, WeekNavigationHeader } from '..'
 import { dateUtils } from '../../core'
 import PropTypes from 'prop-types'
 
-export const WeekView = ({initialDate}) => {
+export const WeekView = ({initialDate, currentGoals}) => {
   const randerDays = () => {
     let result = []
     for (let i = 0; i < 7; i++) {
@@ -14,15 +14,34 @@ export const WeekView = ({initialDate}) => {
   }
 
   return (
-    <div style={weekStyles.root} >
+    <div style={styles.root} >
       <WeekNavigationHeader />
-      <div style={weekStyles.body}>
+      <div style={styles.body}>
         {randerDays()}
+      </div>
+      <div style={styles.footer}>
+        {
+          currentGoals.map(goal => <div
+            key={goal.id}
+            style={styles.goal}
+          >
+            <div>
+              {goal.name}
+            </div>
+            {
+              goal.passive &&
+              <div style={styles.goalLabel}>
+                {'P'}
+              </div>
+            }
+          </div>)
+        }
       </div>
     </div>
   )
 }
 
 WeekView.propTypes = {
-  initialDate: PropTypes.object
+  initialDate: PropTypes.object,
+  currentGoals: PropTypes.array
 }
