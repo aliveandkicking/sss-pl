@@ -76,7 +76,6 @@ export class App extends React.Component {
           this.store.dispatch(setStatusText('saving state...'))
           stateHelper.saveState(this.session, state)
             .then(response => {
-              console.log('then >>> ', response)
               this.store.dispatch(setStatusText('saved'))
             })
             .catch(response => {
