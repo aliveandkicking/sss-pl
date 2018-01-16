@@ -28,7 +28,7 @@ export class GoalView extends React.Component {
     let needPostChanges = false
     const changes = {
       ...(this.editingName ? (needPostChanges = true, {name: this.editingName}) : null),
-      ...(this.editingDate ? (needPostChanges = true, {date: dateUtils.fromISOString(this.editingDate)}) : null)
+      ...(this.editingDate ? (needPostChanges = true, {date: this.editingDate}) : null)
     }
     if (needPostChanges) {
       this.props.onChange(changes)
@@ -81,7 +81,7 @@ export class GoalView extends React.Component {
             <input
               type="date"
               defaultValue={goal.date
-                ? dateUtils.toISOString(goal.date)
+                ? goal.date
                 : dateUtils.toISOString(new Date())
               }
               onChange={event => {
@@ -204,7 +204,7 @@ export class GoalView extends React.Component {
           {
             goal.date &&
             <div style={styles.date}>
-              {this.getDateText(goal.date)}
+              {this.getDateText(dateUtils.fromISOString(goal.date))}
             </div>
           }
 

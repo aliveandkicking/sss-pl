@@ -6,7 +6,6 @@ const createAction = (type, ...payloadFields) => {
     }
     const payload = payloadFields.reduce(
       (payloadObj, field, i) => Object.assign(payloadObj, {[field]: payloadData[i]}), {})
-    console.log(type, payload)
     return {type, payload}
   }
 }

@@ -64,11 +64,9 @@ export class App extends React.Component {
         applyMiddleware(middleware)
       )
     )
-    console.log('initial state >>> ', this.store.getState())
 
     this.store.subscribe(() => {
       const state = this.store.getState()
-      console.log(state)
       this.restartActivityTimeout()
 
       if (!this.sandbox && state.needSave) {

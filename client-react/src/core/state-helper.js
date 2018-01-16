@@ -43,7 +43,7 @@ class StateHelper {
       }
       return true
     } catch (error) {
-      console.log(jsonString, error)
+      console.error(jsonString, error)
       this.initialState = defInitialState
       return false
     }
@@ -55,6 +55,8 @@ class StateHelper {
       mainMenuExpanded: state.mainMenuExpanded,
       pageId: state.pageId,
       tasks: {},
+      goals: state.goals,
+      goalsTree: state.goalsTree,
       tags: state.tags,
       editingTag: state.editingTag,
       doneTasks: state.doneTasks,
