@@ -225,6 +225,10 @@ export class GoalView extends React.Component {
                     inProgress: !goal.complete || goal.inProgress
                   })
                 }
+                onContextMenu={e => {
+                  e.preventDefault();
+                  this.setState({editing: !this.state.editing})
+                }}
               >
                 {goal.name}
               </div>
@@ -235,9 +239,11 @@ export class GoalView extends React.Component {
                 onFocus={e => e.target.select()}
                 defaultValue={goal.name}
                 onChange={event => this.editingName = event.currentTarget.value}
-                onKeyUp={e => {
-                  if (e.keyCode === 13) {
+                onKeyUp={event => {
+                  if (event.keyCode === 13) {
                     this.postChangesIfNeeded()
+                    this.setState({editing: false})
+                  } else if (event.keyCode === 27) {
                     this.setState({editing: false})
                   }
                 }}
