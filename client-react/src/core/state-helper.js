@@ -3,7 +3,7 @@ import {
   dateUtils
 } from '.'
 import { serverApi } from './server-api'
-import { defInitialState } from './initialState'
+import { defInitialState } from './initial-state'
 
 class StateHelper {
   constructor () {

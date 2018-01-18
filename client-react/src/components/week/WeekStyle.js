@@ -11,10 +11,27 @@ export const weekStyles = {
     alignItems: 'stretch',
     overflowY: 'hidden'
   },
+  vocabularyBlockContainer: {
+    display: 'flex',
+    alignItems: 'stretch',
+    justifyContent: 'center',
+    height: '30px',
+    marginTop: '5px'
+  },
+  vocabularyItemContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '0px 5px',
+    backgroundColor: '#2B854B',
+    borderRadius: '2px',
+    padding: '3px 12px',
+    fontSize: '70%'
+  },
   footer: {
     display: 'flex',
     justifyContent: 'center',
-    height: '40px',
+    height: '30px',
     padding: '5px',
     userSelect: 'none',
     MozUserSelect: 'none'
@@ -23,7 +40,7 @@ export const weekStyles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#958237',
+    backgroundColor: '#CB824B',
     borderRadius: '2px',
     padding: '3px 12px',
     margin: '0px 5px',

@@ -7,7 +7,7 @@ import {
 let i = 0
 export const defInitialState = {
   initialDate: dateUtils.clearTime(new Date()),
-  pageId: 2,
+  pageId: 0,
   mainMenuExpanded: false,
   tasks: {
     [++i]: new TaskModel({
@@ -254,9 +254,17 @@ export const defInitialState = {
     calendarMonthMode: false,
     task: null,
     showingCustomDates: false
-  }
+  },
+  vocabulary: [
+    {
+      text: 'cat',
+      explanation: 'awesome animal',
+      date: dateUtils.toISOString(dateUtils.today())
+    },
+    {
+      text: 'dog',
+      explanation: 'pretty good animal too',
+      date: dateUtils.toISOString(dateUtils.incDay(dateUtils.today(), -1))
+    }
+  ]
 }
-
-// export const defInitialState = {
-
-// }

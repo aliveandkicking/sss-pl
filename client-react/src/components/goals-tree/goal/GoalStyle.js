@@ -38,7 +38,7 @@ export const goalsStyles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'stretch',
-    backgroundColor: '#958237',
+    backgroundColor: '#CB824B',
     width: dimensions.width + 'px',
     height: dimensions.height + 'px',
     border: '2px solid #779',

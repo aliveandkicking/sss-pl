@@ -1,6 +1,10 @@
 import React from 'react'
 import { weekStyles as styles } from './WeekStyle'
-import { Day, WeekNavigationHeader } from '..'
+import {
+  Day,
+  WeekNavigationHeader,
+  Vocabulary
+} from '..'
 import { dateUtils } from '../../core'
 import PropTypes from 'prop-types'
 
@@ -19,6 +23,22 @@ export const WeekView = ({initialDate, currentGoals}) => {
       <div style={styles.body}>
         {randerDays()}
       </div>
+
+      <div style={styles.vocabularyBlockContainer}>
+        {
+          dateUtils.DAYS_OF_WEEK.map(
+            (dayName, index) => (
+              <div
+                key={index}
+                style={styles.vocabularyItemContainer}
+              >
+                <Vocabulary date={dateUtils.incDay(initialDate, index)}/>
+              </div>
+            )
+          )
+        }
+      </div>
+
       <div style={styles.footer}>
         {
           currentGoals.map(goal => <div

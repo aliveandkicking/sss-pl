@@ -6,11 +6,15 @@ export class VocabularyView extends React.Component {
 
   render () {
     const {term} = this.props
-
+    if (!term) {
+      return null
+    }
     return (
       <div style={styles.root}>
         <div style={styles.content}>
-          {term.original + term.ranslation}
+          <a href={'https://translate.google.com.ua/?hl=uk&tab=wT&authuser=0#en/uk/' + term.text}>
+            {term.text + ' - ' + term.explanation}
+          </a>
         </div>
       </div>
     )
@@ -18,5 +22,5 @@ export class VocabularyView extends React.Component {
 }
 
 VocabularyView.propTypes = {
-  term: PropTypes.object.isRequired
+  term: PropTypes.object
 }

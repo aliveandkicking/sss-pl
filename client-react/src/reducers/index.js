@@ -155,6 +155,16 @@ const goalsTree = (state = {collapsedNodes:{}}, action) => {
   return state
 }
 
+const vocabulary = (state = [], action) => {
+  // if (action.type === CHANGE_GOAL_TREE) {
+  //   return {
+  //     ...state,
+  //     ...action.payload.changes
+  //   }
+  // }
+  return state
+}
+
 export const rootReducer = combineReducers({
   needSave,
   pageId,
@@ -168,5 +178,6 @@ export const rootReducer = combineReducers({
   goalsTree,
   editingTag,
   editTask: editTaskReducer,
-  windowSize
+  windowSize,
+  vocabulary
 })

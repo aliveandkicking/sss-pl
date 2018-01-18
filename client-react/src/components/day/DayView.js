@@ -1,10 +1,7 @@
 import React from 'react'
 import { dayStyles as styles } from './DayStyle'
 import { Task } from '../task/Task'
-import {
-  CustomSpan,
-  Vocabulary
-} from '..'
+import { CustomSpan } from '..'
 import { dateUtils } from '../../core'
 import PropTypes from 'prop-types'
 
@@ -101,10 +98,6 @@ export class DayView extends React.Component {
           }
         }}
       >
-        <Vocabulary
-          date={this.props.date}
-        />
-
         <div style={styles.caption}>
           {this.props.caption + (this.props.isComplete ? ' ✔' : '')}
         </div>
