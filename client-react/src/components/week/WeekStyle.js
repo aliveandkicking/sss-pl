@@ -15,7 +15,7 @@ export const weekStyles = {
     display: 'flex',
     alignItems: 'stretch',
     justifyContent: 'center',
-    height: '30px',
+    height: '20px',
     marginTop: '5px'
   },
   vocabularyItemContainer: {
@@ -25,7 +25,7 @@ export const weekStyles = {
     margin: '0px 5px',
     backgroundColor: '#2B854B',
     borderRadius: '2px',
-    padding: '3px 12px',
+    padding: '1px 5px',
     fontSize: '70%'
   },
   footer: {

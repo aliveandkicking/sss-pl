@@ -32,7 +32,10 @@ export const WeekView = ({initialDate, currentGoals}) => {
                 key={index}
                 style={styles.vocabularyItemContainer}
               >
-                <Vocabulary date={dateUtils.incDay(initialDate, index)}/>
+                <Vocabulary
+                  date={dateUtils.incDay(initialDate, index)}
+                  compactMode
+                />
               </div>
             )
           )
