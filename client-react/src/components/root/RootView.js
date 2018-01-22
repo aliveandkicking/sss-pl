@@ -1,6 +1,7 @@
 import React from 'react'
 import {
   Week,
+  DayMode,
   EditTask,
   TaskList,
   GoalsTree,
@@ -25,6 +26,24 @@ export class RootView extends React.Component {
   //   window.addEventListener('resize', this.onResizeHandler)
   // }
 
+  getPage (pageId) {
+    if (pageId === pages.taskList.id) {
+      return <TaskList />
+    } else if (pageId === pages.taskList.id) {
+      return
+    } else if (pageId === pages.taskList.id) {
+      return
+    } else if (pageId === pages.taskList.id) {
+      return
+    }
+    ( ?  : false) ||
+    (pageId === pages.weekTasks.id ? <Week /> : false) ||
+    (pageId === pages.weekTasks.id ? <Week /> : false) ||
+    (pageId === pages.goalsTree.id ? <GoalsTree /> : false)
+  }
+
+  }
+
   render () {
     const {pageId} = this.props
     return (
@@ -32,6 +51,7 @@ export class RootView extends React.Component {
         <div style={styles.content}>
           {
             (pageId === pages.taskList.id ? <TaskList /> : false) ||
+            (pageId === pages.weekTasks.id ? <Week /> : false) ||
             (pageId === pages.weekTasks.id ? <Week /> : false) ||
             (pageId === pages.goalsTree.id ? <GoalsTree /> : false)
           }
