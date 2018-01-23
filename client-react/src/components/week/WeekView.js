@@ -2,8 +2,8 @@ import React from 'react'
 import { weekStyles as styles } from './WeekStyle'
 import {
   Day,
-  WeekNavigationHeader,
-  Vocabulary
+  WeekNavigationHeader
+  // Vocabulary
 } from '..'
 import { dateUtils } from '../../core'
 import PropTypes from 'prop-types'
@@ -25,7 +25,7 @@ export const WeekView = ({initialDate, currentGoals}) => {
       </div>
 
       <div style={styles.vocabularyBlockContainer}>
-        {
+        {/*
           dateUtils.DAYS_OF_WEEK.map(
             (dayName, index) => (
               <div
@@ -39,7 +39,7 @@ export const WeekView = ({initialDate, currentGoals}) => {
               </div>
             )
           )
-        }
+        */}
       </div>
 
       <div style={styles.footer}>

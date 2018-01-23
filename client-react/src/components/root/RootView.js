@@ -29,19 +29,13 @@ export class RootView extends React.Component {
   getPage (pageId) {
     if (pageId === pages.taskList.id) {
       return <TaskList />
-    } else if (pageId === pages.taskList.id) {
-      return
-    } else if (pageId === pages.taskList.id) {
-      return
-    } else if (pageId === pages.taskList.id) {
-      return
+    } else if (pageId === pages.dayTasks.id) {
+      return <DayMode />
+    } else if (pageId === pages.weekTasks.id) {
+      return <Week />
+    } else if (pageId === pages.goalsTree.id) {
+      return <GoalsTree />
     }
-    ( ?  : false) ||
-    (pageId === pages.weekTasks.id ? <Week /> : false) ||
-    (pageId === pages.weekTasks.id ? <Week /> : false) ||
-    (pageId === pages.goalsTree.id ? <GoalsTree /> : false)
-  }
-
   }
 
   render () {
@@ -49,12 +43,7 @@ export class RootView extends React.Component {
     return (
       <div style={styles.root}>
         <div style={styles.content}>
-          {
-            (pageId === pages.taskList.id ? <TaskList /> : false) ||
-            (pageId === pages.weekTasks.id ? <Week /> : false) ||
-            (pageId === pages.weekTasks.id ? <Week /> : false) ||
-            (pageId === pages.goalsTree.id ? <GoalsTree /> : false)
-          }
+          {this.getPage(pageId)}
         </div>
         <StatusBar />
         <EditTask />

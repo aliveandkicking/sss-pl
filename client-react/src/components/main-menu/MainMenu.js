@@ -41,6 +41,11 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
       if (pageId !== pages.goalsTree.id) {
         dispatch(setPageId(pages.goalsTree.id))
       }
+    },
+    onShowDay: () => {
+      if (pageId !== pages.dayTasks.id) {
+        dispatch(setPageId(pages.dayTasks.id))
+      }
     }
   }
 }

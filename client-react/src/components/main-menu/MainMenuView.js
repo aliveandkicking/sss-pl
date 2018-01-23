@@ -9,7 +9,8 @@ export const MainMenuView = ({
   onNewTask,
   onShowTaskList,
   onShowWeek,
-  onShowGoalsTree
+  onShowGoalsTree,
+  onShowDay
 }) => {
   const getItem = (iconSymbol, text, action) => {
     return (
@@ -52,6 +53,7 @@ export const MainMenuView = ({
           {getItem('+', 'New Task', onNewTask)}
           {getItem('▤', 'Task List', onShowTaskList)}
           {getItem('Ⓦ', 'Week', onShowWeek)}
+          {getItem('Ⓓ', 'Day', onShowDay)}
           {getItem('Ⓖ', 'Goals Tree', onShowGoalsTree)}
         </div>
 
