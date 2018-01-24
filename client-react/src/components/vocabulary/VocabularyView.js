@@ -7,7 +7,7 @@ const translateUrlPrefix = 'https://translate.google.com.ua/?hl=uk&tab=wT&authus
 export class VocabularyView extends React.Component {
 
   render () {
-    const {term, compactMode} = this.props
+    const {term} = this.props
     if (!term) {
       return null
     }
@@ -16,8 +16,15 @@ export class VocabularyView extends React.Component {
         <div style={styles.content}
           title={term.text + ' - ' + term.explanation}
         >
-          <a href={translateUrlPrefix + term.text}>
-            {term.text + (compactMode ? '' : ' - ' + term.explanation)}
+          <a
+            target={'_blank'}
+            href={translateUrlPrefix + term.text}
+          >
+            <div
+              style={styles.link}
+            >
+              {term.text + ' - ' + term.explanation}
+            </div>
           </a>
         </div>
       </div>

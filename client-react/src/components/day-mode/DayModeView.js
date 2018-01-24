@@ -2,57 +2,50 @@ import React from 'react'
 import { dayModeStyles as styles } from './DayModeStyle'
 import {
   Day,
-  DayNavigationHeader
-  // Vocabulary
+  DayNavigationHeader,
+  Vocabulary
 } from '..'
 import { dateUtils } from '../../core'
 import PropTypes from 'prop-types'
+
+function getVocabularyContent (date) {
+  const result = []
+  const startOfWeel = dateUtils.getStartOfWeek(date)
+
+  for (let index = 0; index < dateUtils.DAYS_IN_WEEK; index++) {
+    result.push(
+      <div
+        key={'vocab-containter-' + index}
+        style={styles.vocabularyItemContainer}
+      >
+        <Vocabulary
+          date={dateUtils.incDay(startOfWeel, index)}
+        />
+      </div>
+    )
+  }
+  return result
+}
 
 export const DayModeView = ({date, currentGoals}) => {
 
   return (
     <div style={styles.root} >
       <DayNavigationHeader />
-      <div style={styles.body}>
+
+      <div style={styles.content}>
         <Day date={date} />
+
+        <div style={styles.additionalInfo}>
+          <div style={styles.vocabularyContainer}>
+            {getVocabularyContent(date)}
+          </div>
+          <div style={styles.notesContainer}>
+
+          </div>
+        </div>
       </div>
 
-      <div style={styles.vocabularyBlockContainer}>
-        {/*
-          dateUtils.DAYS_OF_WEEK.map(
-            (dayName, index) => (
-              <div
-                key={index}
-                style={styles.vocabularyItemContainer}
-              >
-                <Vocabulary
-                  date={dateUtils.incDay(initialDate, index)}
-                  compactMode
-                />
-              </div>
-            )
-          )
-        */}
-      </div>
-
-      <div style={styles.footer}>
-        {/*
-          currentGoals.map(goal => <div
-            key={goal.id}
-            style={styles.goal}
-          >
-            <div>
-              {goal.name}
-            </div>
-            {
-              goal.passive &&
-              <div style={styles.goalLabel}>
-                {'P'}
-              </div>
-            }
-          </div>)
-          */}
-      </div>
     </div>
   )
 }

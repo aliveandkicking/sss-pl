@@ -5,5 +5,9 @@ export const vocabularyStyles = {
   },
   content: {
 
+  },
+  link: {
+    color: '#eee'
+
   }
 }

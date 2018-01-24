@@ -1,19 +1,27 @@
-import { theme } from '../styles'
+// import { theme } from '../styles'
 
 export const dayModeStyles = {
   root: {
-    background: `linear-gradient(-30deg, ${theme.colorC}, ${theme.colorE})`,
-    fontFamily: theme.fontFamily,
-    color: theme.colorText,
     height: '100%',
-    minWidth: theme.minContentWidth,
-    minHeight: theme.minContentHeight,
-    marginLeft: theme.mainMenuCollapsedWidth,
     display: 'flex',
     flexDirection: 'column'
   },
   content: {
     flex: 1,
+    display: 'flex',
     overflowY: 'auto'
+  },
+  additionalInfo: {
+    border: '1px solid #888',
+    width: '85%',
+    display: 'flex',
+  },
+  vocabularyContainer: {
+    flex: 1,
+    border: '1px solid yellow',
+  },
+  notesContainer: {
+    flex: 1,
+    border: '1px solid yellow',
   }
 }
