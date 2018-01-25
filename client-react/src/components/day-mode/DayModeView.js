@@ -55,7 +55,7 @@ export class DayModeView extends React.Component {
 
     setTimeout(() => {
       this.setState({popupIndex: getRandomIndex(popups.length)})
-    }, 60000);
+    }, 300000);
 
     return (
       <div style={styles.root} >
@@ -79,7 +79,6 @@ export class DayModeView extends React.Component {
       </div>
     )
   }
-
 }
 
 DayModeView.propTypes = {

@@ -43,7 +43,9 @@ export const dayModeStyles = {
   vocabularyDate: {
     color: '#bbb',
     fontSize: '11px',
-    width: '80px'
+    width: '80px',
+    textAlign: 'end',
+    alignSelf: 'center'
   },
   popup: {
     flex: 'auto',
@@ -53,6 +55,7 @@ export const dayModeStyles = {
     borderRadius: '2px',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    cursor: 'pointer'
   }
 }
