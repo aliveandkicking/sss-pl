@@ -98,9 +98,12 @@ export class DayView extends React.Component {
           }
         }}
       >
-        <div style={styles.caption}>
-          {this.props.caption + (this.props.isComplete ? ' ✔' : '')}
-        </div>
+        {
+          !this.props.hideCaption &&
+          <div style={styles.caption}>
+            {this.props.caption + (this.props.isComplete ? ' ✔' : '')}
+          </div>
+        }
         <div style={styles.content}>
           {this.getTasks()}
         </div>
@@ -133,6 +136,7 @@ DayView.propTypes = {
   isComplete: PropTypes.bool.isRequired,
   predefinedTaskNames: PropTypes.array.isRequired,
   date: PropTypes.object.isRequired,
+  hideCaption: PropTypes.bool,
   onAddNewTask: PropTypes.func.isRequired,
   onAddTask: PropTypes.func.isRequired,
   dropTask: PropTypes.func.isRequired

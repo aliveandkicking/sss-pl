@@ -15,7 +15,7 @@ function getRandomIndex (length) {
 function getVocabularyContent (date) {
   const result = []
   const startOfWeel = dateUtils.getStartOfWeek(date)
-  const todayTime = dateUtils.today().getTime()
+  const todayTime = dateUtils.clearTime(date).getTime()
 
   let currDate
   let currVocabItem
@@ -62,7 +62,10 @@ export class DayModeView extends React.Component {
         <DayNavigationHeader />
   
         <div style={styles.content}>
-          <Day date={date} />
+          <Day
+            date={date}
+            hideCaption
+          />
   
           <div style={styles.additionalInfo}>
             <div style={styles.vocabularyContainer}>

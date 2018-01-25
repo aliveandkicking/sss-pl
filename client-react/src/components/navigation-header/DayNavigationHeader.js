@@ -4,22 +4,13 @@ import { setInitialDate } from '../../actions'
 import { dateUtils } from '../../core'
 
 const buildDateCaption = date => {
-  const startDateData = dateUtils.decodeDate(date)
-  const endDateData = dateUtils.decodeDate(dateUtils.incDay(date, dateUtils.DAYS_IN_WEEK - 1))
-  let result = ''
-
-  if (startDateData[1] === endDateData[1]) {
-    result = ` ${dateUtils.MONTH_NAMES[startDateData[1]]} ${startDateData[2]} - ${endDateData[2]}, `
-  } else {
-    result = ` ${dateUtils.MONTH_NAMES[startDateData[1]]} ${startDateData[2]} -  ${dateUtils.MONTH_NAMES[endDateData[1]]} ${endDateData[2]}, `
-  }
-  result += startDateData[0] !== endDateData[0] ? startDateData[0] + ' - ' + endDateData[0] : startDateData[0]
-  return result
+  const dateData = dateUtils.decodeDate(date)
+  return `${dateUtils.DAY_NAMES[date.getDay()]}. ${dateUtils.MONTH_NAMES[dateData[1]]} ${dateData[2]}, ${dateData[0]}`
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    initialDate: dateUtils.getStartOfWeek(state.initialDate)
+    initialDate: state.initialDate
   }
 }
 

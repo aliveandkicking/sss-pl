@@ -13,17 +13,13 @@ export const dayModeStyles = {
     overflowY: 'auto'
   },
   additionalInfo: {
-    // marginTop: '21px',
-    // border: '1px solid #888',
-    width: '50%',
-    display: 'flex',
+    width: '75%',
+    display: 'flex'
   },
   vocabularyContainer: {
     flex: '1',
-    // border: '1px solid yellow',
     borderRadius: '3px',
-    margin: '10px 5px 10px 10px',
-    // backgroundColor: 'rgba(0,0,0,0.2)',
+    margin: '0px 5px 10px 10px',
     backgroundColor: theme.colorB,
     padding: '10px',
     display: 'flex',
@@ -31,10 +27,12 @@ export const dayModeStyles = {
   },
   vocabularyItemContainer: {
     backgroundColor: theme.colorC,
+    height: '30px',
     margin: '5px',
     padding: '12px',
     borderRadius: '2px',
     display: 'flex',
+    alignItems: 'center',
     justifyContent: 'space-between'
   },
   vocabularyItemContainerToday: {
@@ -44,8 +42,7 @@ export const dayModeStyles = {
     color: '#bbb',
     fontSize: '11px',
     width: '80px',
-    textAlign: 'end',
-    alignSelf: 'center'
+    textAlign: 'end'
   },
   popup: {
     flex: 'auto',

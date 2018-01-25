@@ -5,7 +5,7 @@ import { setWindowSize } from '../../actions'
 const mapStateToProps = (state, ownProps) => {
   return {
     popups: state.popups,
-    date: new Date()
+    date: state.initialDate
   }
 }
 

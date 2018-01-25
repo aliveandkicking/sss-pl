@@ -3,12 +3,11 @@ import { weekStyles as styles } from './WeekStyle'
 import {
   Day,
   WeekNavigationHeader
-  // Vocabulary
 } from '..'
 import { dateUtils } from '../../core'
 import PropTypes from 'prop-types'
 
-export const WeekView = ({initialDate, currentGoals}) => {
+export const WeekView = ({initialDate}) => {
   const randerDays = () => {
     let result = []
     for (let i = 0; i < 7; i++) {
@@ -22,43 +21,6 @@ export const WeekView = ({initialDate, currentGoals}) => {
       <WeekNavigationHeader />
       <div style={styles.body}>
         {randerDays()}
-      </div>
-
-      <div style={styles.vocabularyBlockContainer}>
-        {/*
-          dateUtils.DAYS_OF_WEEK.map(
-            (dayName, index) => (
-              <div
-                key={index}
-                style={styles.vocabularyItemContainer}
-              >
-                <Vocabulary
-                  date={dateUtils.incDay(initialDate, index)}
-                  compactMode
-                />
-              </div>
-            )
-          )
-        */}
-      </div>
-
-      <div style={styles.footer}>
-        {
-          currentGoals.map(goal => <div
-            key={goal.id}
-            style={styles.goal}
-          >
-            <div>
-              {goal.name}
-            </div>
-            {
-              goal.passive &&
-              <div style={styles.goalLabel}>
-                {'P'}
-              </div>
-            }
-          </div>)
-        }
       </div>
     </div>
   )
