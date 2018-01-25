@@ -4,46 +4,55 @@ export const dayModeStyles = {
   root: {
     height: '100%',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    paddingLeft: '10px'
   },
   content: {
-    flex: 1,
+    flex: '1',
     display: 'flex',
     overflowY: 'auto'
   },
   additionalInfo: {
-    marginTop: '21px',
+    // marginTop: '21px',
     // border: '1px solid #888',
-    width: '85%',
+    width: '50%',
     display: 'flex',
   },
   vocabularyContainer: {
-    flex: 1,
+    flex: '1',
     // border: '1px solid yellow',
     borderRadius: '3px',
-    margin: '10px',
-    backgroundColor: 'rgba(50,50,50,0.5)',
-    padding: '10px'
+    margin: '10px 5px 10px 10px',
+    // backgroundColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: theme.colorB,
+    padding: '10px',
+    display: 'flex',
+    flexDirection: 'column'
   },
   vocabularyItemContainer: {
-    backgroundColor: theme.colorB,
+    backgroundColor: theme.colorC,
     margin: '5px',
-    padding: '5px 72px 5px 5px',
+    padding: '12px',
     borderRadius: '2px',
-    position: 'relative'
+    display: 'flex',
+    justifyContent: 'space-between'
   },
   vocabularyItemContainerToday: {
-    backgroundColor: theme.colorC
+    backgroundColor: theme.colorA
   },
   vocabularyDate: {
-    color: '#aaa',
-    position: 'absolute',
+    color: '#bbb',
     fontSize: '11px',
-    top: '2px',
-    right: '2px'
+    width: '80px'
   },
-  notesContainer: {
-    flex: 1,
-    // border: '1px solid yellow',
+  popup: {
+    flex: 'auto',
+    backgroundColor: theme.colorC,
+    margin: '5px',
+    padding: '10px',
+    borderRadius: '2px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 }

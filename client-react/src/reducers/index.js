@@ -165,6 +165,16 @@ const vocabulary = (state = [], action) => {
   return state
 }
 
+const popups = (state = [], action) => {
+  // if (action.type === CHANGE_GOAL_TREE) {
+  //   return {
+  //     ...state,
+  //     ...action.payload.changes
+  //   }
+  // }
+  return state
+}
+
 export const rootReducer = combineReducers({
   needSave,
   pageId,
@@ -179,5 +189,6 @@ export const rootReducer = combineReducers({
   editingTag,
   editTask: editTaskReducer,
   windowSize,
-  vocabulary
+  vocabulary,
+  popups
 })

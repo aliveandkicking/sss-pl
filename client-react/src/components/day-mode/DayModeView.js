@@ -8,6 +8,10 @@ import {
 import { dateUtils } from '../../core'
 import PropTypes from 'prop-types'
 
+function getRandomIndex (length) {
+  return Math.floor(Math.random() * length)
+}
+
 function getVocabularyContent (date) {
   const result = []
   const startOfWeel = dateUtils.getStartOfWeek(date)
@@ -31,10 +35,10 @@ function getVocabularyContent (date) {
             )
           }}
         >
+          {currVocabItem}
           <div style={styles.vocabularyDate}>
             {dateUtils.toISOString(currDate)}
           </div>
-          {currVocabItem}
         </div>
       )
     }
@@ -42,30 +46,45 @@ function getVocabularyContent (date) {
   return result
 }
 
-export const DayModeView = ({date, currentGoals}) => {
+export class DayModeView extends React.Component {
 
-  return (
-    <div style={styles.root} >
-      <DayNavigationHeader />
+  state = {popupIndex: 0}
 
-      <div style={styles.content}>
-        <Day date={date} />
+  render () {
+    const {date, popups} = this.props
 
-        <div style={styles.additionalInfo}>
-          <div style={styles.vocabularyContainer}>
-            {getVocabularyContent(date)}
-          </div>
-          <div style={styles.notesContainer}>
-            {}
+    setTimeout(() => {
+      this.setState({popupIndex: getRandomIndex(popups.length)})
+    }, 60000);
+
+    return (
+      <div style={styles.root} >
+        <DayNavigationHeader />
+  
+        <div style={styles.content}>
+          <Day date={date} />
+  
+          <div style={styles.additionalInfo}>
+            <div style={styles.vocabularyContainer}>
+              {getVocabularyContent(date)}
+              <div
+                style={styles.popup}
+                onClick={() => this.setState({popupIndex: getRandomIndex(popups.length)})}
+              >
+                {popups[this.state.popupIndex]}
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
+
 }
 
 DayModeView.propTypes = {
   initialDate: PropTypes.object,
   currentGoals: PropTypes.array,
+  popups: PropTypes.array,
   date: PropTypes.object
 }

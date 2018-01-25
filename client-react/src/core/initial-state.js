@@ -271,5 +271,10 @@ export const defInitialState = {
       explanation: 'that is a bird and this is kind of very long description',
       date: dateUtils.toISOString(dateUtils.incDay(dateUtils.today(), +1))
     }
+  ],
+  popups: [
+    'font-family: Verdana, sans-serif',
+    'that is a bird and this is kind of very long description',
+    'awesome animal'
   ]
 }
