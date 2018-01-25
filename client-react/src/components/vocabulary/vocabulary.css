@@ -1,0 +1,17 @@
+.vocabulary-link {
+  color: #ddd;
+  transition: 200ms;
+  text-decoration: none;
+}
+
+.vocabulary-link:hover {
+  color: rgb(106, 116, 168);
+}
+
+.vocabulary-text {
+  font-size: 100%;
+}
+
+.vocabulary-explanation {
+  font-size: 80%;
+}

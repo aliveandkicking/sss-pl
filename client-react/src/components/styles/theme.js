@@ -5,6 +5,8 @@ export const theme = {
   colorD: '#418DD9',
   colorE: '#002D5A',
 
+  colorLabel: '#8C600C',
+
   colorText: '#dedede',
   colorTextHover: '#8C9DD9',
 

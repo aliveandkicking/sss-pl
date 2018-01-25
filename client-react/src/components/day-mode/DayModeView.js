@@ -11,18 +11,33 @@ import PropTypes from 'prop-types'
 function getVocabularyContent (date) {
   const result = []
   const startOfWeel = dateUtils.getStartOfWeek(date)
+  const todayTime = dateUtils.today().getTime()
 
+  let currDate
+  let currVocabItem
   for (let index = 0; index < dateUtils.DAYS_IN_WEEK; index++) {
-    result.push(
-      <div
-        key={'vocab-containter-' + index}
-        style={styles.vocabularyItemContainer}
-      >
-        <Vocabulary
-          date={dateUtils.incDay(startOfWeel, index)}
-        />
-      </div>
-    )
+    currDate = dateUtils.clearTime(dateUtils.incDay(startOfWeel, index))
+    currVocabItem = <Vocabulary date={dateUtils.incDay(startOfWeel, index)} />
+
+    if (currVocabItem) {
+      result.push(
+        <div
+          key={'vocab-containter-' + index}
+          style={{
+            ...styles.vocabularyItemContainer,
+            ...(currDate.getTime() === todayTime
+              ? styles.vocabularyItemContainerToday
+              : null
+            )
+          }}
+        >
+          <div style={styles.vocabularyDate}>
+            {dateUtils.toISOString(currDate)}
+          </div>
+          {currVocabItem}
+        </div>
+      )
+    }
   }
   return result
 }
@@ -41,16 +56,16 @@ export const DayModeView = ({date, currentGoals}) => {
             {getVocabularyContent(date)}
           </div>
           <div style={styles.notesContainer}>
-
+            {}
           </div>
         </div>
       </div>
-
     </div>
   )
 }
 
 DayModeView.propTypes = {
   initialDate: PropTypes.object,
-  currentGoals: PropTypes.array
+  currentGoals: PropTypes.array,
+  date: PropTypes.object
 }

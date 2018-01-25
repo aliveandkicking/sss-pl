@@ -1,6 +1,7 @@
 import React from 'react'
-import { vocabularyStyles as styles } from './VocabularyStyle'
+import { vocabularyStyles as styles_ } from './VocabularyStyle'
 import PropTypes from 'prop-types'
+import './vocabulary.css'
 
 const translateUrlPrefix = 'https://translate.google.com.ua/?hl=uk&tab=wT&authuser=0#en/uk/'
 
@@ -9,22 +10,22 @@ export class VocabularyView extends React.Component {
   render () {
     const {term} = this.props
     if (!term) {
-      return null
+      return <div>-</div>
     }
     return (
-      <div style={styles.root}>
-        <div style={styles.content}
-          title={term.text + ' - ' + term.explanation}
-        >
+      <div style={styles_.root}>
+        <div style={styles_.content}>
           <a
+            className={'vocabulary-link'}
             target={'_blank'}
             href={translateUrlPrefix + term.text}
           >
-            <div
-              style={styles.link}
-            >
-              {term.text + ' - ' + term.explanation}
-            </div>
+            <span className={'vocabulary-text'}>
+              {term.text}
+            </span>
+            <span className={'vocabulary-explanation'}>
+              {' - ' + term.explanation}
+            </span>
           </a>
         </div>
       </div>
