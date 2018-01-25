@@ -20,6 +20,10 @@ export const dayModeStyles = {
   vocabularyContainer: {
     flex: 1,
     // border: '1px solid yellow',
+    borderRadius: '3px',
+    margin: '10px',
+    backgroundColor: 'rgba(50,50,50,0.5)',
+    padding: '10px'
   },
   vocabularyItemContainer: {
     backgroundColor: theme.colorB,
