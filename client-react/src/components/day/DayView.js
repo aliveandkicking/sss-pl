@@ -23,6 +23,7 @@ export class DayView extends React.Component {
             key={task.id}
             task={task}
             date={this.props.date}
+            large={this.props.largeTasks}
           />
         )
       )
@@ -137,6 +138,7 @@ DayView.propTypes = {
   predefinedTaskNames: PropTypes.array.isRequired,
   date: PropTypes.object.isRequired,
   hideCaption: PropTypes.bool,
+  largeTasks: PropTypes.bool,
   onAddNewTask: PropTypes.func.isRequired,
   onAddTask: PropTypes.func.isRequired,
   dropTask: PropTypes.func.isRequired

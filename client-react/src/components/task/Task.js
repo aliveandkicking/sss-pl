@@ -21,13 +21,14 @@ const mapStateToProps = (state, ownProps) => {
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch } = dispatchProps
   const { doneInfo, tagInfo } = stateProps
-  const { date, task } = ownProps
+  const { date, task, large } = ownProps
 
   return {
     task,
     doneInfo,
     tagInfo,
     date,
+    large,
     onTagClick: () => dispatch(setEditingTag(task.tag)),
     onClick: () => {
       let newDoneInfo = Array.from(doneInfo)

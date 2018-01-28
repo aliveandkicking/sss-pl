@@ -65,6 +65,7 @@ export class DayModeView extends React.Component {
           <Day
             date={date}
             hideCaption
+            largeTasks
           />
   
           <div style={styles.additionalInfo}>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { taskStyles as styles } from './TaskStyle'
+import { taskStyles as styles, size } from './TaskStyle'
 import { dateUtils } from '../../core'
 import { CustomSpan } from '..'
 import PropTypes from 'prop-types'
@@ -35,7 +35,10 @@ export class TaskView extends React.Component {
       <div
         onMouseOver={() => this.setState({hover: true})}
         onMouseOut={() => this.setState({hover: false})}
-        style={styles.root}
+        style={{
+          ...styles.root,
+          ...(this.props.large ? size.large : size.normal)
+        }}
         draggable='true'
         onDragStart={event =>
           event.dataTransfer.setData('text/plain', JSON.stringify({
@@ -128,6 +131,7 @@ TaskView.propTypes = {
   task: PropTypes.object,
   tagInfo: PropTypes.object,
   doneInfo: PropTypes.array,
+  large: PropTypes.bool,
   onClick: PropTypes.func,
   onRemoveDoneTask: PropTypes.func,
   onChangeTimesPerDay: PropTypes.func,

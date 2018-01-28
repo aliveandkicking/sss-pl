@@ -33,6 +33,7 @@ export const editTaskStyles = {
     minHeight: theme.minContentHeight,
     backgroundColor: 'rgba(0,0,0,0.3)',
     userSelect: 'none',
+    MozUserSelect: 'none',
     zIndex: '3',
     top: '0px',
     left: '0px',

@@ -21,7 +21,7 @@ const mapStateToProps = (state, ownProps) => {
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch } = dispatchProps
   const { tasks, doneTasks, tagsInfo } = stateProps
-  const { date, hideCaption } = ownProps
+  const { date, hideCaption, largeTasks } = ownProps
 
   const dropTask = (sourceId, sourceDateStr, copy) => {
     if ((!sourceId) || (!sourceDateStr)) {
@@ -100,6 +100,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     tasksGroupedByTag,
     isComplete,
     hideCaption,
+    largeTasks,
     predefinedTaskNames: Object.keys(tasks).map(key => tasks[key].name),
     onAddNewTask: () => dispatch(setEditingTask(new TaskModel({startDate: date}))),
     onAddTask: addTask,

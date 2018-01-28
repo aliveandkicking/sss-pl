@@ -7,6 +7,7 @@ export const editCustomDatesStyles = {
     alignItems: 'stretch',
     flexDirection: 'column',
     userSelect: 'none',
+    MozUserSelect: 'none',
     cursor: 'default',
     paddingBottom: '10px',
     borderBottom: '1px solid rgba(200,200,200,0.3)'

@@ -4,6 +4,7 @@ export const taskListItemStyles = {
     borderBottom: '1px solid rgba(200,200,200,0.1)',
     cursor: 'pointer',
     userSelect: 'none',
+    MozUserSelect: 'none',
     position: 'relative'
   },
   rootHover: {

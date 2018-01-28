@@ -13,7 +13,7 @@ export const dayModeStyles = {
     overflowY: 'auto'
   },
   additionalInfo: {
-    width: '75%',
+    width: '40%',
     display: 'flex'
   },
   vocabularyContainer: {
