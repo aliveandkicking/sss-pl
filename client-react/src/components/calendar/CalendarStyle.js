@@ -8,7 +8,8 @@ export const calendarStyles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    userSelect: 'none'
+    userSelect: 'none',
+    MozUserSelect: 'none'
   },
   content: {
     display: 'flex',
@@ -21,6 +22,7 @@ export const calendarStyles = {
     display: 'flex',
     justifyContent: 'space-between',
     userSelect: 'none',
+    MozUserSelect: 'none',
     alignSelf: 'stretch',
     margin: '10px 5px'
   },

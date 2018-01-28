@@ -14,7 +14,8 @@ export const navigationHeaderStyles = {
     display: 'flex',
     alignItems: 'stretch',
     justifyContent: 'space-between',
-    userSelect: 'none'
+    userSelect: 'none',
+    MozUserSelect: 'none',
   },
   dateCaption: {
     flex: 1,

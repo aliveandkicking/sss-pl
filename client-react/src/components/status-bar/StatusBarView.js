@@ -30,5 +30,5 @@ export const StatusBarView = ({text, currentGoals}) => {
 
 StatusBarView.propTypes = {
   text: PropTypes.string,
-  currentGoals: PropTypes.string
+  currentGoals: PropTypes.array
 }

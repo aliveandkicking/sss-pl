@@ -8,6 +8,7 @@ const addButton = {
   alignItems: 'center',
   cursor: 'pointer',
   userSelect: 'none',
+  MozUserSelect: 'none',
   margin: '2px 1px',
   transition: '500ms',
   opacity: '0.3'
@@ -28,6 +29,7 @@ export const dayStyles = {
     height: '25px',
     fontSize: '75%',
     userSelect: 'none',
+    MozUserSelect: 'none',
     cursor: 'default'
   },
   content: {
@@ -96,6 +98,7 @@ export const dayStyles = {
   quickAddDialogAddButton: {
     margin: '0px 10px',
     userSelect: 'none',
+    MozUserSelect: 'none',
     cursor: 'pointer',
     transition: '200ms'
   },

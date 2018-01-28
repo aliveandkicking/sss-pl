@@ -21,7 +21,8 @@ export const taskStyles = {
     minWidth: '75px',
     overflow: 'hidden',
     transition: '400ms',
-    userSelect: 'none'
+    userSelect: 'none',
+    MozUserSelect: 'none'
   },
   content: {
     borderRadius: '2px',

@@ -9,6 +9,7 @@ export const statusBarStyles = {
     height: '36px',
     justifyContent: 'center',
     userSelect: 'none',
+    MozUserSelect: 'none',
     zIndex: 1,
     position: 'relative',
     padding: '10px'
