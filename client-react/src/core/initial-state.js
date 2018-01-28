@@ -7,7 +7,7 @@ import {
 let i = 0
 export const defInitialState = {
   initialDate: dateUtils.clearTime(new Date()),
-  pageId: 3,
+  pageId: 1,
   mainMenuExpanded: false,
   tasks: {
     [++i]: new TaskModel({
