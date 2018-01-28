@@ -134,7 +134,8 @@ export class GoalView extends React.Component {
   }
 
   render () {
-    const {goal} = this.props
+    const {goal, onChangeTasksVisibility, onChangePendingSubgoalsVisibility,
+      onChangeCompleteSubgoalsVisibility} = this.props
 
     return (
       <div
@@ -191,14 +192,47 @@ export class GoalView extends React.Component {
                 passive
               </div>
             }
-            {
-              (this.props.tasksHidden ||
-                this.props.completeSubgoalsHidden ||
-                this.props.pendingSubgoalsHidden) &&
-              <div style={styles.filterLabel}>
-                F
+            <div style={styles.filterButtonContainer}>
+              <div
+                style={{
+                ...styles.filterLabel,
+                ...(this.props.tasksHidden ? styles.filterLabelActive : null)
+                }}
+                onClick={event => {
+                  onChangeTasksVisibility(!event.ctrlKey)
+                  this.setState({editing: false})
+                }}
+              >
+                T
               </div>
-            }
+
+              <div
+                style={{
+                  ...styles.filterLabel,
+                  ...(this.props.completeSubgoalsHidden ? styles.filterLabelActive : null)
+                }}
+                onClick={event => {
+                  onChangeCompleteSubgoalsVisibility(!event.ctrlKey)
+                  this.setState({editing: false})
+                }}
+              >
+                S
+              </div>
+
+              <div
+                style={{
+                  ...styles.filterLabel,
+                  ...(this.props.pendingSubgoalsHidden ? styles.filterLabelActive : null)
+                }}
+                onClick={event => {
+                  onChangePendingSubgoalsVisibility(!event.ctrlKey)
+                  this.setState({editing: false})
+                }}
+              >
+                P
+              </div>
+
+            </div>
           </div>
 
           {

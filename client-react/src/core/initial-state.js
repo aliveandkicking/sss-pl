@@ -7,7 +7,7 @@ import {
 let i = 0
 export const defInitialState = {
   initialDate: dateUtils.clearTime(new Date()),
-  pageId: 1,
+  pageId: 3,
   mainMenuExpanded: false,
   tasks: {
     [++i]: new TaskModel({
@@ -268,7 +268,9 @@ export const defInitialState = {
     },
     {
       text: 'sparrow',
-      explanation: 'that is a bird and this is kind of very long description',
+      explanation: 'that is a bird and this is kind of very long description ' +
+      'that is a bird and this is kind of very long description' +
+      'that is a bird and this is kind of very long description',
       date: dateUtils.toISOString(dateUtils.incDay(dateUtils.today(), +1))
     }
   ],

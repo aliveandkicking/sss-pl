@@ -27,7 +27,7 @@ export const dayModeStyles = {
   },
   vocabularyItemContainer: {
     backgroundColor: theme.colorC,
-    height: '30px',
+    minHeight: '30px',
     margin: '5px',
     padding: '12px',
     borderRadius: '2px',

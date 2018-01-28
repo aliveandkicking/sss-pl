@@ -94,14 +94,24 @@ export const goalsStyles = {
     color: '#ccc',
     marginRight: '2px'
   },
+  filterButtonContainer: {
+    flex: 1,
+    display: 'flex',
+    alignItems: 'stretch',
+    justifyContent: 'flex-end'
+  },
   filterLabel: {
-    backgroundColor: '#8C600C',
     padding: '1px 4px 1px',
+    marginLeft: '1px',
     borderRadius: '2px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: 'auto',
+    color: 'rgba(200,200,200,0.5)',
+    cursor: 'pointer'
+  },
+  filterLabelActive: {
+    backgroundColor: '#8C600C',
     color: '#ccc'
   },
   date: {
