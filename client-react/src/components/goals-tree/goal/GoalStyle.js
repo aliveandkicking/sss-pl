@@ -85,7 +85,7 @@ export const goalsStyles = {
     color: '#ccc'
   },
   label: {
-    backgroundColor: '#8C600C',
+    backgroundColor: '#196666',
     padding: '1px 3px 2px',
     borderRadius: '2px',
     display: 'flex',
@@ -107,11 +107,10 @@ export const goalsStyles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    // color: 'rgba(200,200,200,0.8)',
     cursor: 'pointer'
   },
   filterLabelActive: {
-    backgroundColor: '#8C600C',
+    backgroundColor: '#196666',
     color: '#ccc'
   },
   date: {

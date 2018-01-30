@@ -110,25 +110,25 @@ export class DayView extends React.Component {
           <div style={styles.content}>
             {this.getTasks()}
           </div>
+          <span style={styles.addTaskRow}>
+            <CustomSpan
+              style={styles.addTaskButton}
+              styleHover={styles.addTaskButtonHover}
+              onClick={e => this.props.onAddNewTask()}>
+              +
+            </CustomSpan>
+            <CustomSpan
+              style={Object.assign({}, styles.quickAddTaskButton,
+                this.state.quickAddDialogVisible ? styles.addTaskButtonHover : null
+              )}
+              styleHover={styles.addTaskButtonHover}
+              title='Quick Add'
+              onClick={e => this.setState({quickAddDialogVisible: true})}>
+              &#9660;
+            </CustomSpan>
+            {this.getQuickAddDialog()}
+          </span>
         </Scrollbars>
-        <span style={styles.addTaskRow}>
-          <CustomSpan
-            style={styles.addTaskButton}
-            styleHover={styles.addTaskButtonHover}
-            onClick={e => this.props.onAddNewTask()}>
-            +
-          </CustomSpan>
-          <CustomSpan
-            style={Object.assign({}, styles.quickAddTaskButton,
-              this.state.quickAddDialogVisible ? styles.addTaskButtonHover : null
-            )}
-            styleHover={styles.addTaskButtonHover}
-            title='Quick Add'
-            onClick={e => this.setState({quickAddDialogVisible: true})}>
-            &#9660;
-          </CustomSpan>
-          {this.getQuickAddDialog()}
-        </span>
       </div>
     )
   }
