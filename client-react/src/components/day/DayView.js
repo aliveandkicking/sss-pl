@@ -4,6 +4,7 @@ import { Task } from '../task/Task'
 import { CustomSpan } from '..'
 import { dateUtils } from '../../core'
 import PropTypes from 'prop-types'
+import Scrollbars from 'react-custom-scrollbars'
 
 export class DayView extends React.Component {
   constructor (props) {
@@ -105,9 +106,11 @@ export class DayView extends React.Component {
             {this.props.caption + (this.props.isComplete ? ' ✔' : '')}
           </div>
         }
-        <div style={styles.content}>
-          {this.getTasks()}
-        </div>
+        <Scrollbars>
+          <div style={styles.content}>
+            {this.getTasks()}
+          </div>
+        </Scrollbars>
         <span style={styles.addTaskRow}>
           <CustomSpan
             style={styles.addTaskButton}
