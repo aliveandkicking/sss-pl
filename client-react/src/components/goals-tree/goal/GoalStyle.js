@@ -38,7 +38,7 @@ export const goalsStyles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'stretch',
-    backgroundColor: '#CB824B',
+    backgroundColor: '#248f8f',
     width: dimensions.width + 'px',
     height: dimensions.height + 'px',
     border: '2px solid #779',
@@ -107,7 +107,7 @@ export const goalsStyles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: 'rgba(200,200,200,0.5)',
+    // color: 'rgba(200,200,200,0.8)',
     cursor: 'pointer'
   },
   filterLabelActive: {

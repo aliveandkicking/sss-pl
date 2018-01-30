@@ -55,7 +55,7 @@ export const statusBarStyles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#CB824B',
+    backgroundColor: '#248f8f',
     borderRadius: '2px',
     padding: '3px 12px',
     margin: '0px 5px',
