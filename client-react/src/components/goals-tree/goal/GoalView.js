@@ -216,7 +216,7 @@ export class GoalView extends React.Component {
                   this.setState({editing: false})
                 }}
               >
-                S
+                C
               </div>
 
               <div

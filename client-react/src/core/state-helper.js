@@ -25,7 +25,9 @@ class StateHelper {
 
   loadFromString (jsonString) {
     try {
-      this.initialState = JSON.parse(jsonString)
+      const loadedData = JSON.parse(jsonString)
+      console.log(loadedData)
+      this.initialState = loadedData.state
 
       this.initialState.initialDate = dateUtils.fromISOString(this.initialState.initialDate)
 
@@ -40,6 +42,23 @@ class StateHelper {
       if (this.initialState.editTask.task) {
         this.initialState.editTask.task =
           this.rawDataToTaskModel(this.initialState.editTask.task)
+      }
+
+      if (loadedData.static) {
+        if (Array.isArray(loadedData.static.vocabulary)) {
+          this.initialState.vocabulary = loadedData.static.vocabulary
+        }
+        if (Array.isArray(loadedData.static.popups)) {
+          const now = Date.now()
+          this.initialState.popups = loadedData.static.popups.concat(
+            this.initialState.vocabulary.reduce((result, el) => {
+              if (dateUtils.fromISOString(el.date).getTime() < now) {
+                result.push(el.text + ' - ' + el.explanation)
+              }
+              return result
+            }, [])
+          )
+        }
       }
       return true
     } catch (error) {
@@ -82,7 +101,7 @@ class StateHelper {
   }
 
   loadState (session) {
-    return serverApi.post('load', session, {})
+    return serverApi.post('loadwithstatic', session, {})
       .then(response => {
         if (!this.loadFromString(response)) {
           throw new Error('Cannot load')

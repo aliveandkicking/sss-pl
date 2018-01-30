@@ -156,22 +156,10 @@ const goalsTree = (state = {collapsedNodes:{}}, action) => {
 }
 
 const vocabulary = (state = [], action) => {
-  // if (action.type === CHANGE_GOAL_TREE) {
-  //   return {
-  //     ...state,
-  //     ...action.payload.changes
-  //   }
-  // }
   return state
 }
 
 const popups = (state = [], action) => {
-  // if (action.type === CHANGE_GOAL_TREE) {
-  //   return {
-  //     ...state,
-  //     ...action.payload.changes
-  //   }
-  // }
   return state
 }
 

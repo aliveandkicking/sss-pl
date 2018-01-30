@@ -38,7 +38,8 @@ export const dayStyles = {
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
     alignContent: 'flex-start',
-    position: 'relative'
+    position: 'relative',
+    overflowY: 'hidden'
   },
   addTaskRow: {
     height: '30px',
