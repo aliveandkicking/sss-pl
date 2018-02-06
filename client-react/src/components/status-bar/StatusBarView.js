@@ -2,11 +2,39 @@ import React from 'react'
 import { statusBarStyles as styles } from './StatusBarStyles'
 import PropTypes from 'prop-types'
 
-export const StatusBarView = ({text, currentGoals}) => {
-  const total = (new Date(2100, 6, 1)) - (new Date(1989, 5, 27))
-  const progress = (new Date()) - (new Date(1989, 5, 27))
-  const progressPerc = Math.round(progress * 100 * 100 / total) / 100
+class ProgressBar extends React.Component {
+  state = {millisecondsElapsed: 0}
 
+  componentDidMount () {
+    this.interval = setInterval(() => this.setState({
+      millisecondsElapsed: this.state.millisecondsElapsed + 1
+    }), 50)
+  }
+
+  componentWillUnmount () {
+    clearInterval(this.interval)
+  }
+
+  render () {
+    const total = (new Date(2100, 6, 1)) - (new Date(1989, 5, 27))
+    const progress = (new Date()) - (new Date(1989, 5, 27))
+    const progressPerc = progress * 100 / total
+
+    return (
+      <div style={styles.progressBarContainer}>
+        <div style={styles.progressBarCaption}>
+          {progressPerc.toFixed(9) + ' %'}
+        </div>
+        <div style={{
+          ...styles.progressBar,
+          width: Math.round(progressPerc * 0.98 /* margins */) + '%'
+        }} />
+      </div>
+    )
+  }
+}
+
+export const StatusBarView = ({text, currentGoals}) => {
   return (
     <div style={styles.root}>
       <div style={styles.goalsContainer}>
@@ -27,15 +55,7 @@ export const StatusBarView = ({text, currentGoals}) => {
           </div>)
         }
       </div>
-      <div style={styles.progressBarContainer}>
-        <div style={styles.progressBarCaption}>
-          {progressPerc + '%'}
-        </div>
-        <div style={{
-          ...styles.progressBar,
-          width: Math.round(progressPerc * 0.98 /* margins */) + '%'
-        }} />
-      </div>
+      <ProgressBar />
       <span style={styles.statusLabel}>
         {text}
       </span>

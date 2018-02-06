@@ -48,11 +48,14 @@ function getVocabularyContent (date) {
 
 export class DayModeView extends React.Component {
 
-  state = {popupIndex: 0}
+  state = {popupIndex: getRandomIndex(this.props.popups.length)}
+
+  popupTimeout = null
 
   render () {
     const {date, popups} = this.props
 
+    clearTimeout(this.popupTimeout)
     setTimeout(() => {
       this.setState({popupIndex: getRandomIndex(popups.length)})
     }, 600000);
@@ -60,7 +63,7 @@ export class DayModeView extends React.Component {
     return (
       <div style={styles.root} >
         <DayNavigationHeader />
-  
+
         <div style={styles.content}>
           <Day
             date={date}
